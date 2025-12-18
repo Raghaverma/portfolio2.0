@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, ExternalLink, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ContactSection() {
@@ -29,13 +29,16 @@ export function ContactSection() {
             </a>
 
             <a
-              href="tel:+919717994197"
+              href="/RaghavVerma_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
               className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors group"
             >
-              <Phone className="w-5 h-5 text-primary" />
+              <FileText className="w-5 h-5 text-primary" />
               <div className="text-left">
-                <div className="text-xs text-muted-foreground">Phone</div>
-                <div className="font-semibold text-sm group-hover:text-primary transition-colors">+91 9717994197</div>
+                <div className="text-xs text-muted-foreground">Resume</div>
+                <div className="font-semibold text-sm group-hover:text-primary transition-colors">Download CV</div>
               </div>
             </a>
 
@@ -74,9 +77,9 @@ export function ContactSection() {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                View Portfolio
+              <a href="/RaghavVerma_CV.pdf" target="_blank" rel="noopener noreferrer" download>
+                <FileText className="w-4 h-4 mr-2" />
+                Download CV
               </a>
             </Button>
           </div>
