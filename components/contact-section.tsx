@@ -16,14 +16,14 @@ export function ContactSection() {
 
           <div className="grid sm:grid-cols-2 gap-6 mb-8 max-w-2xl mx-auto">
             <a
-              href="mailto:work@raghav-verma.com"
+              href="mailto:raghav.verma.work@gmail.com"
               className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors group"
             >
               <Mail className="w-5 h-5 text-primary" />
               <div className="text-left">
                 <div className="text-xs text-muted-foreground">Email</div>
                 <div className="font-semibold text-sm group-hover:text-primary transition-colors">
-                  work@raghav-verma.com
+                  raghav.verma.work@gmail.com
                 </div>
               </div>
             </a>
@@ -71,15 +71,9 @@ export function ContactSection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
-              <a href="mailto:work@raghav-verma.com">
+              <a href="mailto:raghav.verma.work@gmail.com">
                 <Mail className="w-4 h-4 mr-2" />
                 Send Message
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a href="/RaghavVerma_CV.pdf" target="_blank" rel="noopener noreferrer" download>
-                <FileText className="w-4 h-4 mr-2" />
-                Download CV
               </a>
             </Button>
           </div>

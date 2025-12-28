@@ -38,7 +38,7 @@ const projects = [
       "Category-based filtering and analytics dashboard",
     ],
     github: "#",
-    demo: "https://expense-tracker-rho-orcin-14.vercel.app/",
+    demo: "https://expense-tracker-psi-olive.vercel.app/",
   },
 ]
 

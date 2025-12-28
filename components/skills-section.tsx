@@ -10,6 +10,7 @@ const skills = {
     "Vercel",
     "REST APIs",
     "Python",
+    "Docker",
   ],
   soft: [
     "Commercial Awareness & Data Storytelling",

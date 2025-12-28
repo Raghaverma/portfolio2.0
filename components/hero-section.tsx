@@ -117,7 +117,7 @@ export function HeroSection() {
 
           <div className="flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
-              <a href="mailto:work@raghav-verma.com">
+              <a href="mailto:raghav.verma.work@gmail.com">
                 <Mail className="w-4 h-4 mr-2" />
                 Get in Touch
               </a>
