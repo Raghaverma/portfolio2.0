@@ -45,7 +45,7 @@ export function ContactSection() {
               href="https://www.linkedin.com/in/raghaverma/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors group sm:col-span-2 sm:mx-auto sm:max-w-[calc(50%-0.75rem)]"
+              className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors group sm:col-span-2 sm:w-[calc(50%-0.75rem)] sm:mx-auto"
             >
               <Linkedin className="w-5 h-5 text-primary" />
               <div className="text-left">
