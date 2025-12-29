@@ -44,11 +44,11 @@ const projects = [
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 md:py-32 px-4 md:px-8 lg:px-16 relative">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-12 md:py-24 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Featured <span className="text-primary">Projects</span>
+            Featured <span className="text-primary">&#123;Projects&#125;</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
             Real-world applications showcasing modern web development practices and performance optimization.

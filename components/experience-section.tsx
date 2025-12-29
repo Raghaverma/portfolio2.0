@@ -29,11 +29,11 @@ const experiences = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 md:py-32 px-4 md:px-8 lg:px-16 relative">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="py-12 md:py-24 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Professional <span className="text-primary">Experience</span>
+            Professional <span className="text-primary">&#123;Experience&#125;</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
             Building high-performance web applications and contributing to innovative platforms that serve thousands of
