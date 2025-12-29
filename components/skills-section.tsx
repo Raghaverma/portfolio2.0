@@ -1,3 +1,5 @@
+import { TiltCard } from "@/components/ui/tilt-card"
+
 const skills = {
   technical: [
     "Next.js",
@@ -21,7 +23,7 @@ const skills = {
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-12 md:py-24 relative">
+    <section id="skills" className="py-10 md:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -34,7 +36,7 @@ export function SkillsSection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Technical Skills */}
-          <div className="glass-card rounded-lg p-6 md:p-8">
+          <TiltCard className="glass-card rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
               <span className="text-primary font-mono">&lt;/&gt;</span>
               Technical Skills
@@ -49,10 +51,10 @@ export function SkillsSection() {
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
 
           {/* Soft Skills */}
-          <div className="glass-card rounded-lg p-6 md:p-8">
+          <TiltCard className="glass-card rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
               <span className="text-primary">★</span>
               Soft Skills
@@ -65,12 +67,12 @@ export function SkillsSection() {
                 </li>
               ))}
             </ul>
-          </div>
+          </TiltCard>
         </div>
 
         {/* Education */}
         <div className="mt-8 grid md:grid-cols-2 gap-6">
-          <div className="glass-card rounded-lg p-6">
+          <TiltCard className="glass-card rounded-lg p-6">
             <div className="text-sm text-primary font-mono mb-2">Current</div>
             <h4 className="font-bold text-lg mb-1">Masters in Computer Applications</h4>
             <div className="text-muted-foreground text-sm mb-2">
@@ -80,9 +82,9 @@ export function SkillsSection() {
               <span className="font-mono">Oct 2024 - Present</span>
               <span className="px-2 py-1 bg-primary/10 text-primary rounded text-xs font-semibold">CGPA: 7.4/10</span>
             </div>
-          </div>
+          </TiltCard>
 
-          <div className="glass-card rounded-lg p-6">
+          <TiltCard className="glass-card rounded-lg p-6">
             <div className="text-sm text-muted-foreground font-mono mb-2">2021 - 2024</div>
             <h4 className="font-bold text-lg mb-1">Bachelors in Computer Applications</h4>
             <div className="text-muted-foreground text-sm mb-2">Bennett University</div>
@@ -90,7 +92,7 @@ export function SkillsSection() {
               <span className="font-mono">Oct 2021 - June 2024</span>
               <span className="px-2 py-1 bg-secondary rounded text-xs font-semibold">CGPA: 7.13/10</span>
             </div>
-          </div>
+          </TiltCard>
         </div>
       </div>
     </section>

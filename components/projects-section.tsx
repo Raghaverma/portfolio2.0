@@ -1,5 +1,6 @@
 import { Github, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TiltCard } from "@/components/ui/tilt-card"
 
 const projects = [
   {
@@ -44,7 +45,7 @@ const projects = [
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-12 md:py-24 relative">
+    <section id="projects" className="py-10 md:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -57,7 +58,7 @@ export function ProjectsSection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div
+            <TiltCard
               key={project.name}
               className="glass-card rounded-lg p-6 md:p-8 hover:shadow-xl transition-shadow flex flex-col"
             >
@@ -102,7 +103,7 @@ export function ProjectsSection() {
                   </Button>
                 )}
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>

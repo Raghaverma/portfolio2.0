@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Terminal, Github, Linkedin, Mail, MapPin, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 const terminalCommands = [
   { cmd: "$ whoami", output: "Raghav Verma" },
@@ -17,6 +18,7 @@ export function HeroSection() {
   const [displayedText, setDisplayedText] = useState("")
   const [showCursor, setShowCursor] = useState(true)
   const [phase, setPhase] = useState<"command" | "output">("command")
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   useEffect(() => {
     const cursorInterval = setInterval(() => {
@@ -76,40 +78,44 @@ export function HeroSection() {
           {/* Left side - Visual Output (Swapped) */}
           <div className="space-y-6 order-last lg:order-first">
             <div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
-                <span className="whitespace-nowrap">Building Systems</span> <br />
-                <span className="text-primary whitespace-nowrap">Not Just Sites</span>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+                <span className="whitespace-normal md:whitespace-nowrap">Building Systems</span> <br />
+                <span className="text-primary whitespace-normal md:whitespace-nowrap">Not Just Sites</span>
               </h1>
               <div className="text-lg md:text-xl text-muted-foreground text-pretty leading-relaxed">
-                <HoverCard>
-                  <HoverCardTrigger asChild>
-                    <span className="cursor-pointer hover:text-primary transition-colors underline decoration-dotted underline-offset-4">
-                      FullStack Developer
-                    </span>
-                  </HoverCardTrigger>
-                  <HoverCardContent className="w-80">
-                    <div className="flex justify-between space-x-4">
-                      <div className="space-y-1">
-                        <h4 className="text-sm font-semibold">@Raghaverma</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Full-stack wizard building scalable web apps.
-                        </p>
-                        <div className="flex items-center pt-2">
-                          <MapPin className="mr-2 h-4 w-4 opacity-70" />{" "}
-                          <span className="text-xs text-muted-foreground">
-                            New Delhi, India
-                          </span>
-                        </div>
-                        <div className="flex items-center pt-1">
-                          <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
-                          <span className="text-xs text-muted-foreground">
-                            Freelance @ Hypeliv
-                          </span>
+                {isDesktop ? (
+                  <HoverCard>
+                    <HoverCardTrigger asChild>
+                      <span className="cursor-pointer hover:text-primary transition-colors underline decoration-dotted underline-offset-4">
+                        FullStack Developer
+                      </span>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-80">
+                      <div className="flex justify-between space-x-4">
+                        <div className="space-y-1">
+                          <h4 className="text-sm font-semibold">@Raghaverma</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Full-stack wizard building scalable web apps.
+                          </p>
+                          <div className="flex items-center pt-2">
+                            <MapPin className="mr-2 h-4 w-4 opacity-70" />{" "}
+                            <span className="text-xs text-muted-foreground">
+                              New Delhi, India
+                            </span>
+                          </div>
+                          <div className="flex items-center pt-1">
+                            <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
+                            <span className="text-xs text-muted-foreground">
+                              Freelance @ Hypeliv
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </HoverCardContent>
-                </HoverCard>{" "}
+                    </HoverCardContent>
+                  </HoverCard>
+                ) : (
+                  <span className="text-foreground font-medium">FullStack Developer</span>
+                )}{" "}
                 crafting scalable, performant web applications with modern architecture and engineering excellence.
               </div>
             </div>

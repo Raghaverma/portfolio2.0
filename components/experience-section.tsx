@@ -1,4 +1,5 @@
 import { Briefcase, Calendar } from "lucide-react"
+import { TiltCard } from "@/components/ui/tilt-card"
 
 const experiences = [
   {
@@ -29,7 +30,7 @@ const experiences = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-12 md:py-24 relative">
+    <section id="experience" className="py-10 md:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -43,7 +44,7 @@ export function ExperienceSection() {
 
         <div className="space-y-8">
           {experiences.map((exp, idx) => (
-            <div key={idx} className="glass-card rounded-lg p-6 md:p-8 hover:shadow-xl transition-shadow">
+            <TiltCard key={idx} className="glass-card rounded-lg p-6 md:p-8 hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold mb-2">{exp.title}</h3>
@@ -67,7 +68,7 @@ export function ExperienceSection() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>
