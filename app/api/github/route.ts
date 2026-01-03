@@ -19,21 +19,49 @@ export async function GET() {
 
         const events = await response.json()
 
-        const pushEvents = events.filter((e: any) =>
-            e.type === 'PushEvent' &&
-            e.payload?.commits &&
-            e.payload.commits.length > 0
+        const relevantEvents = events.filter((e: any) =>
+            ['PushEvent', 'CreateEvent', 'WatchEvent', 'PublicEvent', 'ForkEvent'].includes(e.type)
         ).slice(0, 3)
 
-        const formattedCommits = pushEvents.map((e: any) => ({
-            id: e.payload.commits[0]?.sha.substring(0, 7) || 'unknown',
-            message: e.payload.commits[0]?.message || 'No commit message',
-            author: e.actor.login,
-            date: new Date(e.created_at).toLocaleDateString(),
-            url: `https://github.com/${e.repo.name}/commit/${e.payload.commits[0]?.sha}`
-        }))
+        const formattedEvents = relevantEvents.map((e: any) => {
+            let message = 'Activity'
+            let url = `https://github.com/${e.repo.name}`
+            let id = e.id.substring(0, 7)
 
-        return NextResponse.json(formattedCommits)
+            switch (e.type) {
+                case 'PushEvent':
+                    if (e.payload.commits && e.payload.commits.length > 0) {
+                        message = e.payload.commits[0].message
+                        url = `https://github.com/${e.repo.name}/commit/${e.payload.commits[0].sha}`
+                        id = e.payload.commits[0].sha.substring(0, 7)
+                    } else {
+                        message = `Pushed to ${e.payload.ref.replace('refs/heads/', '')}`
+                    }
+                    break
+                case 'CreateEvent':
+                    message = `Created ${e.payload.ref_type} ${e.payload.ref || e.repo.name}`
+                    break
+                case 'WatchEvent':
+                    message = `Starred ${e.repo.name}`
+                    break
+                case 'ForkEvent':
+                    message = `Forked ${e.repo.name}`
+                    break
+                case 'PublicEvent':
+                    message = `Made ${e.repo.name} public`
+                    break
+            }
+
+            return {
+                id,
+                message,
+                author: e.actor.login,
+                date: new Date(e.created_at).toLocaleDateString(),
+                url
+            }
+        })
+
+        return NextResponse.json(formattedEvents)
     } catch (error) {
         console.error('GitHub API Error:', error)
         return NextResponse.json([])
