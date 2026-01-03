@@ -38,7 +38,7 @@ export async function GET() {
             albumImageUrl: track.image.find((img: any) => img.size === 'large')?.['#text'] || track.image[0]['#text'],
             songUrl: track.url,
             duration,
-            timestamp: Date.now() // Return current server time to help sync
+            timestamp: Date.now()
         })
 
     } catch (error) {

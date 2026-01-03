@@ -232,7 +232,6 @@ function SpotifyCard() {
             setData(currentData => {
                 if (currentData?.isPlaying && currentData.duration) {
                     setProgress(prev => {
-                        // Don't exceed duration
                         if (prev >= currentData.duration!) return prev
                         return prev + 1
                     })
@@ -257,12 +256,14 @@ function SpotifyCard() {
         <Card className="p-4 flex flex-col justify-center h-full min-h-[210px] bg-[#18181b] border-white/10 relative overflow-hidden group">
             {/* Header */}
             <div className="absolute top-4 left-4 flex items-center gap-1.5 z-20">
-                <div className="w-3.5 h-3.5 text-[#1DB954]">
+                <div className={`w-3.5 h-3.5 ${data?.isPlaying ? "text-[#1DB954]" : "text-white/40"}`}>
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
                         <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.539.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
                     </svg>
                 </div>
-                <span className="font-bold text-[10px] tracking-wider text-[#1DB954] uppercase font-sans">Listening to Spotify</span>
+                <span className={`font-bold text-[10px] tracking-wider uppercase font-sans ${data?.isPlaying ? "text-[#1DB954]" : "text-white/40"}`}>
+                    {data?.isPlaying ? "Listening to Spotify" : "Last Played"}
+                </span>
             </div>
 
             {/* Content Container */}
@@ -273,7 +274,7 @@ function SpotifyCard() {
                         <img
                             src={data.albumImageUrl}
                             alt={data.album || "Album Art"}
-                            className="w-[88px] h-[88px] rounded-lg shadow-lg object-cover bg-neutral-800"
+                            className={`w-[88px] h-[88px] rounded-lg shadow-lg object-cover bg-neutral-800 ${!data?.isPlaying && "grayscale sm:grayscale-0"}`}
                         />
                     ) : (
                         <div className="w-[88px] h-[88px] rounded-lg bg-neutral-800 flex items-center justify-center border border-white/5">
@@ -285,13 +286,13 @@ function SpotifyCard() {
                 {/* Text Info */}
                 <div className="min-w-0 flex-1 flex flex-col justify-center gap-0.5">
                     <div className="font-bold text-sm text-white/90 hover:underline cursor-pointer truncate leading-tight">
-                        {loading ? "Loading..." : (data?.isPlaying ? data.title : "Not Playing")}
+                        {loading ? "Loading..." : (data?.title || "Not Playing")}
                     </div>
                     <div className="text-xs text-white/60 truncate leading-tight font-medium">
-                        by <span className="hover:text-white transition-colors cursor-pointer">{loading ? "..." : (data?.isPlaying ? data.artist : "Spotify")}</span>
+                        by <span className="hover:text-white transition-colors cursor-pointer">{loading ? "..." : (data?.artist || "Spotify")}</span>
                     </div>
                     <div className="text-xs text-white/60 truncate leading-tight font-medium">
-                        on <span className="hover:text-white transition-colors cursor-pointer">{loading ? "..." : (data?.isPlaying ? data.album : "System")}</span>
+                        on <span className="hover:text-white transition-colors cursor-pointer">{loading ? "..." : (data?.album || "System")}</span>
                     </div>
                 </div>
             </div>
@@ -302,15 +303,16 @@ function SpotifyCard() {
                     <div
                         className="h-full bg-white rounded-full transition-all duration-1000 linear"
                         style={{
-                            width: data?.isPlaying && data?.duration
-                                ? `${(progress / data.duration) * 100}%`
-                                : '0%'
+                            width: data?.duration
+                                ? (data.isPlaying ? `${(progress / data.duration) * 100}%` : '100%')
+                                : '0%',
+                            opacity: data?.isPlaying ? 1 : 0.5
                         }}
                     />
                 </div>
                 <div className="flex justify-between text-[10px] text-white/50 font-mono font-medium">
-                    <span>{data?.isPlaying ? formatTime(progress) : "0:00"}</span>
-                    <span>{data?.isPlaying && data?.duration ? formatTime(data.duration) : "0:00"}</span>
+                    <span>{data?.isPlaying ? formatTime(progress) : (data?.duration ? formatTime(data.duration) : "0:00")}</span>
+                    <span>{data?.duration ? formatTime(data.duration) : "0:00"}</span>
                 </div>
             </div>
 
