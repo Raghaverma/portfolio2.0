@@ -6,6 +6,7 @@ import { ExperienceSection } from "@/components/experience-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { SkillsSection } from "@/components/skills-section"
 import { ContactSection } from "@/components/contact-section"
+import { FooterBento } from "@/components/footer-bento"
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <ExperienceSection />
         <SkillsSection />
         <ProjectsSection />
+        <FooterBento />
         <ContactSection />
       </main>
     </>

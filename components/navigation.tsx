@@ -54,18 +54,10 @@ export function Navigation() {
                   {item.label}
                 </button>
               ))}
-              <div className="flex items-center gap-2 ml-2 pl-2 border-l">
-                <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                  {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </Button>
-              </div>
             </div>
 
             {/* Mobile Menu */}
             <div className="flex items-center gap-2 md:hidden">
-              <Button variant="ghost" size="icon" onClick={toggleDarkMode}>
-                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon">

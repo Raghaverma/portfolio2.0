@@ -65,18 +65,19 @@ export function ContactSection() {
             </Button>
           </div>
 
-          <div className="mt-8 pt-8 border-t">
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="w-4 h-4" />
-              <span>Based in New Delhi, India • Available for Freelance Projects</span>
+          <div className="mt-12 pt-8 border-t border-border/10">
+            <div className="flex flex-col items-center justify-center gap-3 text-xs text-muted-foreground/60 font-mono">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3 h-3" />
+                <span>Based in New Delhi, India • Available for Freelance Projects</span>
+              </div>
+              <div>© {new Date().getFullYear()} Raghav Verma. All systems nominal.</div>
             </div>
           </div>
+
+
         </TiltCard>
 
-        <div className="mt-8 text-center font-mono text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} Raghav Verma. Built with Next.js & Tailwind CSS.</div>
-          <div className="mt-2">Designed with precision. Engineered with passion.</div>
-        </div>
       </div>
     </section>
   )
