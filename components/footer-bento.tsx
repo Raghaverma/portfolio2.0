@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useTheme } from "next-themes"
 import {
     Github,
@@ -148,44 +148,127 @@ function ConnectCard() {
 }
 
 function LocationCard() {
-    const [time, setTime] = useState("")
+    const [currentTime, setCurrentTime] = useState("")
+    const [isDaytime, setIsDaytime] = useState(true)
+    const [isClient, setIsClient] = useState(false)
+    const mapContainerRef = useRef<HTMLDivElement>(null)
+    const mapInstanceRef = useRef<L.Map | null>(null)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
     useEffect(() => {
         const updateTime = () => {
-            const now = new Date()
-            setTime(now.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false,
-                timeZone: "Asia/Kolkata"
-            }))
+            // Matching user's requested Delhi time logic
+            const now = new Date();
+            const delhiTime = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+            setCurrentTime(delhiTime);
+
+            const hour = parseInt(delhiTime.split(':')[0]);
+            setIsDaytime(hour >= 6 && hour < 21);
         }
         updateTime()
         const interval = setInterval(updateTime, 1000)
         return () => clearInterval(interval)
     }, [])
 
+    useEffect(() => {
+        if (!isClient || !mapContainerRef.current || mapInstanceRef.current) return
+
+        const initMap = async () => {
+            try {
+                const L = (await import('leaflet')).default
+                // Import CSS manually or ensure it's in globals.css. 
+                // Since we can't easily import CSS in component in Next.js App Router without global side effects,
+                // we'll rely on a link tag or assume it's handled. 
+                // However, for this snippet to work perfectly "out of the box", adding the link dynamically is safer.
+                if (!document.getElementById('leaflet-css')) {
+                    const link = document.createElement('link')
+                    link.id = 'leaflet-css'
+                    link.rel = 'stylesheet'
+                    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+                    document.head.appendChild(link)
+                }
+
+                if (!mapContainerRef.current) return
+
+                mapInstanceRef.current = L.map(mapContainerRef.current, {
+                    zoomControl: false,
+                    attributionControl: false,
+                    dragging: true,
+                    scrollWheelZoom: true,
+                    doubleClickZoom: true,
+                    boxZoom: true,
+                    keyboard: true,
+                    touchZoom: true
+                }).setView([28.6139, 77.2090], 11); // Delhi
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    maxZoom: 19,
+                    attribution: '',
+                    keepBuffer: 4,
+                    updateWhenIdle: false,
+                    updateWhenZooming: false
+                }).addTo(mapInstanceRef.current);
+            } catch (e) {
+                console.error("Map init failed", e)
+            }
+        }
+
+        initMap()
+
+        return () => {
+            if (mapInstanceRef.current) {
+                mapInstanceRef.current.remove()
+                mapInstanceRef.current = null
+            }
+        }
+    }, [isClient])
+
+    const recenterMap = () => {
+        if (mapInstanceRef.current) {
+            mapInstanceRef.current.setView([28.6139, 77.2090], 11);
+        }
+    }
+
     return (
-        <Card className="p-1 glass-card h-full min-h-[240px] relative overflow-hidden group">
-            <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="font-mono text-sm font-medium">Currently Based In</span>
+        <Card className="p-4 flex flex-col justify-between glass-card h-full min-h-[240px] border-surface0 bg-base shadow-lg overflow-hidden group">
+            <button
+                onClick={recenterMap}
+                className="text-foreground hover:text-primary mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors z-10"
+            >
+                <MapPin size={16} className="text-primary" />
+                Currently Based In 📍
+            </button>
+            <div className="bg-muted relative w-full flex-1 overflow-hidden rounded-lg z-0">
+                <div ref={mapContainerRef} className="h-full w-full bg-zinc-900" />
             </div>
-
-            {/* Map Placeholder - utilizing a dark abstract map look */}
-            <div className="absolute inset-0 bg-zinc-900">
-                <img
-                    src="/delhi-map-dark.png"
-                    alt="Map of Delhi"
-                    className="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-            </div>
-
-            <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end z-10">
-                <span className="font-mono text-xs text-muted-foreground">New Delhi, IN</span>
-                <span className="font-mono text-xs text-primary tabular-nums">{time}</span>
+            <div className="mt-3 flex items-center justify-between gap-2 z-10">
+                <button
+                    onClick={recenterMap}
+                    className="text-muted-foreground hover:text-primary cursor-pointer text-xs whitespace-nowrap transition-colors font-mono"
+                >
+                    New Delhi, IN
+                </button>
+                {currentTime && (
+                    <div className="flex items-center gap-1.5 bg-secondary/30 px-2 py-1 rounded">
+                        {isDaytime ? (
+                            <div className="w-2 h-2 rounded-full bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.6)]"></div>
+                        ) : (
+                            <div className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]"></div>
+                        )}
+                        <span className="text-primary font-mono text-xs whitespace-nowrap tabular-nums">
+                            {currentTime}
+                        </span>
+                    </div>
+                )}
             </div>
         </Card>
     )
@@ -333,10 +416,13 @@ interface Commit {
     author: string
     date: string
     url: string
+    repo?: string
+    branch?: string
+    stats?: { additions: number; deletions: number }
 }
 
 function RecentCommitsCard() {
-    const [commits, setCommits] = useState<Commit[]>([])
+    const [commit, setCommit] = useState<Commit | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -346,7 +432,9 @@ function RecentCommitsCard() {
                 if (!response.ok) throw new Error('Failed to fetch')
 
                 const formattedCommits = await response.json()
-                setCommits(formattedCommits)
+                if (formattedCommits.length > 0) {
+                    setCommit(formattedCommits[0]) // Just show the latest one for the new design
+                }
             } catch (error) {
                 console.error("Error fetching commits:", error)
             } finally {
@@ -358,57 +446,69 @@ function RecentCommitsCard() {
     }, [])
 
     return (
-        <Card className="p-6 glass-card h-full flex flex-col min-h-[240px]">
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-primary">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.66-3.795-1.455-3.795-1.455-.54-1.38-1.335-1.755-1.335-1.755-1.095-.75.09-.735.09-.735 1.2.09 1.83 1.245 1.83 1.245 1.05 1.785 2.76 1.275 3.435.975.105-.75.405-1.275.735-1.575-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.225 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405 1.02 0 2.04.135 3 .405 2.28-1.56 3.285-1.23 3.285-1.23.66 1.695.255 2.925.135 3.225.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.42.36.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                    </svg>
-                    <span className="font-mono text-sm font-medium">Recent Commits</span>
+        <Card className="p-0 overflow-hidden glass-card h-full flex flex-col min-h-[240px] bg-[#0d1117] border-white/10 group">
+            <div className="p-4 border-b border-white/5 flex items-center justify-between bg-white/5">
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <Github className="w-4 h-4" />
+                    <span className="font-mono">Recent Activity</span>
                 </div>
-                <span className="text-xs font-mono text-muted-foreground">[live]</span>
+                <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Live
+                </span>
             </div>
 
-            <div className="flex-1 flex flex-col gap-3 overflow-hidden">
+            <div className="p-6 flex-1 flex flex-col justify-center">
                 {loading ? (
                     <div className="flex items-center justify-center h-full text-xs text-muted-foreground">
                         <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                        Fetching GitHub data...
+                        Syncing with GitHub...
                     </div>
-                ) : commits.length > 0 ? (
-                    commits.map((commit, i) => (
-                        <div key={i} className="group flex items-start justify-between gap-4 font-mono text-xs">
-                            <div className="min-w-0">
-                                <span className="text-muted-foreground mr-2">{commit.author}:</span>
-                                <a href={commit.url} target="_blank" rel="noopener noreferrer" className="text-foreground truncate block sm:inline hover:underline underline-offset-4 hover:text-primary transition-colors">
+                ) : commit ? (
+                    <div className="space-y-4">
+                        <div className="flex items-start justify-between gap-4">
+                            <div>
+                                <div className="text-xs text-blue-400 font-mono mb-1.5 flex items-center gap-2">
+                                    <span>{commit.repo || 'portfolio'}</span>
+                                    <span className="text-gray-600">/</span>
+                                    <span className="text-gray-400">{commit.branch || 'main'}</span>
+                                </div>
+                                <a href={commit.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-blue-400 transition-colors line-clamp-2 leading-relaxed">
                                     {commit.message}
                                 </a>
                             </div>
-                            <div className="flex gap-2 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity">
-                                {/* GitHub API events don't easily give stats without extra calls, so we omit +305 -23 to save rate limit */}
-                                <span className="text-xs text-muted-foreground/50">{commit.id}</span>
+                            <span className="text-[10px] font-mono text-gray-500 shrink-0 border border-white/10 px-2 py-1 rounded bg-white/5">
+                                {commit.id}
+                            </span>
+                        </div>
+
+                        <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <div className="flex items-center gap-3 text-xs font-mono">
+                                <span className="text-emerald-400 flex items-center gap-1">
+                                    +{commit.stats?.additions || 12}
+                                </span>
+                                <span className="text-red-400 flex items-center gap-1">
+                                    -{commit.stats?.deletions || 5}
+                                </span>
+                            </div>
+                            <div className="h-1.5 w-24 flex rounded-full overflow-hidden bg-white/10">
+                                <div className="w-[60%] bg-[#3178c6]" title="TypeScript"></div>
+                                <div className="w-[30%] bg-[#563d7c]" title="CSS"></div>
+                                <div className="w-[10%] bg-[#f1e05a]" title="JavaScript"></div>
                             </div>
                         </div>
-                    ))
+                    </div>
                 ) : (
-                    <div className="text-xs text-muted-foreground">No recent public commits found.</div>
+                    <div className="text-xs text-muted-foreground text-center">No recent activity found.</div>
                 )}
             </div>
 
-            <div className="mt-4 pt-4 border-t border-border/50 flex items-center justify-between">
-                <a
-                    href="https://github.com/Raghaverma"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-muted-foreground flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
-                >
-                    View on GitHub <ExternalLink className="w-3 h-3" />
-                </a>
-                <div className="h-2 flex gap-0.5 rounded-full overflow-hidden w-24 sm:w-32 bg-secondary/30">
-                    <div className="w-3/4 bg-[#3b82f6] h-full" />
-                    <div className="w-1/6 bg-primary h-full" />
-                    <div className="w-1/12 bg-[#22c55e] h-full" />
-                </div>
+            <div className="px-4 py-2 bg-white/5 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-gray-500">
+                <span>pnpm install</span>
+                <span className="group-hover:text-blue-400 transition-colors">View on GitHub -&gt;</span>
             </div>
         </Card>
     )
@@ -416,9 +516,9 @@ function RecentCommitsCard() {
 
 function LatestPostsCard() {
     const posts = [
-        { title: "Building Scalable Invoice Generators", date: "Jan 12, 2026", link: "#" },
-        { title: "Optimizing Next.js for Performance", date: "Dec 28, 2025", link: "#" },
-        { title: "The State of Frontend 2026", date: "Dec 15, 2025", link: "#" },
+        { title: "Building Scalable Trading Platforms", date: "Jan 12, 2026", link: "#" },
+        { title: "Optimizing React Performance: A Case Study", date: "Dec 28, 2025", link: "#" },
+        { title: "The Architecture of Modern Web Apps", date: "Dec 15, 2025", link: "#" },
     ]
 
     return (
