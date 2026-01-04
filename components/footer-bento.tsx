@@ -421,8 +421,15 @@ interface Commit {
     stats?: { additions: number; deletions: number }
 }
 
+interface Language {
+    name: string
+    color: string
+    size: number
+}
+
 function RecentCommitsCard() {
     const [commit, setCommit] = useState<Commit | null>(null)
+    const [languages, setLanguages] = useState<Language[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -431,9 +438,12 @@ function RecentCommitsCard() {
                 const response = await fetch('/api/github')
                 if (!response.ok) throw new Error('Failed to fetch')
 
-                const formattedCommits = await response.json()
-                if (formattedCommits.length > 0) {
-                    setCommit(formattedCommits[0]) // Just show the latest one for the new design
+                const data = await response.json()
+                if (data.events && data.events.length > 0) {
+                    setCommit(data.events[0])
+                }
+                if (data.languages) {
+                    setLanguages(data.languages)
                 }
             } catch (error) {
                 console.error("Error fetching commits:", error)
@@ -444,6 +454,8 @@ function RecentCommitsCard() {
 
         fetchCommits()
     }, [])
+
+    const totalSize = languages.reduce((acc, l) => acc + l.size, 0)
 
     return (
         <Card className="p-0 overflow-hidden glass-card h-full flex flex-col min-h-[240px] bg-[#0d1117] border-white/10 group">
@@ -470,13 +482,13 @@ function RecentCommitsCard() {
                 ) : commit ? (
                     <div className="space-y-4">
                         <div className="flex items-start justify-between gap-4">
-                            <div>
+                            <div className="min-w-0 flex-1">
                                 <div className="text-xs text-blue-400 font-mono mb-1.5 flex items-center gap-2">
-                                    <span>{commit.repo || 'portfolio'}</span>
+                                    <span className="truncate">{commit.repo || 'portfolio'}</span>
                                     <span className="text-gray-600">/</span>
-                                    <span className="text-gray-400">{commit.branch || 'main'}</span>
+                                    <span className="text-gray-400 shrink-0">{commit.branch || 'main'}</span>
                                 </div>
-                                <a href={commit.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-blue-400 transition-colors line-clamp-2 leading-relaxed">
+                                <a href={commit.url} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-blue-400 transition-colors line-clamp-2 leading-relaxed block">
                                     {commit.message}
                                 </a>
                             </div>
@@ -488,16 +500,24 @@ function RecentCommitsCard() {
                         <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                             <div className="flex items-center gap-3 text-xs font-mono">
                                 <span className="text-emerald-400 flex items-center gap-1">
-                                    +{commit.stats?.additions || 12}
+                                    +{commit.stats?.additions || 0}
                                 </span>
                                 <span className="text-red-400 flex items-center gap-1">
-                                    -{commit.stats?.deletions || 5}
+                                    -{commit.stats?.deletions || 0}
                                 </span>
                             </div>
-                            <div className="h-1.5 w-24 flex rounded-full overflow-hidden bg-white/10">
-                                <div className="w-[60%] bg-[#3178c6]" title="TypeScript"></div>
-                                <div className="w-[30%] bg-[#563d7c]" title="CSS"></div>
-                                <div className="w-[10%] bg-[#f1e05a]" title="JavaScript"></div>
+                            <div className="h-1.5 w-24 flex rounded-full overflow-hidden bg-white/10 relative">
+                                {languages.map((lang, index) => (
+                                    <div
+                                        key={lang.name}
+                                        className="h-full"
+                                        style={{
+                                            width: `${(lang.size / totalSize) * 100}%`,
+                                            backgroundColor: lang.color
+                                        }}
+                                        title={`${lang.name} (${Math.round((lang.size / totalSize) * 100)}%)`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
