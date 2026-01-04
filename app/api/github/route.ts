@@ -40,8 +40,9 @@ export async function GET() {
         }
 
         const rawData = await response.json()
-        console.log("Katib Data:", JSON.stringify(rawData, null, 2)) // Debug log
+        // console.log("Katib Data:", JSON.stringify(rawData, null, 2)) 
         const commits: KatibCommit[] = Array.isArray(rawData) ? rawData : (rawData.commits || [])
+        const languages = !Array.isArray(rawData) && rawData.languages ? rawData.languages : []
 
         const formattedEvents = commits.map((commit) => {
             const repoParts = commit.repo.split('/')
@@ -63,7 +64,10 @@ export async function GET() {
             }
         })
 
-        return NextResponse.json(formattedEvents)
+        return NextResponse.json({
+            events: formattedEvents,
+            languages: languages.slice(0, 5)
+        })
     } catch (error) {
         console.error('GitHub API Error:', error)
         return NextResponse.json([])

@@ -431,22 +431,34 @@ function RecentCommitsCard() {
     const [commit, setCommit] = useState<Commit | null>(null)
     const [languages, setLanguages] = useState<Language[]>([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         async function fetchCommits() {
             try {
                 const response = await fetch('/api/github')
-                if (!response.ok) throw new Error('Failed to fetch')
+                if (!response.ok) {
+                    const errText = await response.text()
+                    throw new Error(`API Error ${response.status}: ${errText}`)
+                }
 
                 const data = await response.json()
-                if (data.events && data.events.length > 0) {
-                    setCommit(data.events[0])
+                // Robust check for data structure
+                const events = data.events || (Array.isArray(data) ? data : [])
+                const langs = data.languages || []
+
+                if (events && events.length > 0) {
+                    setCommit(events[0])
+                } else {
+                    console.warn("No events found in payload:", data)
                 }
-                if (data.languages) {
-                    setLanguages(data.languages)
+
+                if (langs.length > 0) {
+                    setLanguages(langs)
                 }
-            } catch (error) {
+            } catch (error: any) {
                 console.error("Error fetching commits:", error)
+                setError(error.message || "Failed to load")
             } finally {
                 setLoading(false)
             }
@@ -479,6 +491,11 @@ function RecentCommitsCard() {
                         <Loader2 className="w-4 h-4 animate-spin mr-2" />
                         Syncing with GitHub...
                     </div>
+                ) : error ? (
+                    <div className="text-xs text-red-400 text-center px-4">
+                        <p className="font-mono mb-1">Configuration Issue</p>
+                        <p className="opacity-75">{error}</p>
+                    </div>
                 ) : commit ? (
                     <div className="space-y-4">
                         <div className="flex items-start justify-between gap-4">
@@ -507,7 +524,7 @@ function RecentCommitsCard() {
                                 </span>
                             </div>
                             <div className="h-1.5 w-24 flex rounded-full overflow-hidden bg-white/10 relative">
-                                {languages.map((lang, index) => (
+                                {languages.length > 0 ? languages.map((lang, index) => (
                                     <div
                                         key={lang.name}
                                         className="h-full"
@@ -517,12 +534,23 @@ function RecentCommitsCard() {
                                         }}
                                         title={`${lang.name} (${Math.round((lang.size / totalSize) * 100)}%)`}
                                     />
-                                ))}
+                                )) : (
+                                    /* Fallback default languages if API doesn't return them */
+                                    <>
+                                        <div className="w-[60%] bg-[#3178c6]" title="TypeScript"></div>
+                                        <div className="w-[30%] bg-[#563d7c]" title="CSS"></div>
+                                        <div className="w-[10%] bg-[#f1e05a]" title="JavaScript"></div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
                 ) : (
-                    <div className="text-xs text-muted-foreground text-center">No recent activity found.</div>
+                    <div className="text-xs text-muted-foreground text-center">
+                        No recent activity found.
+                        <br />
+                        <span className="opacity-50 text-[10px]">(Check API Response)</span>
+                    </div>
                 )}
             </div>
 
