@@ -1,61 +1,36 @@
 
 import { NextResponse } from 'next/server'
+import { createDevTrackr, DevTrackrRateLimitError } from 'devtrackr'
 
 export const dynamic = 'force-dynamic'
 
-// Katib API Response Interface (Corrected)
-interface KatibCommit {
-    repo: string
-    additions: number
-    deletions: number
-    commitUrl: string
-    committedDate: string
-    oid: string
-    messageHeadline: string
-    messageBody: string
-}
-
 export async function GET() {
     try {
-        const headers: HeadersInit = {
-            'User-Agent': 'dictator-portfolio',
-        }
-
-        if (process.env.GITHUB_TOKEN) {
-            headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`
-        } else {
+        if (!process.env.GITHUB_TOKEN) {
             console.warn("GITHUB_TOKEN is missing")
             return NextResponse.json({ error: "Configuration Error: GITHUB_TOKEN is missing" }, { status: 500 })
         }
 
-        const response = await fetch('https://katib.jasoncameron.dev/v2/commits/latest?username=Raghaverma&limit=3', {
-            headers,
-            next: { revalidate: 60 }
+        const devtrackr = createDevTrackr({
+            token: process.env.GITHUB_TOKEN
         })
 
-        if (!response.ok) {
-            const errorText = await response.text()
-            console.error('Katib API Error:', response.status, errorText)
-            return NextResponse.json({ error: `Katib API Error: ${response.status}`, details: errorText }, { status: response.status })
-        }
+        const [commits, langStats] = await Promise.all([
+            devtrackr.getRecentCommits('Raghaverma', { perPage: 3 }),
+            devtrackr.getLanguageStats('Raghaverma')
+        ])
 
-        const rawData = await response.json()
-        // console.log("Katib Data:", JSON.stringify(rawData, null, 2)) 
-        const commits: KatibCommit[] = Array.isArray(rawData) ? rawData : (rawData.commits || [])
-        const languages = !Array.isArray(rawData) && rawData.languages ? rawData.languages : []
-
-        const formattedEvents = commits.map((commit) => {
-            const repoParts = commit.repo.split('/')
-            const repoName = repoParts[1] || commit.repo
-            const author = repoParts[0] || 'Raghaverma'
+        const formattedEvents = commits.map((commit: any) => {
+            // Extract ID from URL if possible, otherwise generate/fallback
+            const id = commit.commitUrl.split('/').pop()?.substring(0, 7) || 'latest'
 
             return {
-                id: commit.oid.substring(0, 7),
-                message: commit.messageHeadline,
-                repo: repoName,
-                branch: 'main',
-                author: author,
-                date: new Date(commit.committedDate).toLocaleDateString(),
+                id: id,
+                message: commit.message,
+                repo: commit.repo,
+                branch: 'main', // DevTrackr doesn't return branch yet
+                author: 'Raghaverma',
+                date: new Date(commit.committedAt).toLocaleDateString(),
                 url: commit.commitUrl,
                 stats: {
                     additions: commit.additions,
@@ -64,12 +39,28 @@ export async function GET() {
             }
         })
 
+        // Map percentage to size for the frontend component
+        const formattedLanguages = langStats.languages.map((lang: any) => ({
+            name: lang.name,
+            color: lang.color,
+            size: lang.percentage // Frontend treats 'size' relative to total, effectively percentage
+        }))
+
         return NextResponse.json({
             events: formattedEvents,
-            languages: languages.slice(0, 5)
+            languages: formattedLanguages.slice(0, 5)
         })
-    } catch (error) {
+
+    } catch (error: any) {
+        if (error instanceof DevTrackrRateLimitError) {
+            console.error('DevTrackr Rate Limit:', error.resetAt)
+            return NextResponse.json({
+                error: 'Rate limit exceeded',
+                resetAt: error.resetAt
+            }, { status: 429 })
+        }
+
         console.error('GitHub API Error:', error)
-        return NextResponse.json([])
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

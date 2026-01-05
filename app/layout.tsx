@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Particles from "@/components/magicui/particles"
+import { SmoothScroll } from "@/components/smooth-scroll"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -62,7 +63,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
           <Particles
             className="fixed inset-0 z-[-1]"
             quantity={50}

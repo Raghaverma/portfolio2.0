@@ -4,6 +4,19 @@ import { TiltCard } from "@/components/ui/tilt-card"
 
 const projects = [
   {
+    name: "DevTrackr",
+    description:
+      "A production-grade TypeScript SDK for extracting and normalizing GitHub developer signals.",
+    tech: ["TypeScript", "Node.js", "GitHub API"],
+    highlights: [
+      "Type-Safe: Full TypeScript support with exported types",
+      "Normalized Data: UI-ready JSON responses, no raw GitHub API responses",
+      "Zero Dependencies: Uses native fetch only",
+    ],
+    github: "https://github.com/Raghaverma/DevTrackr-Docs",
+    demo: "https://devtrackr.raghav-verma.com/",
+  },
+  {
     name: "Invoice Generator",
     description:
       "Built a React-based invoice creation tool with itemized items, quantity configuration, dynamic pricing, tax rates, and discounts. Enables PDF download using jspdf-react for seamless invoice generation.",

@@ -15,7 +15,7 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
 }
 
 const dockVariants = cva(
-    "mx-auto w-max mt-8 h-[58px] p-2 flex gap-2 rounded-2xl border supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 backdrop-blur-md",
+    "mx-auto w-max mt-8 h-[58px] p-2 flex gap-4 rounded-2xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-slate-200/50 dark:border-zinc-800/80 transition-colors duration-300",
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
