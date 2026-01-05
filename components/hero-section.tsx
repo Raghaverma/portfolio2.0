@@ -8,7 +8,7 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 
 const terminalCommands = [
   { cmd: "$ whoami", output: "Raghav Verma" },
-  { cmd: "$ cat role.txt", output: "Freelance Developer @ Hypeliv Solutions" },
+  { cmd: "$ cat role.txt", output: "Software Engineer" },
   { cmd: "$ ls skills/", output: "Next.js TypeScript React.js Tailwind Node.js" },
   { cmd: "$ ping status", output: "Online • Open for freelance work" },
 ]
@@ -58,20 +58,20 @@ export function HeroSection() {
   }, [displayedText, currentLine, phase])
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative pt-12">
-      {/* Meta info corners */}
-      <div className="fixed top-20 left-8 font-mono text-xs text-muted-foreground hidden md:block z-40">
-        <div>Server: Vercel Edge</div>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span>Ping: 24ms</span>
-        </div>
+    <section id="hero" className="min-h-screen flex items-center justify-center relative pt-12 overflow-hidden">
+
+      <div className="fixed top-24 right-8 z-40 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        <span className="text-xs font-mono text-muted-foreground">Available for Work</span>
       </div>
 
-      <div className="fixed top-20 right-8 font-mono text-xs text-muted-foreground hidden md:block z-40">
-        <div>Build: Production</div>
-        <div className="mt-1">Runtime: Node.js 20</div>
-      </div>
+      {/* Meta info corners */}
+
+
+
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -106,7 +106,7 @@ export function HeroSection() {
                           <div className="flex items-center pt-1">
                             <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
                             <span className="text-xs text-muted-foreground">
-                              Freelance @ Hypeliv
+                              Ex-Hypeliv Solutions
                             </span>
                           </div>
                         </div>

@@ -6,7 +6,7 @@ const experiences = [
     title: "Front-end Developer",
     company: "Hypeliv Solutions Pvt. Ltd",
     location: "Delhi NCR, IN",
-    period: "August 2025 - Present",
+    period: "August 2025 - January 2026",
     highlights: [
       "Developed a Next.js + TypeScript trading and analytics platform, reducing load time by 20–30%",
       "Built responsive Markets, Leaderboard, and Wallet pages with seamless API integrations",
