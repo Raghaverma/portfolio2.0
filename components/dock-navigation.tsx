@@ -24,11 +24,11 @@ import { Dock, DockIcon } from "@/components/magicui/dock"
 
 const DATA = {
     navbar: [
-        { href: "#hero", icon: HomeIcon, label: "Home" },
-        { href: "#experience", icon: BriefcaseIcon, label: "Experience" },
-        { href: "#skills", icon: CodeIcon, label: "Skills" },
-        { href: "#projects", icon: FolderGit2Icon, label: "Projects" },
-        { href: "#contact", icon: MailIcon, label: "Contact" },
+        { href: "/", icon: HomeIcon, label: "Home" },
+        { href: "/experience", icon: BriefcaseIcon, label: "Experience" },
+        { href: "/skills", icon: CodeIcon, label: "Skills" },
+        { href: "/projects", icon: FolderGit2Icon, label: "Projects" },
+        { href: "/#contact", icon: MailIcon, label: "Contact" },
     ],
 }
 
@@ -53,20 +53,9 @@ export function DockDemo() {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [lastScrollY])
 
-    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        e.preventDefault()
-        const targetId = href.replace("#", "")
-        const element = document.getElementById(targetId)
-        if (element) {
-            const offset = 80
-            const elementPosition = element.getBoundingClientRect().top
-            const offsetPosition = elementPosition + window.pageYOffset - offset
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            })
-        }
+    const handleLinkClick = () => {
+        // No custom scroll logic needed for page navigation
+        // Just standard link behavior
     }
 
     return (
@@ -89,7 +78,7 @@ export function DockDemo() {
                                                 <Link
                                                     href={item.href}
                                                     aria-label={item.label}
-                                                    onClick={(e) => handleLinkClick(e, item.href)}
+                                                    // onClick={(e) => handleLinkClick(e, item.href)}
                                                     className={cn(
                                                         buttonVariants({ variant: "ghost", size: "icon" }),
                                                         "size-12 rounded-full"

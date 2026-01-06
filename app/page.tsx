@@ -2,9 +2,9 @@
 
 import { DockDemo } from "@/components/dock-navigation"
 import { HeroSection } from "@/components/hero-section"
-import { ExperienceSection } from "@/components/experience-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { SkillsSection } from "@/components/skills-section"
+import { ExperiencePreview } from "@/components/experience-preview"
+import { ProjectsPreview } from "@/components/projects-preview"
+import { SkillsPreview } from "@/components/skills-preview"
 import { ContactSection } from "@/components/contact-section"
 import { FooterBento } from "@/components/footer-bento"
 
@@ -19,9 +19,9 @@ export default function Home() {
 
       <main className="min-h-screen blueprint-grid">
         <HeroSection />
-        <ExperienceSection />
-        <SkillsSection />
-        <ProjectsSection />
+        <ExperiencePreview />
+        <SkillsPreview />
+        <ProjectsPreview />
         <FooterBento />
         <ContactSection />
       </main>

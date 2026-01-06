@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Menu, Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 export function Navigation() {
@@ -23,11 +24,11 @@ export function Navigation() {
   }
 
   const navItems = [
-    { id: "hero", label: "Home" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "contact", label: "Contact" },
+    { id: "/", label: "Home" },
+    { id: "/experience", label: "Experience" },
+    { id: "/skills", label: "Skills" },
+    { id: "/projects", label: "Projects" },
+    { id: "/#contact", label: "Contact" },
   ]
 
   return (
@@ -36,23 +37,23 @@ export function Navigation() {
         <div className="container mx-auto px-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <button
-              onClick={() => scrollToSection("hero")}
+            <Link
+              href="/"
               className="text-xl font-bold font-mono text-primary hover:text-primary/80 transition-colors"
             >
               {"<RV>"}
-            </button>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  href={item.id}
                   className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
                 >
                   {item.label}
-                </button>
+                </Link>
               ))}
             </div>
 
@@ -70,13 +71,14 @@ export function Navigation() {
                   </SheetHeader>
                   <div className="flex flex-col gap-4 mt-8 px-6">
                     {navItems.map((item) => (
-                      <button
+                      <Link
                         key={item.id}
-                        onClick={() => scrollToSection(item.id)}
+                        href={item.id}
+                        onClick={() => setIsOpen(false)}
                         className="text-left text-lg font-medium text-foreground/80 hover:text-primary transition-colors py-2"
                       >
                         {item.label}
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 </SheetContent>
