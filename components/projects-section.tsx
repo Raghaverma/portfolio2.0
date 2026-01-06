@@ -39,7 +39,7 @@ const projects = [
       "Dynamic browsing and data-driven movie insights",
       "Responsive design with optimized performance",
     ],
-    github: "#",
+    github: "https://github.com/Raghaverma/FilmMuse",
   },
   {
     name: "Expense Tracker",
@@ -51,7 +51,7 @@ const projects = [
       "Optimized lazy loading and improved performance",
       "Category-based filtering and analytics dashboard",
     ],
-    github: "#",
+    github: "https://github.com/Raghaverma/expense-tracker",
     demo: "https://expense-tracker-psi-olive.vercel.app/",
   },
 ]

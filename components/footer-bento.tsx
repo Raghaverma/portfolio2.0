@@ -138,7 +138,7 @@ function ConnectCard() {
                 </p>
             </div>
             <Button className="w-full group" variant="secondary" asChild>
-                <a href="mailto:raghav.verma.work@gmail.com">
+                <a href="https://cal.com/raghaverma/30min" target="_blank" rel="noopener noreferrer">
                     <span className="mr-2">Book a Chat</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </a>
@@ -562,34 +562,7 @@ function RecentCommitsCard() {
     )
 }
 
-function LatestPostsCard() {
-    const posts = [
-        { title: "Building Scalable Trading Platforms", date: "Jan 12, 2026", link: "#" },
-        { title: "Optimizing React Performance: A Case Study", date: "Dec 28, 2025", link: "#" },
-        { title: "The Architecture of Modern Web Apps", date: "Dec 15, 2025", link: "#" },
-    ]
 
-    return (
-        <Card className="p-6 glass-card h-full flex flex-col min-h-[240px]">
-            <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2">
-                    <Copy className="w-4 h-4 text-primary" />
-                    <span className="font-mono text-sm font-medium">Latest Posts</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-muted-foreground" />
-            </div>
-
-            <div className="flex-1 flex flex-col justify-between">
-                {posts.map((post, i) => (
-                    <a key={i} href={post.link} className="group flex items-center justify-between border-b border-border/30 last:border-0 py-2 hover:bg-secondary/20 -mx-2 px-2 rounded transition-colors cursor-pointer">
-                        <span className="font-medium text-sm truncate pr-4 group-hover:text-primary transition-colors">{post.title}</span>
-                        <span className="font-mono text-xs text-muted-foreground shrink-0">{post.date}</span>
-                    </a>
-                ))}
-            </div>
-        </Card>
-    )
-}
 
 export function FooterBento() {
     return (
@@ -614,12 +587,8 @@ export function FooterBento() {
                 </div>
 
                 {/* Row 2 */}
-                <div className="lg:col-span-2 h-full min-h-[200px]">
+                <div className="lg:col-span-4 h-full min-h-[200px]">
                     <RecentCommitsCard />
-                </div>
-
-                <div className="lg:col-span-2 h-full min-h-[200px]">
-                    <LatestPostsCard />
                 </div>
             </div>
         </section>

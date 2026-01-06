@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
     HomeIcon,
     BriefcaseIcon,
@@ -58,6 +59,8 @@ export function DockDemo() {
         // Just standard link behavior
     }
 
+    const pathname = usePathname()
+
     return (
         <div className="flex flex-col items-center justify-center">
             <TooltipProvider>
@@ -71,28 +74,31 @@ export function DockDemo() {
                             className="z-50"
                         >
                             <Dock direction="middle">
-                                {DATA.navbar.map((item) => (
-                                    <DockIcon key={item.label}>
-                                        <Tooltip>
-                                            <TooltipTrigger asChild>
-                                                <Link
-                                                    href={item.href}
-                                                    aria-label={item.label}
-                                                    // onClick={(e) => handleLinkClick(e, item.href)}
-                                                    className={cn(
-                                                        buttonVariants({ variant: "ghost", size: "icon" }),
-                                                        "size-12 rounded-full"
-                                                    )}
-                                                >
-                                                    <item.icon className="size-4" />
-                                                </Link>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <p>{item.label}</p>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </DockIcon>
-                                ))}
+                                {DATA.navbar.map((item) => {
+                                    const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href))
+                                    return (
+                                        <DockIcon key={item.label}>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <Link
+                                                        href={item.href}
+                                                        aria-label={item.label}
+                                                        className={cn(
+                                                            buttonVariants({ variant: "ghost", size: "icon" }),
+                                                            "size-12 rounded-full transition-all duration-300",
+                                                            isActive ? "text-foreground bg-secondary/50" : "text-muted-foreground hover:text-foreground hover:bg-secondary/20"
+                                                        )}
+                                                    >
+                                                        <item.icon className="size-4" />
+                                                    </Link>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{item.label}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </DockIcon>
+                                    )
+                                })}
                             </Dock>
                         </motion.div>
                     )}

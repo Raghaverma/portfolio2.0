@@ -58,7 +58,7 @@ export function HeroSection() {
   }, [displayedText, currentLine, phase])
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative pt-12 overflow-hidden">
+    <section id="hero" className="min-h-screen flex flex-col md:justify-center relative pt-32 md:pt-24 pb-12 overflow-hidden">
 
       <div className="fixed top-24 right-8 z-40 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50">
         <span className="relative flex h-2 w-2">
@@ -74,7 +74,7 @@ export function HeroSection() {
 
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mt-8 md:mt-0">
           {/* Left side - Visual Output (Swapped) */}
           <div className="space-y-6 order-last lg:order-first">
             <div>

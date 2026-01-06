@@ -1,18 +1,25 @@
 import { TiltCard } from "@/components/ui/tilt-card"
 
 const skills = {
-  technical: [
+  frontend: [
     "Next.js",
-    "TypeScript",
     "React.js",
+    "TypeScript",
     "Tailwind CSS",
+    "Framer Motion",
+  ],
+  backend: [
     "Node.js",
     "Supabase",
-    "SQL",
-    "Git",
+    "SQL (PostgreSQL)",
     "REST APIs",
     "Python",
+  ],
+  devops: [
     "Docker",
+    "Git",
+    "CI/CD",
+    "Vercel",
   ],
   soft: [
     "Commercial Awareness & Data Storytelling",
@@ -24,7 +31,7 @@ const skills = {
 export function SkillsSection() {
   return (
     <section id="skills" className="py-10 md:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Technical <span className="text-primary">&#123;Skills&#125;</span>
@@ -34,15 +41,14 @@ export function SkillsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Technical Skills */}
+        <div className="grid gap-8">
+          {/* Frontend */}
           <TiltCard className="glass-card rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-primary font-mono">&lt;/&gt;</span>
-              Technical Skills
+              <span className="text-primary font-mono">&lt;Frontend /&gt;</span>
             </h3>
             <div className="flex flex-wrap gap-3">
-              {skills.technical.map((skill) => (
+              {skills.frontend.map((skill) => (
                 <div
                   key={skill}
                   className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
@@ -52,6 +58,41 @@ export function SkillsSection() {
               ))}
             </div>
           </TiltCard>
+
+          {/* Backend & DevOps Grid */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <TiltCard className="glass-card rounded-lg p-6 md:p-8">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <span className="text-primary font-mono">./Backend</span>
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {skills.backend.map((skill) => (
+                  <div
+                    key={skill}
+                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                  >
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </TiltCard>
+
+            <TiltCard className="glass-card rounded-lg p-6 md:p-8">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <span className="text-primary font-mono">DevOps_</span>
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {skills.devops.map((skill) => (
+                  <div
+                    key={skill}
+                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                  >
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </TiltCard>
+          </div>
 
           {/* Soft Skills */}
           <TiltCard className="glass-card rounded-lg p-6 md:p-8">

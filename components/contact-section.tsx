@@ -58,6 +58,12 @@ export function ContactSection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
+              <a href="https://cal.com/raghaverma/30min" target="_blank" rel="noopener noreferrer">
+                <FileText className="w-4 h-4 mr-2" />
+                Book a Call
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
               <a href="/RaghavVerma_CV.pdf" target="_blank" rel="noopener noreferrer" download>
                 <FileText className="w-4 h-4 mr-2" />
                 Download Resume

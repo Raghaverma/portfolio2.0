@@ -40,6 +40,29 @@ export const metadata: Metadata = {
       },
     ],
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://raghav-verma.com/",
+    title: "Raghav Verma | Front-end Developer & Software Engineer",
+    description: "Portfolio of Raghav Verma - Front-end Developer specializing in Next.js, React, and TypeScript.",
+    siteName: "Raghav Verma Portfolio",
+    images: [
+      {
+        url: "/og-image.png", // User needs to provide this
+        width: 1200,
+        height: 630,
+        alt: "Raghav Verma Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Raghav Verma | Front-end Developer",
+    description: "Building scalable web applications with Next.js and React.",
+    images: ["/og-image.png"], // User needs to provide this
+    creator: "@Raghaverma",
+  },
 }
 
 export const viewport = {
