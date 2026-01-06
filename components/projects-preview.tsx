@@ -5,6 +5,14 @@ import Link from "next/link"
 
 const featuredProjects = [
     {
+        name: "Boundary",
+        description:
+            "A resilient SDK to tame API chaos. Normalize responses, handle errors, and implement circuit breakers without the boilerplate.",
+        tech: ["TypeScript", "Node.js", "Resilience Patterns"],
+        github: "https://github.com/Raghaverma/Boundary",
+        demo: "https://boundary.raghav-verma.com/",
+    },
+    {
         name: "DevTrackr",
         description:
             "A production-grade TypeScript SDK for extracting and normalizing GitHub developer signals.",

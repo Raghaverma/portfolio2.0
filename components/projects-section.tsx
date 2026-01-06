@@ -4,6 +4,19 @@ import { TiltCard } from "@/components/ui/tilt-card"
 
 const projects = [
   {
+    name: "Boundary",
+    description:
+      "A resilient SDK to tame API chaos. Normalize responses, handle errors, and implement circuit breakers and retries without the boilerplate.",
+    tech: ["TypeScript", "Node.js", "Resilience Patterns"],
+    highlights: [
+      "Reliability First: Built-in circuit breakers and smart retry strategies",
+      "Data Normalization: Transform inconsistent API responses into predictable shapes",
+      "Type-Safe: Full TypeScript support for robust integrations",
+    ],
+    github: "https://github.com/Raghaverma/Boundary",
+    demo: "https://boundary.raghav-verma.com/",
+  },
+  {
     name: "DevTrackr",
     description:
       "A production-grade TypeScript SDK for extracting and normalizing GitHub developer signals.",
