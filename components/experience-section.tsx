@@ -1,3 +1,4 @@
+// experience-section.tsx
 import { Briefcase, Calendar } from "lucide-react"
 import { TiltCard } from "@/components/ui/tilt-card"
 
@@ -63,8 +64,8 @@ export function ExperienceSection() {
               <ul className="space-y-3">
                 {exp.highlights.map((highlight, hIdx) => (
                   <li key={hIdx} className="flex gap-3 text-foreground/80 leading-relaxed">
-                    <span className="text-primary font-bold mt-1">→</span>
-                    <span className="text-pretty">{highlight}</span>
+                    <span className="text-primary font-bold flex-shrink-0 translate-y-[0.1em]">→</span>
+                    <span className="text-pretty leading-relaxed">{highlight}</span>
                   </li>
                 ))}
               </ul>

@@ -30,6 +30,19 @@ const projects = [
     demo: "https://devtrackr.raghav-verma.com/",
   },
   {
+    name: "Film Muse",
+    description:
+      "Built a Next.js web application for discovering and exploring movies with real-time search, responsive UI, and detailed movie information pages.",
+    tech: ["Next.js", "TMDB API", "TypeScript", "Tailwind CSS"],
+    highlights: [
+      "Integrated the TMDB API to fetch movies, genres, ratings, and trends",
+      "Dynamic browsing and data-driven movie insights",
+      "Responsive design with optimized performance",
+    ],
+    github: "https://github.com/Raghaverma/FilmMuse",
+    demo: "https://filmmuse.raghav-verma.com/",
+  },
+  {
     name: "Invoice Generator",
     description:
       "Built a React-based invoice creation tool with itemized items, quantity configuration, dynamic pricing, tax rates, and discounts. Enables PDF download using jspdf-react for seamless invoice generation.",
@@ -41,18 +54,6 @@ const projects = [
     ],
     github: "https://github.com/Raghaverma/invoice-generator",
     demo: "https://invoice-generator-xi-nine.vercel.app",
-  },
-  {
-    name: "Film Muse",
-    description:
-      "Built a Next.js web application for discovering and exploring movies with real-time search, responsive UI, and detailed movie information pages.",
-    tech: ["Next.js", "TMDB API", "TypeScript", "Tailwind CSS"],
-    highlights: [
-      "Integrated the TMDB API to fetch movies, genres, ratings, and trends",
-      "Dynamic browsing and data-driven movie insights",
-      "Responsive design with optimized performance",
-    ],
-    github: "https://github.com/Raghaverma/FilmMuse",
   },
   {
     name: "Expense Tracker",
@@ -104,11 +105,11 @@ export function ProjectsSection() {
                 </div>
               </div>
 
-              <ul className="space-y-2 mb-6 flex-1">
+              <ul className="space-y-3 mb-6 flex-1">
                 {project.highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex gap-2 text-sm text-foreground/80">
-                    <span className="text-primary font-bold">•</span>
-                    <span className="text-pretty">{highlight}</span>
+                  <li key={idx} className="flex gap-3 text-sm text-foreground/80 leading-relaxed">
+                    <span className="text-primary font-bold flex-shrink-0 translate-y-[0.1em]">→</span>
+                    <span className="text-pretty leading-relaxed">{highlight}</span>
                   </li>
                 ))}
               </ul>

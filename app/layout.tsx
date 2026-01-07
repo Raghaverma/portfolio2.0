@@ -4,7 +4,6 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import Particles from "@/components/magicui/particles"
 import { SmoothScroll } from "@/components/smooth-scroll"
 
 const spaceGrotesk = Space_Grotesk({
@@ -89,13 +88,6 @@ export default function RootLayout({
           <SmoothScroll>
             {children}
           </SmoothScroll>
-          <Particles
-            className="fixed inset-0 z-[-1]"
-            quantity={50}
-            ease={80}
-            color="#ffffff"
-            refresh
-          />
           <Analytics />
         </ThemeProvider>
       </body>

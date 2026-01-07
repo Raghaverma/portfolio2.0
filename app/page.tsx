@@ -1,6 +1,6 @@
 "use client"
 
-import { DockDemo } from "@/components/dock-navigation"
+import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { ExperiencePreview } from "@/components/experience-preview"
 import { ProjectsPreview } from "@/components/projects-preview"
@@ -11,13 +11,9 @@ import { FooterBento } from "@/components/footer-bento"
 export default function Home() {
   return (
     <>
-      <div className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
-        <div className="pointer-events-auto">
-          <DockDemo />
-        </div>
-      </div>
+      <Navigation />
 
-      <main className="min-h-screen blueprint-grid">
+      <main className="min-h-screen blueprint-grid pt-16">
         <HeroSection />
         <ExperiencePreview />
         <SkillsPreview />
