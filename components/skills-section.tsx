@@ -2,24 +2,24 @@ import { TiltCard } from "@/components/ui/tilt-card"
 
 const skills = {
   frontend: [
-    "Next.js",
-    "React.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "Framer Motion",
+    "Next.js (2 years)",
+    "React.js (3 years)",
+    "TypeScript (2 years)",
+    "Tailwind CSS (3 years)",
+    "Framer Motion (1 year)",
   ],
   backend: [
-    "Node.js",
-    "Supabase",
-    "SQL (PostgreSQL)",
-    "REST APIs",
-    "Python",
+    "Node.js (2 years)",
+    "Supabase (1 year)",
+    "SQL (PostgreSQL) (2 years)",
+    "REST APIs (3 years)",
+    "Python (2 years)",
   ],
   devops: [
-    "Docker",
-    "Git",
-    "CI/CD",
-    "Vercel",
+    "Docker (1 year)",
+    "Git (4 years)",
+    "CI/CD (1 year)",
+    "Vercel (2 years)",
   ],
   soft: [
     "Commercial Awareness & Data Storytelling",
@@ -51,7 +51,7 @@ export function SkillsSection() {
               {skills.frontend.map((skill) => (
                 <div
                   key={skill}
-                  className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                  className="px-4 py-2 bg-secondary/50 rounded-md border border-border transition-colors font-mono text-sm"
                 >
                   {skill}
                 </div>
@@ -69,7 +69,7 @@ export function SkillsSection() {
                 {skills.backend.map((skill) => (
                   <div
                     key={skill}
-                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border transition-colors font-mono text-sm"
                   >
                     {skill}
                   </div>
@@ -85,7 +85,7 @@ export function SkillsSection() {
                 {skills.devops.map((skill) => (
                   <div
                     key={skill}
-                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border transition-colors font-mono text-sm"
                   >
                     {skill}
                   </div>

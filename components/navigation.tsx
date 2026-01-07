@@ -18,7 +18,7 @@ export function Navigation() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView()
       setIsOpen(false)
     }
   }
@@ -32,7 +32,14 @@ export function Navigation() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b border-border" aria-label="Main navigation">
+      {/* Skip to content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md"
+      >
+        Skip to main content
+      </a>
       <div className="glass-card">
         <div className="container mx-auto px-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -40,6 +47,7 @@ export function Navigation() {
             <Link
               href="/"
               className="text-xl font-bold font-mono text-primary hover:text-primary/80 transition-colors"
+              aria-label="Home"
             >
               {"<RV>"}
             </Link>

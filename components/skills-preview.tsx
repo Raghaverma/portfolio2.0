@@ -4,12 +4,12 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 const topSkills = [
-    "Next.js",
-    "TypeScript",
-    "React.js",
-    "Tailwind CSS",
-    "Node.js",
-    "Supabase",
+    "Next.js (2 years)",
+    "TypeScript (2 years)",
+    "React.js (3 years)",
+    "Tailwind CSS (3 years)",
+    "Node.js (2 years)",
+    "Supabase (1 year)",
 ]
 
 export function SkillsPreview() {
@@ -43,12 +43,12 @@ export function SkillsPreview() {
                             {topSkills.map((skill) => (
                                 <div
                                     key={skill}
-                                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm"
+                                    className="px-4 py-2 bg-secondary/50 rounded-md border border-border transition-colors font-mono text-sm"
                                 >
                                     {skill}
                                 </div>
                             ))}
-                            <div className="px-4 py-2 bg-secondary/50 rounded-md border border-border hover:border-primary hover:bg-primary/5 transition-colors font-mono text-sm text-muted-foreground">
+                            <div className="px-4 py-2 bg-secondary/50 rounded-md border border-border transition-colors font-mono text-sm text-muted-foreground">
                                 + more depending on scope
                             </div>
                         </div>

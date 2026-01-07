@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Navigation />
 
-      <main className="min-h-screen blueprint-grid pt-16">
+      <main id="main-content" className="min-h-screen blueprint-grid pt-16">
         <HeroSection />
         <ExperiencePreview />
         <SkillsPreview />

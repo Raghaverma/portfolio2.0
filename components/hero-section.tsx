@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Terminal, Github, Linkedin, Mail, MapPin, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
@@ -14,48 +13,7 @@ const terminalCommands = [
 ]
 
 export function HeroSection() {
-  const [currentLine, setCurrentLine] = useState(0)
-  const [displayedText, setDisplayedText] = useState("")
-  const [showCursor, setShowCursor] = useState(true)
-  const [phase, setPhase] = useState<"command" | "output">("command")
   const isDesktop = useMediaQuery("(min-width: 768px)")
-
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev)
-    }, 530)
-
-    return () => clearInterval(cursorInterval)
-  }, [])
-
-  useEffect(() => {
-    if (currentLine >= terminalCommands.length) return
-
-    const currentCommand = terminalCommands[currentLine]
-    const textToType = phase === "command" ? currentCommand.cmd : currentCommand.output
-
-    if (displayedText.length < textToType.length) {
-      const timeout = setTimeout(
-        () => {
-          setDisplayedText(textToType.slice(0, displayedText.length + 1))
-        },
-        phase === "command" ? 50 : 30,
-      )
-      return () => clearTimeout(timeout)
-    } else {
-      const timeout = setTimeout(() => {
-        if (phase === "command") {
-          setPhase("output")
-          setDisplayedText("")
-        } else {
-          setPhase("command")
-          setDisplayedText("")
-          setCurrentLine((prev) => prev + 1)
-        }
-      }, 800)
-      return () => clearTimeout(timeout)
-    }
-  }, [displayedText, currentLine, phase])
 
   return (
     <section id="hero" className="min-h-screen flex flex-col md:justify-center relative pt-32 md:pt-24 pb-12 overflow-hidden">
@@ -116,7 +74,7 @@ export function HeroSection() {
                 ) : (
                   <span className="text-foreground font-medium">FullStack Developer</span>
                 )}{" "}
-                crafting scalable, performant web applications with modern architecture and engineering excellence.
+                with 2+ years of production experience building high-performance Next.js applications, reducing load times by 20-30% through optimized architecture and modern engineering practices.
               </div>
             </div>
 
@@ -130,7 +88,7 @@ export function HeroSection() {
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
                 <a href="mailto:raghav.verma.work@gmail.com">
                   <Mail className="w-4 h-4 mr-2" />
-                  Get in Touch
+                  Hire Me
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -162,33 +120,12 @@ export function HeroSection() {
               </div>
 
               <div className="font-mono text-sm space-y-3 min-h-[280px]">
-                {terminalCommands.slice(0, currentLine).map((item, idx) => (
+                {terminalCommands.map((item, idx) => (
                   <div key={idx} className="space-y-1">
                     <div className="text-primary">{item.cmd}</div>
                     <div className="text-foreground/80 pl-4">{item.output}</div>
                   </div>
                 ))}
-
-                {currentLine < terminalCommands.length && (
-                  <div className="space-y-1">
-                    {phase === "command" ? (
-                      <div className="text-primary">
-                        {displayedText}
-                        {showCursor && <span className="inline-block w-2 h-4 bg-primary ml-1 animate-pulse"></span>}
-                      </div>
-                    ) : (
-                      <>
-                        <div className="text-primary">{terminalCommands[currentLine].cmd}</div>
-                        <div className="text-foreground/80 pl-4">
-                          {displayedText}
-                          {showCursor && (
-                            <span className="inline-block w-2 h-4 bg-foreground/80 ml-1 animate-pulse"></span>
-                          )}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
               </div>
             </div>
           </div>
