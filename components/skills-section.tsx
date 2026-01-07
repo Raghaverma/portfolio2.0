@@ -102,9 +102,9 @@ export function SkillsSection() {
             </h3>
             <ul className="space-y-4">
               {skills.soft.map((skill) => (
-                <li key={skill} className="flex gap-3 items-start">
-                  <span className="text-primary font-bold mt-1">→</span>
-                  <span className="text-foreground/80 leading-relaxed text-pretty">{skill}</span>
+                <li key={skill} className="flex items-start gap-3">
+                  <span className="w-4 shrink-0 text-primary font-bold">→</span>
+                  <span className="leading-relaxed text-pretty text-foreground/80">{skill}</span>
                 </li>
               ))}
             </ul>

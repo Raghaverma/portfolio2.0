@@ -107,9 +107,9 @@ export function ProjectsSection() {
 
               <ul className="space-y-3 mb-6 flex-1">
                 {project.highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex gap-3 text-sm text-foreground/80 leading-relaxed">
-                    <span className="text-primary font-bold flex-shrink-0 translate-y-[0.1em]">→</span>
-                    <span className="text-pretty leading-relaxed">{highlight}</span>
+                  <li key={idx} className="flex items-start gap-3 text-sm text-foreground/80">
+                    <span className="w-4 shrink-0 text-primary font-bold">→</span>
+                    <span className="leading-relaxed text-pretty">{highlight}</span>
                   </li>
                 ))}
               </ul>
