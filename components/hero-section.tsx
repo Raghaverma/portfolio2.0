@@ -86,9 +86,9 @@ export function HeroSection() {
 
             <div className="flex flex-wrap gap-3 pt-4">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
-                <a href="mailto:raghav.verma.work@gmail.com">
+                <a href="https://cal.com/raghavermaa/potfolio" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-4 h-4 mr-2" />
-                  Hire Me
+                  Book a Call
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg">
