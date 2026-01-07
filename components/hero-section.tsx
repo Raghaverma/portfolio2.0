@@ -40,41 +40,46 @@ export function HeroSection() {
                 <span className="whitespace-normal md:whitespace-nowrap">Building Systems</span> <br />
                 <span className="text-primary whitespace-normal md:whitespace-nowrap">Not Just Sites</span>
               </h1>
-              <div className="text-lg md:text-xl text-muted-foreground text-pretty leading-relaxed">
-                {isDesktop ? (
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <span className="cursor-pointer hover:text-primary transition-colors underline decoration-dotted underline-offset-4">
-                        FullStack Developer
-                      </span>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-80">
-                      <div className="flex justify-between space-x-4">
-                        <div className="space-y-1">
-                          <h4 className="text-sm font-semibold">@Raghaverma</h4>
-                          <p className="text-sm text-muted-foreground">
-                            Full-stack wizard building scalable web apps.
-                          </p>
-                          <div className="flex items-center pt-2">
-                            <MapPin className="mr-2 h-4 w-4 opacity-70" />{" "}
-                            <span className="text-xs text-muted-foreground">
-                              New Delhi, India
-                            </span>
-                          </div>
-                          <div className="flex items-center pt-1">
-                            <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
-                            <span className="text-xs text-muted-foreground">
-                              Ex-Hypeliv Solutions
-                            </span>
+              <div className="text-lg md:text-xl text-muted-foreground text-pretty leading-relaxed space-y-2">
+                <div>
+                  {isDesktop ? (
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <span className="cursor-pointer hover:text-primary transition-colors underline decoration-dotted underline-offset-4">
+                          Full-stack developer
+                        </span>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-80">
+                        <div className="flex justify-between space-x-4">
+                          <div className="space-y-1">
+                            <h4 className="text-sm font-semibold">@Raghaverma</h4>
+                            <p className="text-sm text-muted-foreground">
+                              Building production systems that scale.
+                            </p>
+                            <div className="flex items-center pt-2">
+                              <MapPin className="mr-2 h-4 w-4 opacity-70" />{" "}
+                              <span className="text-xs text-muted-foreground">
+                                New Delhi, India
+                              </span>
+                            </div>
+                            <div className="flex items-center pt-1">
+                              <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
+                              <span className="text-xs text-muted-foreground">
+                                Freelance Developer 
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </HoverCardContent>
-                  </HoverCard>
-                ) : (
-                  <span className="text-foreground font-medium">FullStack Developer</span>
-                )}{" "}
-                with 2+ years of production experience building high-performance Next.js applications, reducing load times by 20-30% through optimized architecture and modern engineering practices.
+                      </HoverCardContent>
+                    </HoverCard>
+                  ) : (
+                    <span className="text-foreground font-medium">Full-stack developer</span>
+                  )}{" "}
+                  building and shipping production Next.js applications end to end.
+                </div>
+                <div>
+                  I design clean, maintainable UI architectures, integrate APIs and authentication, debug real production issues, and deploy systems that users actually rely on. My work prioritizes performance, clarity, and reliability—removing bottlenecks, simplifying flows, and improving load times and developer velocity.
+                </div>
               </div>
             </div>
 
