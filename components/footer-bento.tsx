@@ -90,6 +90,7 @@ function ThemeCard() {
                                 ? "bg-background shadow-sm text-foreground"
                                 : "text-muted-foreground hover:text-foreground"
                                 }`}
+                            suppressHydrationWarning
                         >
                             {t}
                         </button>
@@ -104,6 +105,7 @@ function ThemeCard() {
                             className="h-8 rounded-md transition-transform hover:scale-110 duration-200 cursor-pointer border border-border/10 shadow-sm"
                             style={{ backgroundColor: color }}
                             aria-label={`Select color ${color}`}
+                            suppressHydrationWarning
                         />
                     ))}
                 </div>
@@ -114,6 +116,7 @@ function ThemeCard() {
                 className="flex items-center gap-2 mt-auto cursor-pointer group"
                 onClick={toggleBgEffect}
                 aria-label={`Toggle background effect: currently ${bgEffect ? "on" : "off"}`}
+                suppressHydrationWarning
             >
                 <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${bgEffect ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
                     }`}>
@@ -245,6 +248,7 @@ function LocationCard() {
             <button
                 onClick={recenterMap}
                 className="text-foreground hover:text-primary mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors z-10"
+                suppressHydrationWarning
             >
                 <MapPin size={16} className="text-primary" />
                 Currently Based In 📍
@@ -256,6 +260,7 @@ function LocationCard() {
                 <button
                     onClick={recenterMap}
                     className="text-muted-foreground hover:text-primary cursor-pointer text-xs whitespace-nowrap transition-colors font-mono"
+                    suppressHydrationWarning
                 >
                     New Delhi, IN
                 </button>

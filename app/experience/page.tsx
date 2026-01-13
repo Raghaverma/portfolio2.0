@@ -18,7 +18,7 @@ export default async function ExperiencePage() {
     const experiences = await getExperiences()
 
     return (
-        <main className="min-h-screen pt-24 pb-16 px-4 md:px-8">
+        <main className="min-h-screen blueprint-grid pt-24 pb-16 px-4 md:px-8">
             <div className="container mx-auto">
                 <div className="mb-8">
                     <Button asChild variant="ghost" className="group">
