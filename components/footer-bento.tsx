@@ -109,9 +109,11 @@ function ThemeCard() {
                 </div>
             </div>
 
-            <div
+            <button
+                type="button"
                 className="flex items-center gap-2 mt-auto cursor-pointer group"
                 onClick={toggleBgEffect}
+                aria-label={`Toggle background effect: currently ${bgEffect ? "on" : "off"}`}
             >
                 <div className={`w-5 h-5 rounded flex items-center justify-center transition-colors ${bgEffect ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
                     }`}>
@@ -120,7 +122,7 @@ function ThemeCard() {
                 <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
                     Background effect: <span className={bgEffect ? "text-foreground font-medium" : "text-muted-foreground"}>{bgEffect ? "on" : "off"}</span>
                 </span>
-            </div>
+            </button>
         </Card>
     )
 }
@@ -338,7 +340,7 @@ function SpotifyCard() {
     return (
         <Card className="p-4 flex flex-col justify-center h-full min-h-[210px] bg-[#18181b] border-white/10 relative overflow-hidden group">
             {/* Header */}
-            <div className="absolute top-4 left-4 flex items-center gap-1.5 z-20">
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 z-20" role="status" aria-live="polite">
                 <div className={`w-3.5 h-3.5 ${data?.isPlaying ? "text-[#1DB954]" : "text-white/40"}`}>
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
                         <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.539.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
@@ -356,11 +358,16 @@ function SpotifyCard() {
                     {data?.albumImageUrl ? (
                         <img
                             src={data.albumImageUrl}
-                            alt={data.album || "Album Art"}
+                            alt={`${data.album || "Album"} cover art by ${data.artist || "Unknown Artist"}`}
                             className={`w-[88px] h-[88px] rounded-lg shadow-lg object-cover bg-neutral-800 ${!data?.isPlaying && "grayscale sm:grayscale-0"}`}
+                            loading="lazy"
                         />
                     ) : (
-                        <div className="w-[88px] h-[88px] rounded-lg bg-neutral-800 flex items-center justify-center border border-white/5">
+                        <div
+                            className="w-[88px] h-[88px] rounded-lg bg-neutral-800 flex items-center justify-center border border-white/5"
+                            role="img"
+                            aria-label="No album art available"
+                        >
                             <div className="w-8 h-8 text-white/20">🎵</div>
                         </div>
                     )}
@@ -382,7 +389,14 @@ function SpotifyCard() {
 
             {/* Progress Bar (Real) */}
             <div className="mt-4 space-y-1.5 z-10 pl-1">
-                <div className="h-1 bg-white/20 w-full rounded-full overflow-hidden">
+                <div
+                    className="h-1 bg-white/20 w-full rounded-full overflow-hidden"
+                    role="progressbar"
+                    aria-valuenow={data?.duration ? Math.round((progress / data.duration) * 100) : 0}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={data?.isPlaying ? "Song progress" : "Song completed"}
+                >
                     <div
                         className="h-full bg-white rounded-full transition-all duration-1000 linear"
                         style={{
@@ -393,7 +407,7 @@ function SpotifyCard() {
                         }}
                     />
                 </div>
-                <div className="flex justify-between text-[10px] text-white/50 font-mono font-medium">
+                <div className="flex justify-between text-[10px] text-white/50 font-mono font-medium" aria-hidden="true">
                     <span>{data?.isPlaying ? formatTime(progress) : (data?.duration ? formatTime(data.duration) : "0:00")}</span>
                     <span>{data?.duration ? formatTime(data.duration) : "0:00"}</span>
                 </div>

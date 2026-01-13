@@ -2,34 +2,19 @@
 import { Briefcase, Calendar } from "lucide-react"
 import { TiltCard } from "@/components/ui/tilt-card"
 
-const experiences = [
-  {
-    title: "Front-end Developer",
-    company: "Hypeliv Solutions Pvt. Ltd",
-    location: "Delhi NCR, IN",
-    period: "August 2025 - January 2026",
-    highlights: [
-      "Developed a Next.js + TypeScript trading and analytics platform, reducing load time by 20–30%",
-      "Built responsive Markets, Leaderboard, and Wallet pages with seamless API integrations",
-      "Enhanced performance and scalability through reusable components and optimized state management",
-      "Maintained UI consistency by collaborating on a Figma-based design system",
-      "Established Git branching workflows to streamline team collaboration",
-    ],
-  },
-  {
-    title: "Front-end Developer Intern",
-    company: "The TechnoLabs",
-    location: "Gurugram, IN",
-    period: "Jan 2024 – July 2024",
-    highlights: [
-      "Developed a dynamic invoice generator in React & Tailwind, increasing user engagement by 32% through an intuitive layout, real-time updates, upgraded mobile responsiveness, and seamless efficient smart component optimization.",
-      "Integrated front-end components with backend APIs to ensure seamless flow, reducing retrieval time by 15%.",
-      "Supported early-stage research for an OCR engine by assisting in data collection, UI/UX exploration, usability analysis, and feature testing.",
-    ],
-  },
-]
+export interface Experience {
+  title: string
+  company: string
+  location: string
+  period: string
+  highlights: string[]
+}
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+  experiences: Experience[]
+}
+
+export function ExperienceSection({ experiences }: ExperienceSectionProps) {
   return (
     <section id="experience" className="py-10 md:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,22 +1,26 @@
 import { getRecentTracks, getTrackInfo } from '@/lib/lastfm'
 import { NextResponse } from 'next/server'
+import { unstable_cache } from 'next/cache'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 30 // Revalidate every 30 seconds for music
 
-export async function GET() {
-    try {
+// Cached function to fetch music data
+// Shorter cache time (30s) since music changes frequently
+const getCachedMusicData = unstable_cache(
+    async () => {
         const response = await getRecentTracks()
 
         if (!response.ok) {
             console.error('Last.fm API Error:', response.status, response.statusText)
-            return NextResponse.json({ isPlaying: false })
+            return { isPlaying: false }
         }
 
         const data = await response.json()
         const tracks = data.recenttracks.track
 
         if (!tracks || tracks.length === 0) {
-            return NextResponse.json({ isPlaying: false })
+            return { isPlaying: false }
         }
 
         const track = tracks[0]
@@ -30,7 +34,7 @@ export async function GET() {
             }
         }
 
-        return NextResponse.json({
+        return {
             isPlaying,
             title: track.name,
             artist: track.artist['#text'],
@@ -39,8 +43,19 @@ export async function GET() {
             songUrl: track.url,
             duration,
             timestamp: Date.now()
-        })
+        }
+    },
+    ['music-data'],
+    {
+        revalidate: 30, // Cache for 30 seconds
+        tags: ['music']
+    }
+)
 
+export async function GET() {
+    try {
+        const musicData = await getCachedMusicData()
+        return NextResponse.json(musicData)
     } catch (error) {
         console.error('Last.fm API Error:', error)
         return NextResponse.json({ isPlaying: false })

@@ -2,75 +2,20 @@ import { Github, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TiltCard } from "@/components/ui/tilt-card"
 
-const projects = [
-  {
-    name: "Boundary",
-    description:
-      "A resilient SDK to tame API chaos. Normalize responses, handle errors, and implement circuit breakers and retries without the boilerplate.",
-    tech: ["TypeScript", "Node.js", "Resilience Patterns"],
-    highlights: [
-      "Reliability First: Built-in circuit breakers and smart retry strategies",
-      "Data Normalization: Transform inconsistent API responses into predictable shapes",
-      "Type-Safe: Full TypeScript support for robust integrations",
-    ],
-    github: "https://github.com/Raghaverma/Boundary",
-    demo: "https://boundary.raghav-verma.com/",
-  },
-  {
-    name: "DevTrackr",
-    description:
-      "A production-grade TypeScript SDK for extracting and normalizing GitHub developer signals.",
-    tech: ["TypeScript", "Node.js", "GitHub API"],
-    highlights: [
-      "Type-Safe: Full TypeScript support with exported types",
-      "Normalized Data: UI-ready JSON responses, no raw GitHub API responses",
-      "Zero Dependencies: Uses native fetch only",
-    ],
-    github: "https://github.com/Raghaverma/DevTrackr-Docs",
-    demo: "https://devtrackr.raghav-verma.com/",
-  },
-  {
-    name: "Film Muse",
-    description:
-      "Built a Next.js web application for discovering and exploring movies with real-time search, responsive UI, and detailed movie information pages.",
-    tech: ["Next.js", "TMDB API", "TypeScript", "Tailwind CSS"],
-    highlights: [
-      "Integrated the TMDB API to fetch movies, genres, ratings, and trends",
-      "Dynamic browsing and data-driven movie insights",
-      "Responsive design with optimized performance",
-    ],
-    github: "https://github.com/Raghaverma/FilmMuse",
-    demo: "https://filmmuse.raghav-verma.com/",
-  },
-  {
-    name: "Invoice Generator",
-    description:
-      "Built a React-based invoice creation tool with itemized items, quantity configuration, dynamic pricing, tax rates, and discounts. Enables PDF download using jspdf-react for seamless invoice generation.",
-    tech: ["React", "JavaScript", "jspdf-react", "CSS"],
-    highlights: [
-      "Dynamic invoice creation with itemized billing and calculations",
-      "Real-time tax and discount computation",
-      "Export invoices as PDF directly to device",
-    ],
-    github: "https://github.com/Raghaverma/invoice-generator",
-    demo: "https://invoice-generator-xi-nine.vercel.app",
-  },
-  {
-    name: "Expense Tracker",
-    description:
-      "Created personal finance manager in React.js with Tailwind CSS, helping expense entries, category filters, and analytics.",
-    tech: ["React.js", "Tailwind CSS", "JavaScript"],
-    highlights: [
-      "Reduced session load time by 20% through better state management",
-      "Optimized lazy loading and improved performance",
-      "Category-based filtering and analytics dashboard",
-    ],
-    github: "https://github.com/Raghaverma/expense-tracker",
-    demo: "https://expense-tracker-psi-olive.vercel.app/",
-  },
-]
+export interface Project {
+  name: string
+  description: string
+  tech: string[]
+  highlights: string[]
+  github: string
+  demo?: string
+}
 
-export function ProjectsSection() {
+interface ProjectsSectionProps {
+  projects: Project[]
+}
+
+export function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section id="projects" className="py-10 md:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +39,7 @@ export function ProjectsSection() {
                 <p className="text-foreground/80 leading-relaxed mb-4 text-pretty">{project.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
+                  {(project.tech || []).map((tech) => (
                     <span
                       key={tech}
                       className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-mono font-semibold"

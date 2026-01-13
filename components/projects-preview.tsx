@@ -2,35 +2,16 @@ import { ArrowRight, Github, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TiltCard } from "@/components/ui/tilt-card"
 import Link from "next/link"
+import { Project } from "@/components/projects-section"
 
-const featuredProjects = [
-    {
-        name: "Boundary",
-        description:
-            "A resilient SDK to tame API chaos. Normalize responses, handle errors, and implement circuit breakers without the boilerplate.",
-        tech: ["TypeScript", "Node.js", "Resilience Patterns"],
-        github: "https://github.com/Raghaverma/Boundary",
-        demo: "https://boundary.raghav-verma.com/",
-    },
-    {
-        name: "DevTrackr",
-        description:
-            "A production-grade TypeScript SDK for extracting and normalizing GitHub developer signals.",
-        tech: ["TypeScript", "Node.js", "GitHub API"],
-        github: "https://github.com/Raghaverma/DevTrackr-Docs",
-        demo: "https://devtrackr.raghav-verma.com/",
-    },
-    {
-        name: "Invoice Generator",
-        description:
-            "Built a React-based invoice creation tool with itemized items, quantity configuration, dynamic pricing, and PDF export.",
-        tech: ["React", "JavaScript", "jspdf-react"],
-        github: "https://github.com/Raghaverma/invoice-generator",
-        demo: "https://invoice-generator-xi-nine.vercel.app",
-    },
-]
+interface ProjectsPreviewProps {
+    projects: Project[]
+}
 
-export function ProjectsPreview() {
+export function ProjectsPreview({ projects }: ProjectsPreviewProps) {
+    // Take first 3 for preview or all if less than 3
+    const featuredProjects = projects.slice(0, 3)
+
     return (
         <section className="py-10 md:py-20 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +45,7 @@ export function ProjectsPreview() {
                                 <p className="text-foreground/80 leading-relaxed mb-4 text-pretty">{project.description}</p>
 
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    {project.tech.map((tech) => (
+                                    {(project.tech || []).map((tech) => (
                                         <span
                                             key={tech}
                                             className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-mono font-semibold"

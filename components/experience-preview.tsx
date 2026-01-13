@@ -2,16 +2,17 @@ import { Briefcase, Calendar, ArrowRight } from "lucide-react"
 import { TiltCard } from "@/components/ui/tilt-card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Experience } from "@/components/experience-section"
 
-const recentExperience = {
-    title: "Front-end Developer",
-    company: "Hypeliv Solutions Pvt. Ltd",
-    location: "Delhi NCR, IN",
-    period: "August 2025 - January 2026",
-    description: "Developed a Next.js + TypeScript trading and analytics platform, reducing load time by 20–30%. Built responsive Markets, Leaderboard, and Wallet pages."
+interface ExperiencePreviewProps {
+    experience: Experience
 }
 
-export function ExperiencePreview() {
+export function ExperiencePreview({ experience }: ExperiencePreviewProps) {
+    // If no experience is passed, we might want to return null or handle it.
+    // Assuming experience is available for now.
+    if (!experience) return null;
+
     return (
         <section className="py-10 md:py-20 relative">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,21 +37,25 @@ export function ExperiencePreview() {
                     <Link href="/experience">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                             <div className="flex-1">
-                                <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{recentExperience.title}</h3>
+                                <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{experience.title}</h3>
                                 <div className="flex items-center gap-2 text-primary font-semibold mb-1">
                                     <Briefcase className="w-4 h-4" />
-                                    <span>{recentExperience.company}</span>
+                                    <span>{experience.company}</span>
                                 </div>
-                                <div className="text-sm text-muted-foreground">{recentExperience.location}</div>
+                                <div className="text-sm text-muted-foreground">{experience.location}</div>
                             </div>
                             <div className="flex items-center gap-2 text-sm font-mono text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-md w-fit">
                                 <Calendar className="w-4 h-4" />
-                                {recentExperience.period}
+                                {experience.period}
                             </div>
                         </div>
-                        <p className="text-foreground/80 leading-relaxed text-pretty">
-                            {recentExperience.description}
-                        </p>
+                        <ul className="list-disc pl-4 space-y-1 text-foreground/80 leading-relaxed text-pretty">
+                            {/* Preview just the first highlight or combine them? 
+                                 Original used a single description string.
+                                 Let's use the first highlight as the description. 
+                             */}
+                            {experience.highlights?.[0]}
+                        </ul>
                     </Link>
                 </TiltCard>
             </div>

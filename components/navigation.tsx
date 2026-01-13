@@ -1,19 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, Moon, Sun } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 export function Navigation() {
-  const [isDark, setIsDark] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-
-  const toggleDarkMode = () => {
-    setIsDark(!isDark)
-    document.documentElement.classList.toggle("dark")
-  }
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)

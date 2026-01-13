@@ -1,14 +1,16 @@
 
 import { NextResponse } from 'next/server'
+import { unstable_cache } from 'next/cache'
 import { createDevTrackr, DevTrackrRateLimitError } from 'devtrackr'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 3600 // Revalidate every hour
 
-export async function GET() {
-    try {
+// Cached function to fetch GitHub data
+const getCachedGitHubData = unstable_cache(
+    async () => {
         if (!process.env.GITHUB_TOKEN) {
-            console.warn("GITHUB_TOKEN is missing")
-            return NextResponse.json({ error: "Configuration Error: GITHUB_TOKEN is missing" }, { status: 500 })
+            throw new Error("GITHUB_TOKEN is missing")
         }
 
         const devtrackr = createDevTrackr({
@@ -19,6 +21,24 @@ export async function GET() {
             devtrackr.getRecentCommits('Raghaverma', { perPage: 3 }),
             devtrackr.getLanguageStats('Raghaverma')
         ])
+
+        return { commits, langStats }
+    },
+    ['github-data'],
+    {
+        revalidate: 3600, // Cache for 1 hour
+        tags: ['github']
+    }
+)
+
+export async function GET() {
+    try {
+        if (!process.env.GITHUB_TOKEN) {
+            console.warn("GITHUB_TOKEN is missing")
+            return NextResponse.json({ error: "Configuration Error: GITHUB_TOKEN is missing" }, { status: 500 })
+        }
+
+        const { commits, langStats } = await getCachedGitHubData()
 
         const formattedEvents = commits.map((commit: any) => {
             // Extract ID from URL if possible, otherwise generate/fallback

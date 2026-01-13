@@ -5,6 +5,9 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SmoothScroll } from "@/components/smooth-scroll"
+import { CommandPalette } from "@/components/command-palette"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { PageTransition } from "@/components/page-transition"
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -17,6 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://raghav-verma.com'),
   title: "Raghav Verma | Full-Stack Developer & Software Engineer",
   description:
     "Full-Stack Developer with 2+ years of experience specializing in Next.js, React, and TypeScript. Building high-performance web applications with 20-30% faster load times. Available for freelance work and full-time opportunities.",
@@ -152,9 +156,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ScrollProgress />
           <SmoothScroll>
             {children}
           </SmoothScroll>
+          <CommandPalette />
           <Analytics />
         </ThemeProvider>
       </body>
