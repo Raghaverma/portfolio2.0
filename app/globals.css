@@ -159,4 +159,14 @@
     background: rgba(24, 24, 27, 0.7); /* Zinc-900 with transparency */
     border: 1px solid rgba(39, 39, 42, 0.8); /* Subtle zinc-800 border */
   }
+
+  /* Terminal cursor blink animation */
+  .terminal-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
 }

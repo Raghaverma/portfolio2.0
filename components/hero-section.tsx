@@ -1,16 +1,10 @@
 "use client"
 
-import { Terminal, Github, Linkedin, Mail, MapPin, Briefcase } from "lucide-react"
+import { Github, Linkedin, Mail, MapPin, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { useMediaQuery } from "@/hooks/use-media-query"
-
-const terminalCommands = [
-  { cmd: "$ whoami", output: "Raghav Verma" },
-  { cmd: "$ cat role.txt", output: "Software Engineer" },
-  { cmd: "$ ls skills/", output: "Next.js TypeScript React.js Tailwind Node.js" },
-  { cmd: "$ ping status", output: "Online • Open for freelance work" },
-]
+import { InteractiveTerminal } from "@/components/interactive-terminal"
 
 export function HeroSection() {
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -65,7 +59,7 @@ export function HeroSection() {
                             <div className="flex items-center pt-1">
                               <Briefcase className="mr-2 h-4 w-4 opacity-70" />{" "}
                               <span className="text-xs text-muted-foreground">
-                                Freelance Developer 
+                                Freelance Developer
                               </span>
                             </div>
                           </div>
@@ -113,26 +107,7 @@ export function HeroSection() {
 
           {/* Right side - Terminal (Swapped) */}
           <div className="space-y-8 lg:order-last">
-            <div className="glass-card rounded-lg p-6 md:p-8 border shadow-lg">
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b">
-                <Terminal className="w-4 h-4 text-primary" />
-                <span className="font-mono text-sm">terminal</span>
-                <div className="flex gap-1.5 ml-auto">
-                  <div className="w-3 h-3 rounded-full bg-destructive"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-              </div>
-
-              <div className="font-mono text-sm space-y-3 min-h-[280px]">
-                {terminalCommands.map((item, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <div className="text-primary">{item.cmd}</div>
-                    <div className="text-foreground/80 pl-4">{item.output}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <InteractiveTerminal />
           </div>
         </div>
       </div>
