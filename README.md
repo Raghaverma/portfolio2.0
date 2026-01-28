@@ -96,7 +96,7 @@ This project is private and proprietary.
 
 **Raghav Verma**
 
-- Portfolio: [portfolio2-0-sand-seven.vercel.app](https://portfolio2-0-sand-seven.vercel.app)
+- Portfolio: [Click Here! ](https://raghav-verma.com)
 - GitHub: [@Raghaverma](https://github.com/Raghaverma)
 
 ---
