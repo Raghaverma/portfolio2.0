@@ -30,19 +30,6 @@ const PROJECTS: Project[] = [
         demo: "https://devtrackr.raghav-verma.com/"
     },
     {
-        name: "Pragya Med",
-        description: "Diagnostic platform for NEET medical exam aspirants (UG/PG) that identifies weak knowledge areas, categorizes error types, and delivers data-driven improvement strategies through mock testing and analytics.",
-        tech: ["Next.js 14+", "TypeScript", "Tailwind CSS v4", "Zustand", "Recharts"],
-        highlights: [
-            "Role-based authentication flows with secure state management and protected routes",
-            "Full-screen exam simulation with server-synchronized timer and anti-cheat measures",
-            "Algorithm-driven diagnostics with weakness detection and percentile ranking",
-            "Post-test analytics with accuracy trends and detailed question-level review"
-        ],
-        github: "https://github.com/Raghaverma/Pragya-Med",
-        demo: "https://pragyamed.raghav-verma.com/"
-    },
-    {
         name: "FilmMuse",
         description: "Modern film discovery platform with personalized recommendations, watchlist management, custom lists, and social features. Implements algorithm-based movie recommendations using genre matching and scoring.",
         tech: ["Next.js 15", "TypeScript", "Tailwind CSS 4", "Firebase", "TMDb API"],

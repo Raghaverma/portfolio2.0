@@ -30,7 +30,7 @@ export function HeroSection() {
           {/* Left side - Visual Output (Swapped) */}
           <div className="space-y-6 order-last lg:order-first">
             <div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight">
                 <span className="whitespace-normal md:whitespace-nowrap">Building Systems</span> <br />
                 <span className="text-primary whitespace-normal md:whitespace-nowrap">Not Just Sites</span>
               </h1>
@@ -84,7 +84,7 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-wrap gap-3 pt-4">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg shadow-primary/25">
                 <a href="https://cal.com/raghavermaa/potfolio" target="_blank" rel="noopener noreferrer">
                   <Mail className="w-4 h-4 mr-2" />
                   Book a Call

@@ -244,7 +244,7 @@ function LocationCard() {
     }
 
     return (
-        <Card className="p-4 flex flex-col justify-between glass-card h-full min-h-[240px] border-surface0 bg-base shadow-lg overflow-hidden group">
+        <Card className="p-4 flex flex-col justify-between glass-card h-full min-h-[240px] overflow-hidden group">
             <button
                 onClick={recenterMap}
                 className="text-foreground hover:text-primary mb-3 flex w-full cursor-pointer items-center gap-2 text-left text-sm font-semibold transition-colors z-10"
@@ -343,7 +343,7 @@ function SpotifyCard() {
     }
 
     return (
-        <Card className="p-4 flex flex-col justify-center h-full min-h-[210px] bg-[#18181b] border-white/10 relative overflow-hidden group">
+        <Card className="p-4 flex flex-col justify-center h-full min-h-[210px] glass-card relative overflow-hidden group">
             {/* Header */}
             <div className="absolute top-4 left-4 flex items-center gap-1.5 z-20" role="status" aria-live="polite">
                 <div className={`w-3.5 h-3.5 ${data?.isPlaying ? "text-[#1DB954]" : "text-white/40"}`}>
@@ -489,7 +489,7 @@ function RecentCommitsCard() {
     const totalSize = languages.reduce((acc, l) => acc + l.size, 0)
 
     return (
-        <Card className="p-0 overflow-hidden glass-card h-full flex flex-col min-h-[240px] bg-[#0d1117] border-white/10 group">
+        <Card className="p-0 overflow-hidden glass-card h-full flex flex-col min-h-[240px] group">
             <div className="p-4 border-b border-white/5 flex items-center justify-between bg-white/5">
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                     <Github className="w-4 h-4" />
@@ -586,7 +586,7 @@ function RecentCommitsCard() {
 export function FooterBento() {
     return (
         <section id="activity-dashboard" className="py-20 px-4 md:px-8 container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
                 {/* Row 1 */}
                 <div className="lg:col-span-1 h-full">
                     <ThemeCard />

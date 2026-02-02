@@ -201,7 +201,7 @@ export function InteractiveTerminal() {
   const [input, setInput] = useState("")
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
-  const [lineId, setLineId] = useState(0)
+  const lineIdRef = useRef(0)
 
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
@@ -225,8 +225,8 @@ export function InteractiveTerminal() {
   }
 
   const getNextId = () => {
-    const id = lineId
-    setLineId((prev) => prev + 1)
+    const id = lineIdRef.current
+    lineIdRef.current += 1
     return id
   }
 

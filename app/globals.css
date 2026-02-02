@@ -11,19 +11,19 @@
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
-  --primary: #ff5f1f; /* Safety Orange */
+  --primary: #f97316; /* Refined Orange (Tailwind orange-500) */
   --primary-foreground: #ffffff;
   --secondary: #e2e8f0; /* Neutral borders */
   --secondary-foreground: #0f172a;
   --muted: #e2e8f0;
   --muted-foreground: #64748b;
-  --accent: #ff5f1f;
+  --accent: #f97316;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #ff5f1f;
+  --ring: #f97316;
   --radius: 0.5rem;
 
   /* Blueprint grid variables */
@@ -51,19 +51,19 @@
   --card-foreground: #fafafa;
   --popover: #18181b;
   --popover-foreground: #fafafa;
-  --primary: #ff5f1f;
+  --primary: #f97316; /* Refined Orange (Tailwind orange-500) */
   --primary-foreground: #ffffff;
   --secondary: #27272a; /* Zinc-800 for subtle backgrounds */
   --secondary-foreground: #fafafa;
   --muted: #27272a;
   --muted-foreground: #a1a1aa; /* Zinc-400 for muted text */
-  --accent: #ff5f1f;
+  --accent: #f97316;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #27272a; /* Subtle borders */
   --input: #27272a;
-  --ring: #ff5f1f;
+  --ring: #f97316;
 
   --grid-color: #18181b;
   --chart-1: oklch(0.488 0.243 264.376);
@@ -168,5 +168,15 @@
   @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+  }
+
+  /* Heading letter-spacing utility */
+  .heading-tracking {
+    letter-spacing: -0.02em;
+  }
+
+  /* Consistent transition utility */
+  .transition-base {
+    transition: all 200ms ease-out;
   }
 }
