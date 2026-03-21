@@ -3,8 +3,9 @@
 import { useState } from "react"
 import { Navigation } from "@/components/layout/navigation"
 import { SiteFooter } from "@/components/layout/site-footer"
-import { Loader2, CheckCircle, AlertCircle, Download } from "lucide-react"
+import { Loader2, AlertCircle, Download } from "lucide-react"
 import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -122,20 +123,83 @@ export default function ContactPage() {
 
           {/* Form */}
           <div className="lg:col-span-8">
+            <AnimatePresence mode="wait">
             {status === "success" ? (
-              <div className="flex flex-col items-center justify-center py-24 space-y-4 bg-white border border-[#e0e3e0]">
-                <CheckCircle size={48} className="text-[#944a32]" />
-                <h4 className="font-headline text-3xl">Message Sent</h4>
-                <p className="text-[#5c605d] text-center">
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center justify-center py-24 bg-white border border-[#e0e3e0] overflow-hidden relative"
+              >
+                {/* Animated ring + check */}
+                <motion.div
+                  className="relative mb-8"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <svg width="80" height="80" viewBox="0 0 80 80">
+                    {/* Background circle */}
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="#f3f4f1" strokeWidth="3" />
+                    {/* Animated ring */}
+                    <motion.circle
+                      cx="40" cy="40" r="36"
+                      fill="none"
+                      stroke="#944a32"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeDasharray="226"
+                      initial={{ strokeDashoffset: 226 }}
+                      animate={{ strokeDashoffset: 0 }}
+                      transition={{ delay: 0.2, duration: 0.7, ease: "easeInOut" }}
+                      style={{ rotate: -90, transformOrigin: "40px 40px" }}
+                    />
+                    {/* Animated checkmark */}
+                    <motion.path
+                      d="M24 40 L35 51 L56 30"
+                      fill="none"
+                      stroke="#944a32"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeDasharray="45"
+                      initial={{ strokeDashoffset: 45 }}
+                      animate={{ strokeDashoffset: 0 }}
+                      transition={{ delay: 0.85, duration: 0.4, ease: "easeOut" }}
+                    />
+                  </svg>
+                </motion.div>
+
+                <motion.h4
+                  className="font-headline text-4xl mb-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.55, duration: 0.4, ease: "easeOut" }}
+                >
+                  Message Sent
+                </motion.h4>
+
+                <motion.p
+                  className="text-[#5c605d] text-center max-w-xs leading-relaxed"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.68, duration: 0.4, ease: "easeOut" }}
+                >
                   Thanks for reaching out. I&apos;ll get back to you soon.
-                </p>
-                <button
+                </motion.p>
+
+                <motion.button
                   onClick={() => setStatus("idle")}
-                  className="text-xs uppercase tracking-widest font-bold text-[#944a32] hover:underline mt-4"
+                  className="mt-8 text-[10px] uppercase tracking-[0.2em] font-bold text-[#944a32] hover:underline"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.3 }}
                 >
                   Send another
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             ) : (
               <form
                 onSubmit={handleSubmit}
@@ -218,6 +282,7 @@ export default function ContactPage() {
                 </button>
               </form>
             )}
+            </AnimatePresence>
           </div>
         </div>
       </main>

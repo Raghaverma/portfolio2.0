@@ -214,6 +214,8 @@ function LocationCard() {
           document.head.appendChild(link)
         }
         if (!mapContainerRef.current) return
+        // Guard against React Strict Mode double-invoke: Leaflet stamps _leaflet_id on the DOM node
+        if ((mapContainerRef.current as any)._leaflet_id) return
         mapInstanceRef.current = L.map(mapContainerRef.current, {
           zoomControl: true,
           attributionControl: false,
