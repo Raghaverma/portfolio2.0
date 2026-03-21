@@ -1,32 +1,42 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google"
+import { Newsreader, Inter, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { SmoothScroll } from "@/components/smooth-scroll"
-import { CommandPalette } from "@/components/command-palette"
-import { ScrollProgress } from "@/components/scroll-progress"
-import { PageTransition } from "@/components/page-transition"
+import { SmoothScroll } from "@/components/shared/smooth-scroll"
+import { CustomCursor } from "@/components/shared/custom-cursor"
+import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 
-const spaceGrotesk = Space_Grotesk({
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-headline",
+  display: "swap",
+})
+
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://raghav-verma.com'),
-  title: "Raghav Verma | Full-Stack Developer & Software Engineer",
+  metadataBase: new URL("https://raghav-verma.com"),
+  alternates: { canonical: "https://raghav-verma.com" },
+  title: "Raghav Verma | Full-Stack Developer",
   description:
-    "Full-Stack Developer with 2+ years of experience specializing in Next.js, React, and TypeScript. Building high-performance web applications with 20-30% faster load times. Available for freelance work and full-time opportunities.",
-  generator: "v0.app",
+    "Raghav Verma — Full-Stack Developer based in New Delhi, India. Specializing in Next.js, React, and TypeScript. Building high-performance web applications. Available for freelance and full-time opportunities.",
   keywords: [
     "Raghav Verma",
+    "Raghav Verma developer",
+    "Raghav Verma portfolio",
     "Full-Stack Developer",
     "Frontend Developer",
     "React Developer",
@@ -34,46 +44,31 @@ export const metadata: Metadata = {
     "TypeScript Developer",
     "Web Developer",
     "Software Engineer",
-    "JavaScript",
-    "Node.js",
-    "Tailwind CSS",
+    "full stack developer New Delhi",
+    "Next.js developer India",
+    "khel.ai",
+    "sports tech developer",
     "Delhi",
     "India",
-    "Freelance Developer",
-    "Hire Developer",
   ],
   authors: [{ name: "Raghav Verma", url: "https://raghav-verma.com" }],
   creator: "Raghav Verma",
-  publisher: "Raghav Verma",
   icons: {
-    icon: [
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
+    icon: [{ url: "/Dev.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://raghav-verma.com/",
-    title: "Raghav Verma | Full-Stack Developer & Software Engineer",
-    description: "Full-Stack Developer with 2+ years of experience building high-performance Next.js applications. Specializing in React, TypeScript, and modern web technologies.",
-    siteName: "Raghav Verma Portfolio",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Raghav Verma - Full-Stack Developer Portfolio",
-      },
-    ],
+    title: "Raghav Verma | Full-Stack Developer",
+    description:
+      "Full-Stack Developer building high-performance Next.js applications. Specializing in React, TypeScript, and modern web technologies.",
+    siteName: "Raghav Verma",
   },
   twitter: {
     card: "summary_large_image",
     title: "Raghav Verma | Full-Stack Developer",
-    description: "Building high-performance web applications with Next.js, React, and TypeScript. 2+ years of production experience.",
-    images: ["/og-image.png"],
+    description: "Building high-performance web applications with Next.js, React, and TypeScript.",
     creator: "@Raghaverma",
   },
   robots: {
@@ -92,8 +87,6 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 }
 
 export default function RootLayout({
@@ -106,63 +99,47 @@ export default function RootLayout({
     "@type": "Person",
     name: "Raghav Verma",
     url: "https://raghav-verma.com",
-    image: "https://raghav-verma.com/og-image.png",
     jobTitle: "Full-Stack Developer",
-    description: "Full-Stack Developer with 2+ years of experience specializing in Next.js, React, and TypeScript",
+    description: "Full-Stack Developer based in New Delhi, India, specializing in Next.js, React, and TypeScript",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Delhi",
+      addressLocality: "New Delhi",
       addressCountry: "IN",
     },
-    alumniOf: [
-      {
-        "@type": "EducationalOrganization",
-        name: "Vivekananda Institute of Professional Studies",
-      },
-      {
-        "@type": "EducationalOrganization",
-        name: "Bennett University",
-      },
-    ],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Vivekananda Institute of Professional Studies – GGSIPU",
+    },
     knowsAbout: [
-      "Next.js",
-      "React.js",
-      "TypeScript",
-      "JavaScript",
-      "Node.js",
-      "Tailwind CSS",
-      "Web Development",
-      "Full-Stack Development",
+      "Next.js", "React", "TypeScript", "Node.js", "PostgreSQL",
+      "Full-Stack Development", "Web Performance", "Computer Vision",
+      "Sports Analytics",
     ],
     sameAs: [
       "https://github.com/Raghaverma",
       "https://www.linkedin.com/in/raghaverma/",
-      "https://twitter.com/Raghaverma",
+      "https://open.spotify.com/user/31pgsy5xe3cbxvvf3r7hxtluvy74",
     ],
   }
 
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`font-sans antialiased overflow-x-hidden`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ScrollProgress />
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
-          <CommandPalette />
-          <Analytics />
-        </ThemeProvider>
+      <body className="antialiased overflow-x-hidden bg-[#faf9f7] text-[#2f3331]">
+        <CustomCursor />
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
+        <MobileBottomNav />
+        <Analytics />
       </body>
     </html>
   )

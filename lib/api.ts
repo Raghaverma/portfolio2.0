@@ -72,15 +72,36 @@ const PROJECTS: Project[] = [
 
 const EXPERIENCES: Experience[] = [
     {
-        title: "Front-end Developer",
+        title: "SDE Intern",
+        company: "Khel.AI",
+        location: "Noida, India",
+        period: "2026 — Present",
+        highlights: [
+            "Building frontend interfaces for a sports analytics platform that integrates computer vision with real-time video analysis",
+            "Developing Canvas-based rendering pipelines and browser-side motion analytics tooling",
+            "Architecting modular React component systems and 3D visualization layers"
+        ]
+    },
+    {
+        title: "Frontend Engineer (Contract)",
         company: "Hypeliv Solutions Pvt. Ltd",
         location: "Delhi NCR, India",
-        period: "Aug 2025 - Jan 2026",
+        period: "Aug 2025 — Jan 2026",
         highlights: [
-            "Developed a trading and analytics platform reducing load times by 20-30% through performance optimization",
-            "Built Markets, Leaderboard, and Wallet pages using Next.js and TypeScript with focus on user experience",
-            "Implemented responsive UI components and integrated real-time data visualization features",
-            "Collaborated with backend team to optimize API integration and state management"
+            "Optimized a Next.js trading platform through performance improvements including code splitting and dynamic imports",
+            "Built core product features with real-time data streams and robust schema validation",
+            "Refactored component architecture to improve rendering efficiency"
+        ]
+    },
+    {
+        title: "Frontend Engineer Intern",
+        company: "The TechnoLabs",
+        location: "Delhi NCR, India",
+        period: "Jan 2024 — Jul 2024",
+        highlights: [
+            "Built a document generation system with PDF export capabilities using React",
+            "Integrated REST APIs for data submission and retrieval workflows",
+            "Contributed to data pipeline tooling for document processing"
         ]
     }
 ]

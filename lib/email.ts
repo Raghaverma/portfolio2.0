@@ -1,11 +1,4 @@
-// lib/email.ts
-import { Resend } from "resend";
-
-// Initialize Resend client conditionally (only if API key is available)
-// This prevents build-time errors when environment variables aren't set
-const resend = process.env.RESEND_API_KEY
-    ? new Resend(process.env.RESEND_API_KEY)
-    : null;
+import nodemailer from "nodemailer";
 
 interface SendEmailParams {
     name: string;
@@ -13,18 +6,34 @@ interface SendEmailParams {
     message: string;
 }
 
+function createTransporter() {
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+        return null;
+    }
+    return nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_APP_PASSWORD,
+        },
+    });
+}
+
 /**
  * Sends a confirmation email to the user who submitted the contact form
  */
 export async function sendUserConfirmation({ name, email }: SendEmailParams) {
-    if (!process.env.RESEND_API_KEY || !resend) {
-        console.warn("RESEND_API_KEY not configured, skipping user confirmation email");
+    const transporter = createTransporter();
+    if (!transporter) {
+        console.warn("GMAIL_USER or GMAIL_APP_PASSWORD not configured, skipping user confirmation email");
         return { success: false, error: "Email service not configured" };
     }
 
     try {
-        const { data, error } = await resend.emails.send({
-            from: "Raghav Verma <noreply@raghav-verma.com>", // Update with your verified domain
+        await transporter.sendMail({
+            from: `"Raghav Verma" <${process.env.GMAIL_USER}>`,
             to: email,
             subject: "Thanks for reaching out!",
             html: `
@@ -39,7 +48,6 @@ export async function sendUserConfirmation({ name, email }: SendEmailParams) {
                     <ul style="color: #666; line-height: 1.6; margin-bottom: 20px;">
                         <li>Check out my <a href="https://github.com/Raghaverma" style="color: #0070f3; text-decoration: none;">GitHub profile</a></li>
                         <li>Connect with me on <a href="https://www.linkedin.com/in/raghaverma/" style="color: #0070f3; text-decoration: none;">LinkedIn</a></li>
-                        <li>Schedule a call directly on <a href="https://cal.com/raghaverma/30min" style="color: #0070f3; text-decoration: none;">Cal.com</a></li>
                     </ul>
                     <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
                         Best regards,<br />
@@ -54,12 +62,7 @@ export async function sendUserConfirmation({ name, email }: SendEmailParams) {
             `,
         });
 
-        if (error) {
-            console.error("Error sending user confirmation email:", error);
-            return { success: false, error: error.message };
-        }
-
-        return { success: true, data };
+        return { success: true };
     } catch (error: any) {
         console.error("Error sending user confirmation email:", error);
         return { success: false, error: error.message };
@@ -70,16 +73,17 @@ export async function sendUserConfirmation({ name, email }: SendEmailParams) {
  * Sends a notification email to the portfolio owner about the new contact form submission
  */
 export async function sendOwnerNotification({ name, email, message }: SendEmailParams) {
-    if (!process.env.RESEND_API_KEY || !process.env.OWNER_EMAIL || !resend) {
-        console.warn("RESEND_API_KEY or OWNER_EMAIL not configured, skipping owner notification");
+    const transporter = createTransporter();
+    if (!transporter || !process.env.GMAIL_USER || !process.env.OWNER_EMAIL) {
+        console.warn("GMAIL_USER, GMAIL_APP_PASSWORD, or OWNER_EMAIL not configured, skipping owner notification");
         return { success: false, error: "Email service not configured" };
     }
 
     try {
-        const { data, error } = await resend.emails.send({
-            from: "Portfolio Contact <noreply@raghav-verma.com>", // Update with your verified domain
+        await transporter.sendMail({
+            from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
             to: process.env.OWNER_EMAIL,
-            replyTo: email, // Allow direct reply to the sender
+            replyTo: email,
             subject: `New Contact Form Submission from ${name}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb; border-radius: 8px;">
@@ -118,12 +122,7 @@ ${message}
             `,
         });
 
-        if (error) {
-            console.error("Error sending owner notification email:", error);
-            return { success: false, error: error.message };
-        }
-
-        return { success: true, data };
+        return { success: true };
     } catch (error: any) {
         console.error("Error sending owner notification email:", error);
         return { success: false, error: error.message };

@@ -1,90 +1,34 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
-  /* Custom color palette: Glass-Industrial with Deep Sea & Safety Orange */
-  --background: #f8f9fa; /* Off-white/Light Grey */
-  --foreground: #0f172a; /* Slate Navy */
+  --background: #faf9f7;
+  --foreground: #2f3331;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #2f3331;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #f97316; /* Refined Orange (Tailwind orange-500) */
-  --primary-foreground: #ffffff;
-  --secondary: #e2e8f0; /* Neutral borders */
-  --secondary-foreground: #0f172a;
-  --muted: #e2e8f0;
-  --muted-foreground: #64748b;
-  --accent: #f97316;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #f97316;
-  --radius: 0.5rem;
-
-  /* Blueprint grid variables */
-  --grid-color: #f1f5f9;
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  /* Updated dark mode to match V0's sophisticated design with zinc/slate colors */
-  --background: #09090b; /* Very dark, almost black like V0 */
-  --foreground: #fafafa;
-  --card: #18181b; /* Zinc-900 for cards */
-  --card-foreground: #fafafa;
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
-  --primary: #f97316; /* Refined Orange (Tailwind orange-500) */
-  --primary-foreground: #ffffff;
-  --secondary: #27272a; /* Zinc-800 for subtle backgrounds */
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa; /* Zinc-400 for muted text */
-  --accent: #f97316;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #27272a; /* Subtle borders */
-  --input: #27272a;
-  --ring: #f97316;
-
-  --grid-color: #18181b;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --popover-foreground: #2f3331;
+  --primary: #944a32;
+  --primary-foreground: #faf7f6;
+  --secondary: #f3f4f1;
+  --secondary-foreground: #2f3331;
+  --muted: #edeeeb;
+  --muted-foreground: #5c605d;
+  --accent: #ffdbd0;
+  --accent-foreground: #6c2b16;
+  --destructive: #9f403d;
+  --destructive-foreground: #fff7f6;
+  --border: #e0e3e0;
+  --input: #e0e3e0;
+  --ring: #944a32;
+  --radius: 0.125rem;
 }
 
 @theme inline {
-  /* Custom fonts: Space Grotesk for headings, JetBrains Mono for body/mono */
-  --font-sans: "Space Grotesk", "Geist", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Geist Mono", monospace;
+  --font-headline: "Newsreader", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -108,19 +52,24 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Design system tokens */
+  --color-rust: #944a32;
+  --color-rust-dim: #853e27;
+  --color-rust-light: #ffdbd0;
+  --color-rust-lighter: #ffc8b8;
+  --color-warm-grey: #5f5e5e;
+  --color-warm-grey-dark: #2f3331;
+  --color-warm-grey-mid: #655d59;
+  --color-on-surface-muted: #5c605d;
+  --color-surface-bright: #faf9f7;
+  --color-surface-low: #f3f4f1;
+  --color-surface-mid: #edeeeb;
+  --color-surface-high: #e6e9e6;
+  --color-surface-highest: #e0e3e0;
+  --color-border-subtle: #afb3b0;
+  --color-border-strong: #777c79;
+  --color-on-dark: #faf7f6;
 }
 
 @layer base {
@@ -129,40 +78,61 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    cursor: none;
   }
 
-  /* Blueprint grid background pattern */
-  .blueprint-grid {
-    background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 40px 40px;
-    position: relative;
+  /* Restore default cursor on touch devices */
+  @media (pointer: coarse) {
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
   }
 
-  .blueprint-grid::before {
+  /* Noise texture overlay on the page background */
+  body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/svg%3E");
     pointer-events: none;
+    z-index: 9997;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
   }
 
-  /* Glass effect for cards */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(226, 232, 240, 0.5);
+  .font-headline {
+    font-family: "Newsreader", serif;
   }
 
-  /* Updated dark mode glass effect to match V0's aesthetic */
-  .dark .glass-card {
-    background: rgba(24, 24, 27, 0.7); /* Zinc-900 with transparency */
-    border: 1px solid rgba(39, 39, 42, 0.8); /* Subtle zinc-800 border */
+  .serif-italic {
+    font-family: "Newsreader", serif;
+    font-style: italic;
   }
 
-  /* Terminal cursor blink animation */
+  /* Terminal cursor */
   .terminal-cursor {
     animation: blink 1s step-end infinite;
+  }
+
+  /* Terminal custom scrollbar */
+  .terminal-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+  .terminal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .terminal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+  }
+  .terminal-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.28);
+  }
+  /* Firefox */
+  .terminal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
   }
 
   @keyframes blink {
@@ -170,13 +140,26 @@
     51%, 100% { opacity: 0; }
   }
 
-  /* Heading letter-spacing utility */
-  .heading-tracking {
-    letter-spacing: -0.02em;
+  /* Light card with subtle shadow */
+  .glass-card {
+    background: #ffffff;
+    border: 1px solid #e0e3e0;
+    box-shadow: 0 4px 24px rgba(47, 51, 49, 0.06);
   }
 
-  /* Consistent transition utility */
-  .transition-base {
-    transition: all 200ms ease-out;
+  /* Music bars animation */
+  @keyframes musicBar {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+  }
+
+  .music-bar {
+    animation: musicBar 0.8s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  /* Pulse ping for location */
+  @keyframes ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
   }
 }
