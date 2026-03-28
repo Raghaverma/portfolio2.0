@@ -65,7 +65,7 @@ export function Navigation() {
                 className="opacity-70 hover:opacity-100 transition-opacity"
               />
             </Link>
-            <Link href="mailto:raghavverma.work@gmail.com" aria-label="Email">
+            <Link href="mailto:raghav.verma.work@gmail.com" aria-label="Email">
               <Terminal size={20} className="hover:text-[#944a32] transition-colors" />
             </Link>
           </div>

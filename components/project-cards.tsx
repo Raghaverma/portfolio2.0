@@ -1,6 +1,6 @@
 // Inline SVG/JSX project cards — one per project, fully scalable
 
-export function BoundaryCard() {
+export function MeridianCard() {
   return (
     <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
       <rect width="800" height="450" fill="#0d0d0d" />
@@ -37,10 +37,10 @@ export function BoundaryCard() {
 
       {/* Code block */}
       <rect x="570" y="80" width="200" height="120" rx="4" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
-      <text x="585" y="102" fill="#555" fontSize="9" fontFamily="monospace">// boundary.config.ts</text>
+      <text x="585" y="102" fill="#555" fontSize="9" fontFamily="monospace">// meridian.config.ts</text>
       <text x="585" y="120" fill="#944a32" fontSize="9" fontFamily="monospace">const</text>
       <text x="618" y="120" fill="#c8c8c8" fontSize="9" fontFamily="monospace"> api = new</text>
-      <text x="585" y="136" fill="#67d4f8" fontSize="9" fontFamily="monospace">  Boundary</text>
+      <text x="585" y="136" fill="#67d4f8" fontSize="9" fontFamily="monospace">  Meridian</text>
       <text x="635" y="136" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"({"}</text>
       <text x="585" y="152" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  circuit: { threshold: 5 },"}</text>
       <text x="585" y="168" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  retry:   { attempts: 3 }"}</text>
@@ -48,13 +48,13 @@ export function BoundaryCard() {
 
       {/* Error shape */}
       <rect x="570" y="230" width="200" height="55" rx="4" fill="#1a0a0a" stroke="#944a32" strokeWidth="1" opacity="0.7" />
-      <text x="585" y="250" fill="#944a32" fontSize="9" fontFamily="monospace">BoundaryError {"{"}type: 'circuit'{"},"}</text>
+      <text x="585" y="250" fill="#944a32" fontSize="9" fontFamily="monospace">MeridianError {"{"}type: 'circuit'{"},"}</text>
       <text x="585" y="266" fill="#944a32" fontSize="9" fontFamily="monospace">  provider: 'stripe',</text>
       <text x="585" y="280" fill="#944a32" fontSize="9" fontFamily="monospace">  switched: true {"}"}</text>
 
       {/* Title */}
-      <text x="40" y="60" fill="#ffffff" fontSize="28" fontFamily="serif" fontStyle="italic" fontWeight="500">Boundary</text>
-      <text x="40" y="80" fill="#555" fontSize="11" fontFamily="monospace">API resilience SDK</text>
+      <text x="40" y="60" fill="#ffffff" fontSize="28" fontFamily="serif" fontStyle="italic" fontWeight="500">Meridian</text>
+      <text x="40" y="80" fill="#555" fontSize="11" fontFamily="monospace">API resilience SDK · npm</text>
 
       {/* Bottom tag */}
       <rect x="40" y="390" width="90" height="20" rx="2" fill="#1a1a1a" />
@@ -350,7 +350,7 @@ export function WroomCard() {
 }
 
 export const PROJECT_CARDS: Record<string, React.FC> = {
-  "Boundary":        BoundaryCard,
+  "Meridian":        MeridianCard,
   "DevTrackr":       DevTrackrCard,
   "FilmMuse":        FilmMuseCard,
   "Major Realites":  MajorRealitiesCard,

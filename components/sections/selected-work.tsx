@@ -62,7 +62,17 @@ export async function SelectedWork() {
                 <p className="text-sm text-[#5c605d] leading-relaxed">
                   {project.description}
                 </p>
-                <div className="flex gap-4 mt-6">
+                <div className="flex flex-wrap gap-4 mt-6">
+                  {project.npm && (
+                    <Link
+                      href={project.npm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#944a32] hover:gap-4 transition-all"
+                    >
+                      npm <ArrowUpRight size={14} />
+                    </Link>
+                  )}
                   {project.demo && (
                     <Link
                       href={project.demo}

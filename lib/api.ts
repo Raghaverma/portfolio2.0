@@ -4,16 +4,17 @@ import { Experience } from "@/components/experience-section"
 // Hardcoded Data - Updated with accurate information from repositories
 const PROJECTS: Project[] = [
     {
-        name: "Boundary",
-        description: "A production-grade API integration SDK that provides unified typing and consistent response structures across multiple third-party APIs. Implements resilience patterns including circuit breakers and standardized error handling.",
+        name: "Meridian",
+        description: "A production-grade API integration SDK that eliminates boilerplate retry and error handling across Anthropic, OpenAI, Stripe, and GitHub. Provides unified typing and consistent response structures across multiple third-party APIs.",
         tech: ["TypeScript", "Node.js", "API Design", "Resilience Patterns"],
         highlights: [
-            "Unified interface for seamless integration across multiple API providers",
-            "Type-safe, predictable return values with standardized error shapes",
+            "Eliminates boilerplate retry and error handling across Anthropic, OpenAI, Stripe and GitHub",
+            "Unified interface with type-safe, predictable return values and standardized error shapes",
             "Built-in circuit breakers for fault tolerance and reliability",
             "Zero dependencies with tree-shakeable architecture"
         ],
-        github: "https://github.com/Raghaverma/Boundary-Docs",
+        github: "https://github.com/Raghaverma/meridianjs",
+        npm: "https://www.npmjs.com/package/meridianjs",
         demo: "https://boundary.raghav-verma.com/"
     },
     {
@@ -75,7 +76,7 @@ const EXPERIENCES: Experience[] = [
         title: "SDE Intern",
         company: "Khel.AI",
         location: "Noida, India",
-        period: "2026 — Present",
+        period: "Feb 2026 — Present",
         highlights: [
             "Building frontend interfaces for a sports analytics platform that integrates computer vision with real-time video analysis",
             "Developing Canvas-based rendering pipelines and browser-side motion analytics tooling",

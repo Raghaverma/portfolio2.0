@@ -4,6 +4,7 @@ import { StatsBar } from "@/components/sections/stats-bar"
 import { AboutSnippet } from "@/components/sections/about-snippet"
 import { StatusDashboard } from "@/components/sections/status-dashboard"
 import { SelectedWork } from "@/components/sections/selected-work"
+import { ExperienceSnippet } from "@/components/sections/experience-snippet"
 import { ContactSectionNew } from "@/components/sections/contact-section-new"
 import { SiteFooter } from "@/components/layout/site-footer"
 
@@ -17,6 +18,7 @@ export default function Home() {
         <AboutSnippet />
         <StatusDashboard />
         <SelectedWork />
+        <ExperienceSnippet />
         <ContactSectionNew />
       </main>
       <SiteFooter />

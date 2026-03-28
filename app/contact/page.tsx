@@ -76,6 +76,9 @@ export default function ContactPage() {
                   >
                     raghav.verma.work@gmail.com
                   </a>
+                  <p className="font-sans text-[10px] uppercase tracking-widest text-[#655d59] mt-3">
+                    Usually replies within 24–48 hours
+                  </p>
                 </div>
 
                 <div>

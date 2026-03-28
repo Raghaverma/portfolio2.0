@@ -29,7 +29,7 @@ const FS: FSDir = {
       "modern architecture, clean code, and intentional design.",
     ]},
     "contact.txt": { type: "file", content: [
-      "Email    :  raghavverma.work@gmail.com",
+      "Email    :  raghav.verma.work@gmail.com",
       "GitHub   :  github.com/Raghaverma",
       "LinkedIn :  linkedin.com/in/raghaverma",
       "Calendar :  cal.com/raghaverma",
@@ -46,17 +46,17 @@ const FS: FSDir = {
       "Redirecting to /RaghavVerma_CV.pdf ...",
     ]},
     "projects": { type: "dir", children: {
-      "boundary": { type: "dir", children: {
+      "meridian": { type: "dir", children: {
         "README.md": { type: "file", content: [
-          "# Boundary",
+          "# Meridian",
           "",
           "Production-grade API integration SDK.",
-          "Unified typing + consistent response shapes",
-          "across multiple third-party APIs.",
+          "Eliminates boilerplate retry and error handling",
+          "across Anthropic, OpenAI, Stripe, and GitHub.",
           "",
           "Tech :  TypeScript, Node.js",
-          "Demo :  boundary.raghav-verma.com",
-          "Repo :  github.com/Raghaverma/Boundary-Docs",
+          "npm  :  npmjs.com/package/meridianjs",
+          "Repo :  github.com/Raghaverma/meridianjs",
         ]},
       }},
       "devtrackr": { type: "dir", children: {
@@ -138,7 +138,7 @@ const ASK_RESPONSES: Array<{ keywords: string[]; response: string[] }> = [
       "i do my best work on frontend-heavy full-stack stuff —",
       "Next.js, React, TypeScript, that whole world.",
       "",
-      "→ raghavverma.work@gmail.com",
+      "→ raghav.verma.work@gmail.com",
       "→ cal.com/raghaverma  (grab a slot, i don't bite)",
     ],
   },
@@ -147,7 +147,7 @@ const ASK_RESPONSES: Array<{ keywords: string[]; response: string[] }> = [
     response: [
       "shipped a few things i'm actually proud of:",
       "",
-      "◆ Boundary        — API integration SDK",
+      "◆ Meridian        — API integration SDK (npm)",
       "◆ DevTrackr       — GitHub signals SDK",
       "◆ FilmMuse        — film discovery platform",
       "◆ Major Realties  — real estate site with smooth animations",
@@ -196,7 +196,7 @@ const ASK_RESPONSES: Array<{ keywords: string[]; response: string[] }> = [
     response: [
       "easiest ways to reach me:",
       "",
-      "→ raghavverma.work@gmail.com",
+      "→ raghav.verma.work@gmail.com",
       "→ github.com/Raghaverma",
       "→ linkedin.com/in/raghaverma",
       "",
@@ -268,7 +268,7 @@ const ASK_RESPONSES: Array<{ keywords: string[]; response: string[] }> = [
       "Rates depend on scope, timeline, and complexity.",
       "",
       "Best to discuss directly:",
-      "→ raghavverma.work@gmail.com",
+      "→ raghav.verma.work@gmail.com",
       "→ cal.com/raghaverma  (15-min intro call)",
       "",
       "I'm flexible for the right project.",
@@ -581,7 +581,7 @@ export function InteractiveTerminal() {
         skills:     { type: "output",  lines: ["Run 'cat skills.json' for the full breakdown.", "Or 'ls' to explore the filesystem."] },
         projects:   { type: "output",  lines: ["Run 'ls projects/' to browse all projects.", "Or 'cd projects && ls'."] },
         experience: { type: "output",  lines: ["SDE Intern @ Khel.AI (2026–Present)  ·  Canvas · React · TypeScript", "Frontend Eng. @ Hypeliv Solutions (2025–2026)  ·  Next.js · TypeScript"] },
-        contact:    { type: "output",  lines: ["raghavverma.work@gmail.com", "Run 'cat contact.txt' for all links."] },
+        contact:    { type: "output",  lines: ["raghav.verma.work@gmail.com", "Run 'cat contact.txt' for all links."] },
         social:     { type: "output",  lines: ["GitHub:   github.com/Raghaverma", "LinkedIn: linkedin.com/in/raghaverma"] },
         date:       { type: "info",    lines: [new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + "  (IST)"] },
         sudo:       { type: "error",   lines: ["Permission denied. Nice try though."] },

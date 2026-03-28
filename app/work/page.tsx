@@ -50,7 +50,17 @@ export default async function ProjectsPage() {
                 <p className="text-sm text-[#5c605d] leading-relaxed mb-4">
                   {project.description}
                 </p>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
+                  {project.npm && (
+                    <Link
+                      href={project.npm}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-[#944a32] hover:gap-2 transition-all"
+                    >
+                      npm <ArrowUpRight size={12} />
+                    </Link>
+                  )}
                   {project.demo && (
                     <Link
                       href={project.demo}

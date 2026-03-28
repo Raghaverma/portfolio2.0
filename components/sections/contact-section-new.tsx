@@ -55,10 +55,13 @@ export function ContactSectionNew() {
             Let&apos;s build something{" "}
             <span className="serif-italic">intentional.</span>
           </h2>
-          <p className="text-[#5c605d] leading-relaxed mb-12">
+          <p className="text-[#5c605d] leading-relaxed mb-6">
             Currently accepting new projects and collaborations. If you have an
             idea that needs architectural precision and a humanist touch, I&apos;d
             love to hear it.
+          </p>
+          <p className="text-[10px] uppercase tracking-[0.15em] font-bold text-[#655d59] mb-12">
+            Usually replies within 24–48 hours
           </p>
 
           <div className="space-y-6">

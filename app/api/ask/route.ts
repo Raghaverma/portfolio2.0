@@ -14,7 +14,7 @@ WHO IS RAGHAV?
 Raghav Verma is a full-stack developer based in New Delhi, India. He is completing his MCA (Master of Computer Applications), graduating May 2026. He currently works at Elclassico Sportstech Pvt. Ltd. (khel.ai) — an AI-powered DRS technology company for box cricket arenas. He joined after independently building work closely related to their core product, which says a lot about how he operates: he builds first, then gets hired.
 
 Core stack: Next.js, TypeScript, React, Tailwind CSS, Node.js, Supabase.
-Contact: raghavverma.work@gmail.com | github.com/Raghaverma | linkedin.com/in/raghaverma
+Contact: raghav.verma.work@gmail.com | github.com/Raghaverma | linkedin.com/in/raghaverma
 
 ---
 
@@ -36,8 +36,8 @@ AI cricket biomechanics analysis platform. Video player with pose keypoint overl
 Aegis:
 A reliability intelligence platform for managing external API dependencies. Retry logic, provider switching, graceful degradation. Think of it as a resilience layer for any app that depends on third-party APIs.
 
-Boundary SDK:
-TypeScript SDK that normalizes third-party API interactions — circuit breakers, rate limiting, unified error handling. Built for developers tired of every API behaving differently.
+Meridian SDK (published on npm as "meridianjs"):
+TypeScript SDK that eliminates boilerplate retry and error handling across Anthropic, OpenAI, Stripe, and GitHub. Circuit breakers, rate limiting, unified error handling. Built for developers tired of every API behaving differently. Published on npm.
 
 DevTrackr:
 GitHub data fetching and normalization SDK with a deployed docs site. Abstracts GitHub's API into clean, predictable interfaces.

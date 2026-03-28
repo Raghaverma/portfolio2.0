@@ -9,6 +9,7 @@ export interface Project {
   highlights: string[]
   github: string
   demo?: string
+  npm?: string
 }
 
 interface ProjectsSectionProps {
