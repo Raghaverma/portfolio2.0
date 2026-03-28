@@ -1,15 +1,23 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+
 
 export function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 })
   const [isHovering, setIsHovering] = useState(false)
   const [visible, setVisible] = useState(false)
 
+  const pathname = usePathname()
+  
   useEffect(() => {
     // Only show on non-touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return
+    if (pathname.startsWith('/admin')) {
+      setVisible(false)
+      return
+    }
 
     setVisible(true)
 
@@ -30,9 +38,10 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", move)
       window.removeEventListener("mouseover", over)
     }
-  }, [])
+  }, [pathname])
 
-  if (!visible) return null
+  if (!visible || pathname.startsWith('/admin')) return null
+
 
   return (
     <>
