@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendUserConfirmation, sendOwnerNotification } from "@/lib/email";
+import { logContact } from "@/lib/admin-store";
+
+
 
 const contactSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters").max(100, "Name too long"),
@@ -53,15 +56,20 @@ export async function POST(req: Request) {
 
         const { name, email, message } = validation.data;
 
-        // Rate limiting: 5 requests per 10 minutes per IP
-        if (!checkRateLimit(ip)) {
-            return NextResponse.json(
-                { error: "Too many requests. Please try again later." },
-                { status: 429 }
-            );
-        }
+        // Log contact submission
+        logContact({
+            id: crypto.randomUUID(),
+            name,
+            email,
+            message,
+            timestamp: new Date().toISOString(),
+            ip,
+            emailSent: !!process.env.RESEND_API_KEY,
+        });
 
         // Send emails (non-blocking - we don't want to fail the request if emails fail)
+
+
         const emailPromises = [
             sendUserConfirmation({ name, email, message }),
             sendOwnerNotification({ name, email, message })

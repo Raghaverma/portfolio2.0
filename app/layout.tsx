@@ -6,6 +6,8 @@ import "./globals.css"
 import { SmoothScroll } from "@/components/shared/smooth-scroll"
 import { CustomCursor } from "@/components/shared/custom-cursor"
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
+import { VisitorTracker } from "@/components/shared/visitor-tracker"
+
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -139,7 +141,9 @@ export default function RootLayout({
           {children}
         </SmoothScroll>
         <MobileBottomNav />
+        <VisitorTracker />
         <Analytics />
+
       </body>
     </html>
   )
