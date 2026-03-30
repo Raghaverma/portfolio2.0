@@ -65,6 +65,20 @@ export function Navigation() {
                 className="opacity-70 hover:opacity-100 transition-opacity"
               />
             </Link>
+            <Link
+              href="https://www.npmjs.com/~0xsantoryu"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="NPM"
+            >
+              <Image
+                src="/npm-logo.svg"
+                alt="NPM"
+                width={36}
+                height={36}
+                className="opacity-70 hover:opacity-100 transition-opacity"
+              />
+            </Link>
             <Link href="mailto:raghav.verma.work@gmail.com" aria-label="Email">
               <Terminal size={20} className="hover:text-[#944a32] transition-colors" />
             </Link>
@@ -112,6 +126,14 @@ export function Navigation() {
               className="font-sans text-xs uppercase tracking-widest text-[#655d59] hover:text-[#944a32] transition-colors"
             >
               LinkedIn
+            </Link>
+            <Link
+              href="https://www.npmjs.com/~0xsantoryu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-xs uppercase tracking-widest text-[#655d59] hover:text-[#944a32] transition-colors"
+            >
+              NPM
             </Link>
           </div>
         </div>
