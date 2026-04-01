@@ -8,7 +8,7 @@ const quickFacts = [
   { label: "Current Role", value: "SDE Intern @ Khel.AI" },
   { label: "Location", value: "New Delhi, IN · IST" },
   { label: "Status", value: "● Available for work", highlight: true },
-  { label: "GitHub", value: "github.com/Raghaverma", href: "https://github.com/Raghaverma" },
+  { label: "Focus", value: "Next.js · TypeScript · APIs · UX" },
 ]
 
 export function HeroNew() {
@@ -24,22 +24,26 @@ export function HeroNew() {
           </h1>
 
           <p className="max-w-md text-lg text-[#5c605d] leading-relaxed">
-            I build production-ready APIs and web apps for early-stage startups and teams.
+            Full-stack developer building production Next.js apps, APIs, and performance-focused interfaces.
+          </p>
+
+          <p className="max-w-md text-sm text-[#655d59] leading-relaxed -mt-4">
+            Currently shipping sports analytics products at Khel.AI. Open to freelance and full-time roles.
           </p>
 
           <div className="flex flex-wrap gap-4 items-center pt-2">
             <Link
-              href="/contact"
+              href="/work"
               className="inline-flex items-center gap-2 bg-[#5f5e5e] text-[#faf7f6] px-8 py-4 text-sm uppercase tracking-widest hover:bg-[#944a32] transition-all duration-300 group"
             >
-              Get in Touch
+              View Selected Work
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/work"
+              href="/contact"
               className="inline-flex items-center gap-2 border border-[#afb3b0] text-[#5f5e5e] px-8 py-4 text-sm uppercase tracking-widest hover:border-[#944a32] hover:text-[#944a32] transition-all duration-300"
             >
-              Explore Works
+              Get in Touch
             </Link>
           </div>
         </div>

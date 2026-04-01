@@ -3,10 +3,10 @@
 import { StaggerContainer, StaggerItem } from "@/components/shared/scroll-reveal"
 
 const STATS = [
-  { value: "1+", label: "Years Experience" },
-  { value: "5+", label: "Projects Shipped" },
-  { value: "∞", label: "Commits Pushed" },
-  { value: "1", label: "Goal: Build Great Things" },
+  { value: "2+", label: "Years in Production" },
+  { value: "5+", label: "Products Shipped" },
+  { value: "3", label: "Companies & Startups" },
+  { value: "2", label: "Published npm Packages" },
 ]
 
 export function StatsBar() {

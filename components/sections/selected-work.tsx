@@ -15,8 +15,8 @@ export async function SelectedWork() {
           Portfolio
         </span>
         <h2 className="font-headline text-5xl mt-2 leading-tight">
-          Selected Work &amp;{" "}
-          <span className="serif-italic">Experimental Builds</span>
+          Selected{" "}
+          <span className="serif-italic">Work</span>
         </h2>
       </div>
 
@@ -38,7 +38,7 @@ export async function SelectedWork() {
                   )}
                   <div className="absolute top-8 right-8">
                     <span className="bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#2f3331]">
-                      {index === 0 ? "Featured" : "Open Source"}
+                      {index === 0 ? "Flagship Case Study" : "Open Source"}
                     </span>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { Experience } from "@/components/experience-section"
 const PROJECTS: Project[] = [
     {
         name: "Meridian",
-        description: "A production-grade API integration SDK that eliminates boilerplate retry and error handling across Anthropic, OpenAI, Stripe, and GitHub. Provides unified typing and consistent response structures across multiple third-party APIs.",
+        description: "Production API integration SDK unifying Anthropic, OpenAI, Stripe, and GitHub behind a single typed interface — with built-in circuit breakers, retry logic, and zero dependencies. Owned architecture, type system, and npm release.",
         tech: ["TypeScript", "Node.js", "API Design", "Resilience Patterns"],
         highlights: [
             "Eliminates boilerplate retry and error handling across Anthropic, OpenAI, Stripe and GitHub",
@@ -78,7 +78,7 @@ const EXPERIENCES: Experience[] = [
         location: "Noida, India",
         period: "Feb 2026 — Present",
         highlights: [
-            "Building frontend interfaces for a sports analytics platform that integrates computer vision with real-time video analysis",
+            "Built and refined sports analytics interfaces used in real-time operator workflows, focusing on performance, rendering precision, and product reliability",
             "Developing Canvas-based rendering pipelines and browser-side motion analytics tooling",
             "Architecting modular React component systems and 3D visualization layers"
         ]
@@ -89,7 +89,7 @@ const EXPERIENCES: Experience[] = [
         location: "Delhi NCR, India",
         period: "Aug 2025 — Jan 2026",
         highlights: [
-            "Optimized a Next.js trading platform through performance improvements including code splitting and dynamic imports",
+            "Improved perceived load time on a Next.js trading platform through code splitting, dynamic imports, and component architecture refactoring",
             "Built core product features with real-time data streams and robust schema validation",
             "Refactored component architecture to improve rendering efficiency"
         ]

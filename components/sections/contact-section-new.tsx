@@ -54,12 +54,12 @@ export function ContactSectionNew() {
           </span>
           <h2 className="font-headline text-5xl mt-4 mb-8 leading-tight">
             Let&apos;s build something{" "}
-            <span className="serif-italic">intentional.</span>
+            <span className="serif-italic">sharp.</span>
           </h2>
           <p className="text-[#5c605d] leading-relaxed mb-6">
-            Currently accepting new projects and collaborations. If you have an
-            idea that needs architectural precision and a humanist touch, I&apos;d
-            love to hear it.
+            Available for freelance projects and full-time roles. If you need a
+            developer who cares about both architecture and interface quality,
+            let&apos;s talk.
           </p>
           <p className="text-[10px] uppercase tracking-[0.15em] font-bold text-[#655d59] mb-12">
             Usually replies within 24–48 hours

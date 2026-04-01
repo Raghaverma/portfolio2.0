@@ -140,9 +140,9 @@ export function StatusDashboard() {
       <div className="mb-12 flex items-end justify-between">
         <div>
           <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#655d59]">
-            Live System
+            Live
           </span>
-          <h2 className="font-headline text-4xl mt-2">Status Dashboard</h2>
+          <h2 className="font-headline text-4xl mt-2">Now</h2>
         </div>
         <div className="h-px flex-1 bg-[#edeeeb] mx-8 mb-3 hidden md:block" />
       </div>
