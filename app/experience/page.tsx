@@ -76,8 +76,8 @@ export default async function ExperiencePage() {
                   <div className="md:col-span-3">
                     <ul className="space-y-3">
                       {exp.highlights.map((h, i) => (
-                        <li key={i} className="text-[#5c605d] leading-relaxed flex gap-3">
-                          <span className="text-[#944a32] mt-1 flex-shrink-0">—</span>
+                        <li key={i} className="text-[#5c605d] leading-relaxed flex items-baseline gap-3">
+                          <span className="text-[#944a32] flex-shrink-0">—</span>
                           <span>{h}</span>
                         </li>
                       ))}
