@@ -4,7 +4,14 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { InteractiveTerminal } from "@/components/sections/interactive-terminal"
 
-const quickFacts = [
+interface QuickFact {
+  label: string
+  value: string
+  highlight?: boolean
+  href?: string
+}
+
+const quickFacts: QuickFact[] = [
   { label: "Current Role", value: "SDE Intern @ Khel.AI" },
   { label: "Location", value: "New Delhi, IN · IST" },
   { label: "Status", value: "● Available for work", highlight: true },
