@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/shared/smooth-scroll"
 import { CustomCursor } from "@/components/shared/custom-cursor"
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 import { VisitorTracker } from "@/components/shared/visitor-tracker"
+import { GreetingPreloader } from "@/components/shared/greetings-preloader"
 
 
 const newsreader = Newsreader({
@@ -136,6 +137,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased overflow-x-hidden bg-[#faf9f7] text-[#2f3331]">
+        <GreetingPreloader intervalMs={1000} />
         <CustomCursor />
         <SmoothScroll>
           {children}
