@@ -6,7 +6,9 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/shared
 
 export async function SelectedWork() {
   const projects = await getProjects()
-  const featured = projects.slice(0, 2)
+  const featured = ["RepoGremlin", "Meridian"].map(
+    (name) => projects.find((p) => p.name === name)!
+  )
 
   return (
     <section id="work" className="px-6 md:px-12 pb-32 max-w-7xl mx-auto scroll-mt-24">
@@ -38,7 +40,7 @@ export async function SelectedWork() {
                   )}
                   <div className="absolute top-8 right-8">
                     <span className="bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#2f3331]">
-                      {index === 0 ? "Flagship Case Study" : "Open Source"}
+                      {index === 0 ? "Flagship · Under Construction" : "Open Source"}
                     </span>
                   </div>
                 </div>
@@ -60,7 +62,9 @@ export async function SelectedWork() {
               <div className="col-span-full sm:col-span-8">
                 <h3 className="font-headline text-2xl mb-3">{project.name}</h3>
                 <p className="text-sm text-[#5c605d] leading-relaxed">
-                  {project.description}
+                  {project.underConstruction
+                    ? "A repo-aware developer workflow agent. Details coming soon."
+                    : project.description}
                 </p>
                 <div className="flex flex-wrap gap-4 mt-6">
                   {project.npm && (
@@ -73,7 +77,7 @@ export async function SelectedWork() {
                       npm <ArrowUpRight size={14} />
                     </Link>
                   )}
-                  {project.demo && (
+                  {project.demo && !project.underConstruction && (
                     <Link
                       href={project.demo}
                       target="_blank"

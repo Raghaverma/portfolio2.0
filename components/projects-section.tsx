@@ -10,6 +10,7 @@ export interface Project {
   github: string
   demo?: string
   npm?: string
+  underConstruction?: boolean
 }
 
 interface ProjectsSectionProps {

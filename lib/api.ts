@@ -4,6 +4,18 @@ import { Experience } from "@/components/experience-section"
 // Hardcoded Data - Updated with accurate information from repositories
 const PROJECTS: Project[] = [
     {
+        name: "RepoGremlin",
+        description: "A repo-aware developer workflow agent that understands repository structure, generates implementation plans, reviews changes, and maintains project context — built on a permission-aware Rust runtime.",
+        tech: ["Rust", "Python", "CLI", "AI Agents"],
+        highlights: [
+            "Analyze any codebase and surface architecture, entrypoints, and risky areas",
+            "Turn feature requests into file-level implementation plans with context-aware reasoning",
+            "Session-persistent context across analytical runs with structured handoff output"
+        ],
+        github: "https://github.com/Raghaverma/repogremlin",
+        underConstruction: true
+    },
+    {
         name: "Meridian",
         description: "Production API integration SDK unifying Anthropic, OpenAI, Stripe, and GitHub behind a single typed interface — with built-in circuit breakers, retry logic, and zero dependencies. Owned architecture, type system, and npm release.",
         tech: ["TypeScript", "Node.js", "API Design", "Resilience Patterns"],

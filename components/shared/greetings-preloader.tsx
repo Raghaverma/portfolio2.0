@@ -18,24 +18,26 @@ interface GreetingPreloaderProps {
 const defaultGreetings: Greeting[] = [
   { text: "Hello", language: "English" },
   { text: "Bonjour", language: "French" },
-  { text: "안녕하세요", language: "Korean" },
   { text: "Hola", language: "Spanish" },
-  { text: "Ciao", language: "Italian" },
   { text: "नमस्ते", language: "Hindi" },
   { text: "こんにちは", language: "Japanese" },
 ]
 
+const SESSION_KEY = "preloader-shown"
+
 export function GreetingPreloader({
   greetings = defaultGreetings,
-  intervalMs = 300,
+  intervalMs = 800,
   fullPage = true,
 }: GreetingPreloaderProps) {
+  // Skip entirely if already shown this session
+  const [skip] = useState(() => sessionStorage.getItem(SESSION_KEY) === "true")
   const [index, setIndex] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (isComplete) return
+    if (skip || isComplete) return
 
     const timeout = setTimeout(() => {
       if (index < greetings.length - 1) {
@@ -46,29 +48,23 @@ export function GreetingPreloader({
     }, intervalMs)
 
     return () => clearTimeout(timeout)
-  }, [index, greetings.length, intervalMs, isComplete])
+  }, [skip, index, greetings.length, intervalMs, isComplete])
 
   useEffect(() => {
     if (isComplete && fullPage && containerRef.current) {
-      const tl = gsap.timeline()
-      
-      tl.to(containerRef.current, {
+      sessionStorage.setItem(SESSION_KEY, "true")
+      gsap.to(containerRef.current, {
         yPercent: -110,
-        duration: 1.2,
+        duration: 0.9,
         ease: "power4.inOut",
         onComplete: () => {
-          // Additional cleanup if needed
-          if (containerRef.current) {
-            containerRef.current.style.display = "none"
-          }
-        }
+          if (containerRef.current) containerRef.current.style.display = "none"
+        },
       })
-
-      // We can also animate other elements here if they exist in the layout
-      // For now, focusing on the overlay exit as requested.
     }
   }, [isComplete, fullPage])
 
+  if (skip) return null
   if (!fullPage && isComplete) return null
 
   return (
@@ -83,10 +79,10 @@ export function GreetingPreloader({
           {!isComplete && (
             <motion.div
               key={index}
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -100, opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
+              exit={{ y: -16, opacity: 0 }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
               className="flex flex-col items-center gap-2"
             >
               <h2 className="text-4xl md:text-7xl font-extralight tracking-tighter text-[#2f3331]">

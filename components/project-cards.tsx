@@ -349,10 +349,87 @@ export function WroomCard() {
   )
 }
 
+export function RepoGremlinCard() {
+  return (
+    <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <rect width="800" height="450" fill="#0d0d0d" />
+
+      {/* Background grid */}
+      {Array.from({ length: 18 }).map((_, i) => (
+        <line key={`v${i}`} x1={i * 48} y1="0" x2={i * 48} y2="450" stroke="#111" strokeWidth="1" />
+      ))}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <line key={`h${i}`} x1="0" y1={i * 50} x2="800" y2={i * 50} stroke="#111" strokeWidth="1" />
+      ))}
+
+      {/* Terminal window */}
+      <rect x="40" y="50" width="420" height="300" rx="6" fill="#111" stroke="#1e1e1e" strokeWidth="1" />
+      <rect x="40" y="50" width="420" height="32" rx="6" fill="#1a1a1a" />
+      <rect x="40" y="70" width="420" height="12" fill="#1a1a1a" />
+      <circle cx="60" cy="66" r="5" fill="#ff5f57" />
+      <circle cx="76" cy="66" r="5" fill="#febc2e" />
+      <circle cx="92" cy="66" r="5" fill="#28c840" />
+      <text x="220" y="70" textAnchor="middle" fill="#333" fontSize="9" fontFamily="monospace">claw — zsh</text>
+
+      {/* Terminal lines */}
+      <text x="56" y="104" fill="#555" fontSize="9" fontFamily="monospace">~ $</text>
+      <text x="78" y="104" fill="#39d353" fontSize="9" fontFamily="monospace">claw analyze</text>
+      <text x="56" y="122" fill="#444" fontSize="9" fontFamily="monospace">→ scanning repository structure...</text>
+      <text x="56" y="140" fill="#444" fontSize="9" fontFamily="monospace">→ indexing 47 source files</text>
+      <text x="56" y="158" fill="#444" fontSize="9" fontFamily="monospace">→ detecting stack: Rust · Python · TypeScript</text>
+      <text x="56" y="176" fill="#67d4f8" fontSize="9" fontFamily="monospace">  entrypoints: rust/crates/rusty-claude-cli/src/main.rs</text>
+      <text x="56" y="194" fill="#67d4f8" fontSize="9" fontFamily="monospace">  risky areas: src/migrations, src/voice</text>
+
+      <line x1="56" y1="204" x2="444" y2="204" stroke="#1e1e1e" strokeWidth="1" />
+
+      <text x="56" y="220" fill="#555" fontSize="9" fontFamily="monospace">~ $</text>
+      <text x="78" y="220" fill="#39d353" fontSize="9" fontFamily="monospace">claw plan "add rate limiting to API"</text>
+      <text x="56" y="238" fill="#444" fontSize="9" fontFamily="monospace">→ reading context from .claw/sessions/...</text>
+      <text x="56" y="256" fill="#67d4f8" fontSize="9" fontFamily="monospace">  1. src/api/middleware.rs — add RateLimiter</text>
+      <text x="56" y="274" fill="#67d4f8" fontSize="9" fontFamily="monospace">  2. rust/crates/api/src/lib.rs — expose config</text>
+      <text x="56" y="292" fill="#67d4f8" fontSize="9" fontFamily="monospace">  3. tests/integration/api_test.rs — add test</text>
+
+      <text x="56" y="316" fill="#555" fontSize="9" fontFamily="monospace">~ $</text>
+      <rect x="78" y="305" width="7" height="13" rx="1" fill="#39d353" opacity="0.8" />
+
+      {/* Right panel — architecture map */}
+      <rect x="500" y="50" width="260" height="300" rx="6" fill="#111" stroke="#1e1e1e" strokeWidth="1" />
+      <text x="515" y="74" fill="#333" fontSize="9" fontFamily="monospace">REPO MAP</text>
+      <line x1="500" y1="80" x2="760" y2="80" stroke="#1e1e1e" strokeWidth="1" />
+
+      {/* Tree structure */}
+      {[
+        { x: 515, y: 100, label: "repogremlin/", color: "#944a32" },
+        { x: 530, y: 118, label: "rust/", color: "#555" },
+        { x: 545, y: 136, label: "crates/", color: "#444" },
+        { x: 560, y: 154, label: "rusty-claude-cli", color: "#67d4f8" },
+        { x: 545, y: 172, label: "api/", color: "#444" },
+        { x: 545, y: 190, label: "runtime/", color: "#444" },
+        { x: 530, y: 208, label: "src/", color: "#555" },
+        { x: 545, y: 226, label: "migrations/", color: "#444" },
+        { x: 545, y: 244, label: "voice/", color: "#444" },
+        { x: 530, y: 262, label: "scripts/", color: "#555" },
+        { x: 530, y: 280, label: "tests/", color: "#555" },
+      ].map(({ x, y, label, color }) => (
+        <text key={label} x={x} y={y} fill={color} fontSize="9" fontFamily="monospace">{label}</text>
+      ))}
+
+      {/* Under construction banner */}
+      <rect x="40" y="370" width="720" height="50" rx="4" fill="#1a1208" stroke="#c8a96e" strokeWidth="1" opacity="0.95" />
+      <text x="400" y="390" textAnchor="middle" fill="#c8a96e" fontSize="10" fontFamily="monospace" letterSpacing="3">UNDER CONSTRUCTION</text>
+      <text x="400" y="408" textAnchor="middle" fill="#7a6540" fontSize="9" fontFamily="monospace">flagship project · active development</text>
+
+      {/* Title */}
+      <text x="40" y="438" fill="#444" fontSize="11" fontFamily="monospace">Rust · Python · CLI · AI Agents</text>
+    </svg>
+  )
+}
+
 export const PROJECT_CARDS: Record<string, React.FC> = {
   "Meridian":        MeridianCard,
   "DevTrackr":       DevTrackrCard,
   "FilmMuse":        FilmMuseCard,
   "Major Realites":  MajorRealitiesCard,
   "Wroom Inc":       WroomCard,
+  "RepoGremlin":     RepoGremlinCard,
 }

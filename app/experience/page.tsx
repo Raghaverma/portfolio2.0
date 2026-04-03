@@ -147,105 +147,110 @@ export default async function ExperiencePage() {
         </section>
 
         {/* The Stack */}
-        <section className="bg-[#f3f4f1] -mx-6 md:-mx-12 px-6 md:px-12 py-24 mb-40">
+        <section id="stack" className="bg-[#f3f4f1] -mx-6 md:-mx-12 px-6 md:px-12 py-24 mb-40 scroll-mt-24">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-16">
-              <h2 className="font-headline text-4xl mb-2">The Stack</h2>
-              <p className="font-sans text-xs uppercase tracking-[0.2em] text-[#655d59]">
-                Technical Arsenal &amp; Mastery
-              </p>
+            <div className="mb-16 flex items-end gap-8">
+              <div>
+                <p className="font-sans text-xs uppercase tracking-[0.2em] text-[#655d59] mb-2">Technical Arsenal</p>
+                <h2 className="font-headline text-5xl">The Stack</h2>
+              </div>
+              <div className="h-px flex-1 bg-[#afb3b0]/30 mb-3 hidden md:block" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Frontend - wide */}
-              <div className="md:col-span-2 bg-[#edeeeb] p-10 flex flex-col justify-between min-h-[280px] group hover:bg-[#e6e9e6] transition-colors">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+              {/* Interface — 7 cols */}
+              <div className="md:col-span-7 bg-white p-10 flex flex-col justify-between min-h-[320px] group hover:bg-[#faf9f7] transition-colors duration-300">
                 <div>
-                  <span className="text-[#944a32] text-3xl mb-6 block">◈</span>
-                  <h3 className="font-headline text-3xl mb-4">Interface</h3>
-                  <p className="text-[#5c605d] max-w-md">
-                    Crafting editorial web experiences using React and Next.js,
-                    prioritizing performance and tactile UI design.
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#944a32] mb-3">Interface</p>
+                  <h3 className="font-headline text-4xl mb-4 leading-tight">
+                    Precision UI,<br />
+                    <span className="serif-italic font-light">editorial craft.</span>
+                  </h3>
+                  <p className="text-sm text-[#5c605d] leading-relaxed max-w-md">
+                    React and Next.js at the core — layered with motion, performance, and typographic discipline.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-8">
-                  {["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"].map(
-                    (s) => (
-                      <MagneticButton key={s} strength={0.25}>
-                        <span className="block px-3 py-1 bg-[#faf9f7] font-sans text-[10px] uppercase tracking-wider border border-[#e0e3e0]/50 hover:bg-[#944a32] hover:text-[#faf9f7] hover:border-[#944a32] transition-colors duration-300 cursor-default">
-                          {s}
-                        </span>
-                      </MagneticButton>
-                    )
-                  )}
+                  {["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP"].map((s) => (
+                    <MagneticButton key={s} strength={0.25}>
+                      <span className="block px-4 py-1.5 bg-[#f3f4f1] font-sans text-xs uppercase tracking-wider border border-[#e0e3e0] hover:bg-[#944a32] hover:text-white hover:border-[#944a32] transition-colors duration-300 cursor-default">
+                        {s}
+                      </span>
+                    </MagneticButton>
+                  ))}
                 </div>
               </div>
 
-              {/* Backend - dark */}
-              <div className="bg-[#2f3331] p-10 text-[#faf7f6] flex flex-col justify-between min-h-[280px] hover:bg-[#363c39] transition-colors duration-300">
+              {/* Architecture — 5 cols, dark */}
+              <div className="md:col-span-5 bg-[#2f3331] p-10 text-[#faf7f6] flex flex-col justify-between min-h-[320px]">
                 <div>
-                  <span className="text-[#ffc8b8] text-3xl mb-6 block">▣</span>
-                  <h3 className="font-headline text-3xl mb-4">Architecture</h3>
-                  <p className="text-[#afb3b0] text-sm leading-relaxed">
-                    Building resilient backends with Node.js. Focused on
-                    scalability and type safety.
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#ffc8b8] mb-3">Architecture</p>
+                  <h3 className="font-headline text-4xl mb-4 leading-tight">
+                    Backends<br />
+                    <span className="serif-italic font-light">built to last.</span>
+                  </h3>
+                  <p className="text-sm text-[#afb3b0] leading-relaxed">
+                    Node.js for APIs, Rust for systems — focused on scalability, type safety, and agentic runtimes.
                   </p>
                 </div>
-                <div className="mt-8 flex flex-col gap-2">
+                <div className="mt-8 flex flex-col gap-3">
                   {[
-                    { name: "Node.js", level: "Fluent" },
-                    { name: "REST APIs", level: "Advanced" },
+                    { name: "Node.js",    level: "Fluent"     },
+                    { name: "Rust",       level: "Proficient" },
+                    { name: "REST APIs",  level: "Advanced"   },
                     { name: "PostgreSQL", level: "Proficient" },
                   ].map((item) => (
-                    <div
-                      key={item.name}
-                      className="group/row relative flex justify-between items-center border-b border-[#faf7f6]/10 pb-2"
-                    >
-                      <span className="font-sans text-[10px] uppercase tracking-widest group-hover/row:text-[#ffc8b8] transition-colors duration-300">
+                    <div key={item.name} className="group/row relative flex justify-between items-center border-b border-white/10 pb-2">
+                      <span className="font-sans text-xs uppercase tracking-wider group-hover/row:text-[#ffc8b8] transition-colors duration-300">
                         {item.name}
                       </span>
-                      <span className="text-xs font-headline italic text-[#ffc8b8]">
-                        {item.level}
-                      </span>
-                      <span className="absolute bottom-0 left-0 h-px bg-[#ffc8b8]/50 w-0 group-hover/row:w-full transition-all duration-500" />
+                      <span className="font-headline text-sm italic text-[#ffc8b8]">{item.level}</span>
+                      <span className="absolute bottom-0 left-0 h-px bg-[#ffc8b8]/40 w-0 group-hover/row:w-full transition-all duration-500" />
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Tools - full width */}
-              <div className="md:col-span-3 bg-[#edeeeb] p-10">
-                <div className="flex items-start justify-between mb-10">
+              {/* Infrastructure & Tools — full width */}
+              <div className="md:col-span-12 bg-[#edeeeb] p-10">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <span className="text-[#944a32] text-3xl mb-4 block">◆</span>
-                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#944a32]">
-                      Infrastructure &amp; Tools
-                    </h4>
+                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#655d59] mb-2">Infrastructure &amp; Tools</p>
+                    <h3 className="font-headline text-4xl">
+                      DevOps, runtimes,{" "}
+                      <span className="serif-italic font-light">and developer tooling.</span>
+                    </h3>
                   </div>
-                  <p className="text-[#5c605d] text-sm leading-relaxed max-w-xs text-right hidden md:block">
-                    Modern DevOps practices — containerization, cloud deployments, and CI/CD pipelines.
+                  <p className="text-sm text-[#5c605d] leading-relaxed max-w-sm md:text-right">
+                    Containerization, cloud deployments, CI/CD, agentic systems — the full operational layer.
                   </p>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#afb3b0]/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-px bg-[#afb3b0]/20">
                   {[
                     { name: "Git & GitHub",   category: "Version Control" },
                     { name: "Docker",         category: "Containers"      },
                     { name: "Vercel",         category: "Deployment"      },
+                    { name: "Rust",           category: "Systems"         },
+                    { name: "Python",         category: "Scripting"       },
+                    { name: "CLI Tooling",    category: "Developer Tools" },
                     { name: "PostgreSQL",     category: "Database"        },
                     { name: "Prisma",         category: "ORM"             },
                     { name: "REST / GraphQL", category: "API Layer"       },
                     { name: "CI/CD",          category: "Automation"      },
+                    { name: "AI Agents",      category: "Agentic Systems" },
                     { name: "shadcn/ui",      category: "UI Library"      },
                   ].map((tool) => (
                     <div
                       key={tool.name}
-                      className="group/cell bg-[#edeeeb] hover:bg-[#2f3331] p-5 flex flex-col justify-between min-h-[100px] transition-colors duration-300 cursor-default"
+                      className="group/cell bg-[#edeeeb] hover:bg-[#2f3331] p-6 flex flex-col justify-between min-h-[110px] transition-colors duration-300 cursor-default"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-[#afb3b0] group-hover/cell:bg-[#ffc8b8] transition-colors duration-300 block" />
                       <div>
-                        <p className="font-sans text-[11px] uppercase tracking-widest text-[#2f3331] group-hover/cell:text-[#faf7f6] transition-colors duration-300 leading-tight">
+                        <p className="font-sans text-sm font-medium text-[#2f3331] group-hover/cell:text-[#faf7f6] transition-colors duration-300 leading-tight">
                           {tool.name}
                         </p>
-                        <p className="font-headline text-[10px] italic text-[#944a32] group-hover/cell:text-[#ffc8b8] transition-colors duration-300 mt-1">
+                        <p className="font-headline text-xs italic text-[#944a32] group-hover/cell:text-[#ffc8b8] transition-colors duration-300 mt-1">
                           {tool.category}
                         </p>
                       </div>
@@ -253,6 +258,7 @@ export default async function ExperiencePage() {
                   ))}
                 </div>
               </div>
+
             </div>
           </div>
         </section>
