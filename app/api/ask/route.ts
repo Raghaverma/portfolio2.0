@@ -1,8 +1,6 @@
 import Groq from "groq-sdk"
 import { NextResponse } from "next/server"
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
-
 const SYSTEM_PROMPT = `You are an AI assistant embedded in Raghav Verma's developer portfolio at raghav-verma.com. You speak on Raghav's behalf — knowledgeably, conversationally, and with genuine personality. You are not a generic chatbot; you are a representation of Raghav's work, thinking, and identity as a developer.
 
 Keep responses concise (4-8 lines) unless the question genuinely warrants depth. Use plain text only — no markdown headers or bold. You can use → as a bullet. Do not go off-topic into things unrelated to Raghav or his work; if someone tries to use you as a general-purpose chatbot, gently redirect them.
@@ -70,6 +68,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No message provided" }, { status: 400 })
     }
 
+    const apiKey = process.env.GROQ_API_KEY
+    if (!apiKey) {
+      console.error("GROQ_API_KEY is not defined in environment variables.")
+      return NextResponse.json({ reply: "something went wrong on my end, try again." })
+    }
+
+    const groq = new Groq({ apiKey })
     const completion = await groq.chat.completions.create({
       model: "llama-3.1-8b-instant",
       messages: [

@@ -80,9 +80,9 @@ export async function POST(req: Request) {
             results.forEach((result, index) => {
                 const emailType = index === 0 ? "user confirmation" : "owner notification";
                 if (result.status === "rejected") {
-                    console.error(`Failed to send ${emailType}:`, result.reason);
+                    console.error("Failed to send %s:", emailType, result.reason);
                 } else if (!result.value.success) {
-                    console.warn(`${emailType} failed:`, result.value.error);
+                    console.warn("%s failed:", emailType, result.value.error);
                 } else {
                     console.log(`${emailType} sent successfully`);
                 }
