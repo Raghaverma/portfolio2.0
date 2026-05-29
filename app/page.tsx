@@ -16,9 +16,9 @@ export default function Home() {
       <Navigation />
       <main className="pb-24 md:pb-0">
         <HeroNew />
+        <StatusDashboard />
         <StatsBar />
         <SelectedWork />
-        <StatusDashboard />
         <ExperienceSnippet />
         <SkillsSnippet />
         <ContactSectionNew />

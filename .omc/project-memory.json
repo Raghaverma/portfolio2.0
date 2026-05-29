@@ -42,7 +42,7 @@
     "runtime": null
   },
   "build": {
-    "buildCommand": "npx tsc --noEmit -p tsconfig.json 2>&1 | head -30 || echo \"tsc done\"",
+    "buildCommand": "npx tsc --noEmit -p /Users/mac/Desktop/Raghav/portfolio2.0/tsconfig.json 2>&1 | head -30",
     "testCommand": null,
     "lintCommand": "npm run lint",
     "devCommand": "npm run dev",
@@ -141,6 +141,12 @@
       "type": "file"
     },
     {
+      "path": "components/sections/status-dashboard.tsx",
+      "accessCount": 10,
+      "lastAccessed": 1780093337415,
+      "type": "file"
+    },
+    {
       "path": "lib/api.ts",
       "accessCount": 6,
       "lastAccessed": 1780076292792,
@@ -180,6 +186,18 @@
       "path": "components/project-cards.tsx",
       "accessCount": 2,
       "lastAccessed": 1780076395499,
+      "type": "file"
+    },
+    {
+      "path": "app/page.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780092570793,
+      "type": "file"
+    },
+    {
+      "path": "components/sections/stats-bar.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780092535218,
       "type": "file"
     }
   ],
