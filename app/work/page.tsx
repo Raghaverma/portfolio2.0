@@ -51,11 +51,21 @@ export default async function ProjectsPage() {
               </div>
 
               <div>
+                {project.category && (
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-[#944a32] mb-2">
+                    {project.category}
+                  </span>
+                )}
                 <div className="flex items-center gap-3 mb-2">
                   <h2 className="font-headline text-2xl">{project.name}</h2>
                   {project.underConstruction && (
                     <span className="text-[10px] font-mono uppercase tracking-widest text-[#7a6540] border border-[#7a6540]/40 px-2 py-0.5 rounded-sm">
                       wip
+                    </span>
+                  )}
+                  {project.isPrivate && (
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#655d59] border border-[#655d59]/40 px-2 py-0.5 rounded-sm">
+                      private
                     </span>
                   )}
                 </div>

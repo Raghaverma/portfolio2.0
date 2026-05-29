@@ -6,7 +6,7 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/shared
 
 export async function SelectedWork() {
   const projects = await getProjects()
-  const featured = ["RepoGremlin", "Meridian"].map(
+  const featured = ["AutoClip", "Phalanx", "Forge", "Meridian"].map(
     (name) => projects.find((p) => p.name === name)!
   )
 
@@ -26,7 +26,7 @@ export async function SelectedWork() {
         {featured.map((project, index) => (
           <StaggerItem
             key={project.name}
-            className={`flex flex-col space-y-4 ${index === 1 ? "md:mt-32" : ""}`}
+            className={`flex flex-col space-y-4 ${index % 2 === 1 ? "md:mt-32" : ""}`}
           >
             {/* Project SVG card */}
             {(() => {
@@ -40,7 +40,7 @@ export async function SelectedWork() {
                   )}
                   <div className="absolute top-8 right-8">
                     <span className="bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-[#2f3331]">
-                      {index === 0 ? "Flagship · Under Construction" : "Open Source"}
+                      {project.category ?? (project.npm ? "Open Source" : "Project")}
                     </span>
                   </div>
                 </div>
@@ -66,6 +66,11 @@ export async function SelectedWork() {
                     ? "A repo-aware developer workflow agent. Details coming soon."
                     : project.description}
                 </p>
+                {project.isPrivate && (
+                  <span className="inline-block mt-4 text-[10px] uppercase tracking-widest font-bold text-[#655d59]">
+                    Private · Personal project
+                  </span>
+                )}
                 <div className="flex flex-wrap gap-4 mt-6">
                   {project.npm && (
                     <Link

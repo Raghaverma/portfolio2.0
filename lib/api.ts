@@ -4,6 +4,45 @@ import { Experience } from "@/components/experience-section"
 // Hardcoded Data - Updated with accurate information from repositories
 const PROJECTS: Project[] = [
     {
+        name: "AutoClip",
+        description: "A computer-vision system that turns a full, unedited match recording into a folder of individual, reviewable clips — automatically locating each cricketing event frame-by-frame, with zero manual scrubbing. Built around pose estimation, multi-model GPU inference, ball tracking, and lossless video cutting.",
+        tech: ["Python", "PyTorch", "YOLO Pose", "OpenCV", "TrackNet", "CatBoost", "Flask", "FFmpeg", "CUDA"],
+        highlights: [
+            "Engineered an end-to-end CV pipeline that localizes events with pose estimation and a multi-stage accuracy stack (scene segmentation, replay rejection, trajectory confirmation)",
+            "Optimized GPU throughput with batched, concurrent multi-model inference running on an RTX A5000",
+            "Built lossless clip extraction (FFmpeg stream-copy) plus a human-in-the-loop review UI for accept/reject and export",
+            "Authored a custom dataset-mining and model fine-tuning workflow to train a domain-specific detector from raw footage"
+        ],
+        category: "Computer Vision · ML",
+        isPrivate: true
+    },
+    {
+        name: "Phalanx",
+        description: "An autonomous application-security platform that clones any repository, runs a federated multi-scanner pipeline, and deterministically triages every finding against industry frameworks — no LLM required. It scores exploitability, builds reachability graphs, and enforces policy-as-code that can gate CI/CD automatically.",
+        tech: ["Go", "Python", "FastAPI", "Next.js", "PostgreSQL", "Redis", "Docker"],
+        highlights: [
+            "Architected a multi-service backend — Go API + worker and a Python triage engine — coordinated over a Redis Streams job queue with real-time SSE progress",
+            "Built multi-tenant RBAC, scoped API tokens, append-only audit logging, and sandboxed execution of untrusted repository code",
+            "Implemented fully offline triage: CVSS v3.1 scoring, CWE / OWASP / MITRE ATT&CK mapping, and import-graph reachability analysis",
+            "Added CI/CD-native PR scanning via a GitHub App with commit status checks and policy-as-code gates"
+        ],
+        category: "Security · Distributed Systems",
+        isPrivate: true
+    },
+    {
+        name: "Forge",
+        description: "A runtime platform for autonomous AI operators that run business and engineering workflows on a user's behalf — where nothing executes without approval and nothing persists without audit. Built as a strictly-layered TypeScript monorepo with an operator kernel, event bus, routine engine, and a VS Code client.",
+        tech: ["TypeScript", "Node.js", "LLM Tool-Use", "VS Code Extension API", "Express", "ts-morph", "esbuild"],
+        highlights: [
+            "Designed a platform kernel — operator registry, wildcard event bus, persistent memory, and a cron + event-driven routine engine",
+            "Enforced permissions at the capability layer with approval gating and tamper-proof, append-only audit logging",
+            "Built LLM tool-use agent loops with staged-only writes, pre-apply verification (tsc + ESLint), and dependency-impact scoring before any disk write",
+            "Authored a VS Code extension client plus an HTTP + SSE runtime host orchestrating multiple specialized operators"
+        ],
+        category: "Platform · AI Agents",
+        isPrivate: true
+    },
+    {
         name: "RepoGremlin",
         description: "A repo-aware developer workflow agent that understands repository structure, generates implementation plans, reviews changes, and maintains project context — built on a permission-aware Rust runtime.",
         tech: ["Rust", "Python", "CLI", "AI Agents"],

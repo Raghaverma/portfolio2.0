@@ -7,10 +7,14 @@ export interface Project {
   description: string
   tech: string[]
   highlights: string[]
-  github: string
+  github?: string
   demo?: string
   npm?: string
   underConstruction?: boolean
+  /** Short label describing the project's domain, e.g. "Computer Vision · ML". */
+  category?: string
+  /** True for private / personal repos with no public link. */
+  isPrivate?: boolean
 }
 
 interface ProjectsSectionProps {

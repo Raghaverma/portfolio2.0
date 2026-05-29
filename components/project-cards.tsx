@@ -425,6 +425,223 @@ export function RepoGremlinCard() {
   )
 }
 
+export function AutoClipCard() {
+  // Pose skeleton joints (a stylised bowler at release)
+  const joints: Record<string, [number, number]> = {
+    head: [150, 110], neck: [150, 135], lShoulder: [125, 150], rShoulder: [175, 150],
+    lElbow: [110, 185], rElbow: [190, 120], lWrist: [120, 220], rWrist: [205, 90],
+    hip: [150, 215], lKnee: [130, 270], rKnee: [175, 265], lAnkle: [125, 320], rAnkle: [185, 315],
+  }
+  const bones: [string, string][] = [
+    ["head", "neck"], ["neck", "lShoulder"], ["neck", "rShoulder"],
+    ["lShoulder", "lElbow"], ["lElbow", "lWrist"], ["rShoulder", "rElbow"], ["rElbow", "rWrist"],
+    ["neck", "hip"], ["hip", "lKnee"], ["lKnee", "lAnkle"], ["hip", "rKnee"], ["rKnee", "rAnkle"],
+  ]
+
+  return (
+    <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <rect width="800" height="450" fill="#0d0d0d" />
+      {Array.from({ length: 18 }).map((_, i) => (
+        <line key={`v${i}`} x1={i * 48} y1="0" x2={i * 48} y2="450" stroke="#111" strokeWidth="1" />
+      ))}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <line key={`h${i}`} x1="0" y1={i * 50} x2="800" y2={i * 50} stroke="#111" strokeWidth="1" />
+      ))}
+
+      {/* Detection frame with pose skeleton */}
+      <rect x="40" y="60" width="280" height="300" rx="6" fill="#0a0a0a" stroke="#1e1e1e" strokeWidth="1" />
+      <rect x="40" y="60" width="280" height="22" fill="#141414" />
+      <text x="54" y="75" fill="#555" fontSize="9" fontFamily="monospace">frame 891 · release</text>
+      <circle cx="305" cy="71" r="4" fill="#ff5f57" />
+
+      {/* Bounding box */}
+      <rect x="95" y="95" width="130" height="240" rx="3" fill="none" stroke="#39d353" strokeWidth="1" strokeDasharray="5 3" opacity="0.8" />
+      <rect x="95" y="86" width="68" height="14" rx="2" fill="#39d353" opacity="0.85" />
+      <text x="100" y="96" fill="#062b12" fontSize="8" fontFamily="monospace" fontWeight="bold">bowler 0.96</text>
+
+      {bones.map(([a, b]) => (
+        <line key={`${a}-${b}`} x1={joints[a][0]} y1={joints[a][1]} x2={joints[b][0]} y2={joints[b][1]} stroke="#67d4f8" strokeWidth="2" opacity="0.85" />
+      ))}
+      {Object.entries(joints).map(([k, [x, y]]) => (
+        <circle key={k} cx={x} cy={y} r="3.5" fill="#944a32" />
+      ))}
+
+      {/* Ball trajectory */}
+      <path d="M 210 90 Q 260 130 250 230" fill="none" stroke="#c8a96e" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.8" />
+      <circle cx="250" cy="230" r="4" fill="#c8a96e" />
+
+      {/* Right panel — clip output filmstrip */}
+      <text x="360" y="100" fill="#333" fontSize="9" fontFamily="monospace">AUTO-CLIPPED OUTPUT</text>
+      <line x1="360" y1="108" x2="760" y2="108" stroke="#1e1e1e" strokeWidth="1" />
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i}>
+          <rect x={360 + i * 100} y="125" width="88" height="60" rx="3" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+          <rect x={360 + i * 100} y="125" width="88" height="60" rx="3" fill="#944a32" opacity={0.06 + i * 0.02} />
+          <text x={404 + i * 100} y="160" textAnchor="middle" fill="#444" fontSize="16" fontFamily="serif">▶</text>
+          <text x={360 + i * 100} y="200" fill="#555" fontSize="8" fontFamily="monospace">delivery_{i + 1}</text>
+        </g>
+      ))}
+
+      {/* Metadata block */}
+      <rect x="360" y="220" width="400" height="92" rx="4" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+      <text x="374" y="240" fill="#555" fontSize="9" fontFamily="monospace">// metadata.json</text>
+      <text x="374" y="258" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  release_frame: "}<tspan fill="#39d353">891</tspan><tspan>,</tspan></text>
+      <text x="374" y="274" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  speed_kmh: "}<tspan fill="#67d4f8">134.2</tspan><tspan>,  bowling_end: </tspan><tspan fill="#944a32">'left'</tspan></text>
+      <text x="374" y="290" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  delivery_length: "}<tspan fill="#c8a96e">'good_length'</tspan></text>
+      <text x="374" y="306" fill="#c8c8c8" fontSize="9" fontFamily="monospace">{"  trajectory_type: "}<tspan fill="#c8a96e">'swing'</tspan></text>
+
+      {/* Title */}
+      <text x="360" y="356" fill="#ffffff" fontSize="28" fontFamily="serif" fontStyle="italic" fontWeight="500">AutoClip</text>
+      <text x="360" y="376" fill="#555" fontSize="11" fontFamily="monospace">Cricket event detection · CV</text>
+      {["PyTorch", "YOLO Pose", "OpenCV"].map((t, i) => (
+        <g key={t}>
+          <rect x={360 + i * 96} y="395" width="88" height="20" rx="2" fill="#1a1a1a" />
+          <text x={360 + i * 96 + 44} y="409" textAnchor="middle" fill="#555" fontSize="9" fontFamily="monospace">{t}</text>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+export function PhalanxCard() {
+  const phases = ["clone", "detect", "sbom", "scan", "triage", "graph", "policy"]
+  const findings = [
+    { sev: "CRIT", n: 3, color: "#ff5f57" },
+    { sev: "HIGH", n: 11, color: "#febc2e" },
+    { sev: "MED", n: 24, color: "#67d4f8" },
+    { sev: "LOW", n: 38, color: "#3d3d3d" },
+  ]
+  return (
+    <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <rect width="800" height="450" fill="#0d0d0d" />
+      {Array.from({ length: 18 }).map((_, i) => (
+        <line key={`v${i}`} x1={i * 48} y1="0" x2={i * 48} y2="450" stroke="#111" strokeWidth="1" />
+      ))}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <line key={`h${i}`} x1="0" y1={i * 50} x2="800" y2={i * 50} stroke="#111" strokeWidth="1" />
+      ))}
+
+      {/* Shield emblem */}
+      <path d="M 130 60 L 200 84 L 200 170 Q 200 230 130 260 Q 60 230 60 170 L 60 84 Z"
+        fill="#1a0a0a" stroke="#944a32" strokeWidth="1.5" opacity="0.9" />
+      <path d="M 100 158 L 122 182 L 165 130" fill="none" stroke="#39d353" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="130" y="295" textAnchor="middle" fill="#555" fontSize="9" fontFamily="monospace">policy: PASS</text>
+
+      {/* Pipeline phases */}
+      <text x="250" y="80" fill="#333" fontSize="9" fontFamily="monospace">SCAN PIPELINE</text>
+      {phases.map((p, i) => (
+        <g key={p}>
+          <rect x={250 + i * 72} y="92" width="62" height="26" rx="3" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+          <text x={250 + i * 72 + 31} y="109" textAnchor="middle" fill="#67d4f8" fontSize="8" fontFamily="monospace">{p}</text>
+          {i < phases.length - 1 && (
+            <line x1={250 + i * 72 + 62} y1="105" x2={250 + (i + 1) * 72} y2="105" stroke="#944a32" strokeWidth="1" strokeDasharray="3 2" opacity="0.6" />
+          )}
+        </g>
+      ))}
+
+      {/* Findings severity bars */}
+      <text x="250" y="155" fill="#333" fontSize="9" fontFamily="monospace">FINDINGS · triaged</text>
+      {findings.map((f, i) => (
+        <g key={f.sev}>
+          <text x="250" y={180 + i * 26} fill="#777" fontSize="9" fontFamily="monospace">{f.sev}</text>
+          <rect x="300" y={171 + i * 26} width={f.n * 8} height="14" rx="2" fill={f.color} opacity="0.85" />
+          <text x={308 + f.n * 8} y={182 + i * 26} fill="#666" fontSize="9" fontFamily="monospace">{f.n}</text>
+        </g>
+      ))}
+
+      {/* Reachability graph */}
+      <rect x="540" y="160" width="230" height="150" rx="4" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+      <text x="554" y="180" fill="#555" fontSize="9" fontFamily="monospace">reachability graph</text>
+      {[
+        { x: 575, y: 215, label: "entry", c: "#39d353" },
+        { x: 660, y: 205, label: "route", c: "#67d4f8" },
+        { x: 660, y: 255, label: "svc", c: "#67d4f8" },
+        { x: 735, y: 230, label: "sink", c: "#ff5f57" },
+      ].map((n) => (
+        <g key={n.label}>
+          <circle cx={n.x} cy={n.y} r="6" fill={n.c} opacity="0.9" />
+          <text x={n.x} y={n.y + 20} textAnchor="middle" fill="#555" fontSize="7" fontFamily="monospace">{n.label}</text>
+        </g>
+      ))}
+      <line x1="581" y1="213" x2="654" y2="206" stroke="#944a32" strokeWidth="1" />
+      <line x1="581" y1="217" x2="654" y2="253" stroke="#944a32" strokeWidth="1" />
+      <line x1="666" y1="207" x2="729" y2="228" stroke="#944a32" strokeWidth="1" />
+      <line x1="666" y1="253" x2="729" y2="232" stroke="#944a32" strokeWidth="1" />
+      <text x="554" y="300" fill="#ff5f57" fontSize="8" fontFamily="monospace">CWE-89 · reachable · CVSS 9.8</text>
+
+      {/* Title */}
+      <text x="40" y="356" fill="#ffffff" fontSize="28" fontFamily="serif" fontStyle="italic" fontWeight="500">Phalanx</text>
+      <text x="40" y="376" fill="#555" fontSize="11" fontFamily="monospace">Autonomous AppSec platform</text>
+      {["Go", "Python", "Next.js"].map((t, i) => (
+        <g key={t}>
+          <rect x={40 + i * 86} y="395" width="78" height="20" rx="2" fill="#1a1a1a" />
+          <text x={40 + i * 86 + 39} y="409" textAnchor="middle" fill="#555" fontSize="9" fontFamily="monospace">{t}</text>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+export function ForgeCard() {
+  const operators = [
+    { label: "HR", y: 110 }, { label: "Finance", y: 150 }, { label: "Marketing", y: 190 },
+    { label: "Support", y: 230 }, { label: "Data", y: 270 },
+  ]
+  return (
+    <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <rect width="800" height="450" fill="#0d0d0d" />
+      {Array.from({ length: 18 }).map((_, i) => (
+        <line key={`v${i}`} x1={i * 48} y1="0" x2={i * 48} y2="450" stroke="#111" strokeWidth="1" />
+      ))}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <line key={`h${i}`} x1="0" y1={i * 50} x2="800" y2={i * 50} stroke="#111" strokeWidth="1" />
+      ))}
+
+      {/* Operators column */}
+      <text x="56" y="90" fill="#333" fontSize="9" fontFamily="monospace">OPERATORS</text>
+      {operators.map((op) => (
+        <g key={op.label}>
+          <rect x="56" y={op.y} width="120" height="28" rx="4" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+          <circle cx="74" cy={op.y + 14} r="4" fill="#39d353" opacity="0.8" />
+          <text x="88" y={op.y + 18} fill="#c8c8c8" fontSize="10" fontFamily="monospace">{op.label}</text>
+          <line x1="176" y1={op.y + 14} x2="300" y2="225" stroke="#944a32" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.5" />
+        </g>
+      ))}
+
+      {/* Approval gate */}
+      <rect x="300" y="185" width="150" height="80" rx="6" fill="#1a1208" stroke="#c8a96e" strokeWidth="1.5" />
+      <text x="375" y="210" textAnchor="middle" fill="#c8a96e" fontSize="11" fontFamily="monospace">APPROVAL</text>
+      <text x="375" y="226" textAnchor="middle" fill="#c8a96e" fontSize="11" fontFamily="monospace">GATE</text>
+      <text x="375" y="248" textAnchor="middle" fill="#7a6540" fontSize="8" fontFamily="monospace">requiresApproval ✓</text>
+
+      {/* Gate -> outcomes */}
+      <line x1="450" y1="210" x2="540" y2="170" stroke="#39d353" strokeWidth="1.5" strokeDasharray="4 3" />
+      <line x1="450" y1="240" x2="540" y2="300" stroke="#944a32" strokeWidth="1.5" strokeDasharray="4 3" />
+
+      {/* Execute + audit */}
+      <rect x="540" y="150" width="220" height="44" rx="4" fill="#0a1f12" stroke="#2e7d32" strokeWidth="1" />
+      <text x="556" y="170" fill="#39d353" fontSize="10" fontFamily="monospace">execute tool</text>
+      <text x="556" y="185" fill="#3a6b48" fontSize="8" fontFamily="monospace">staged write · verified (tsc + eslint)</text>
+
+      <rect x="540" y="270" width="220" height="70" rx="4" fill="#111" stroke="#2a2a2a" strokeWidth="1" />
+      <text x="556" y="290" fill="#555" fontSize="9" fontFamily="monospace">// audit.jsonl (append-only)</text>
+      <text x="556" y="307" fill="#c8c8c8" fontSize="8" fontFamily="monospace">{"{ action: 'invoice.create',"}</text>
+      <text x="556" y="321" fill="#c8c8c8" fontSize="8" fontFamily="monospace">{"  approved_by: 'principal',"}</text>
+      <text x="556" y="335" fill="#c8c8c8" fontSize="8" fontFamily="monospace">{"  outcome: 'ok' }"}</text>
+
+      {/* Title */}
+      <text x="40" y="372" fill="#ffffff" fontSize="28" fontFamily="serif" fontStyle="italic" fontWeight="500">Forge</text>
+      <text x="40" y="392" fill="#555" fontSize="11" fontFamily="monospace">Autonomous operator runtime</text>
+      {["TypeScript", "LLM Tool-Use", "VS Code"].map((t, i) => (
+        <g key={t}>
+          <rect x={360 + i * 104} y="378" width="96" height="20" rx="2" fill="#1a1a1a" />
+          <text x={360 + i * 104 + 48} y="392" textAnchor="middle" fill="#555" fontSize="9" fontFamily="monospace">{t}</text>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
 export const PROJECT_CARDS: Record<string, React.FC> = {
   "Meridian":        MeridianCard,
   "DevTrackr":       DevTrackrCard,
@@ -432,4 +649,7 @@ export const PROJECT_CARDS: Record<string, React.FC> = {
   "Major Realites":  MajorRealitiesCard,
   "Wroom Inc":       WroomCard,
   "RepoGremlin":     RepoGremlinCard,
+  "AutoClip":        AutoClipCard,
+  "Phalanx":         PhalanxCard,
+  "Forge":           ForgeCard,
 }
