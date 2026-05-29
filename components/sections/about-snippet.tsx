@@ -25,7 +25,7 @@ export function AboutSnippet() {
         <ScrollReveal className="lg:col-span-3" delay={0.2} direction="right">
           <div className="space-y-4 text-sm text-[#5c605d] leading-relaxed border-l-2 border-[#e0e3e0] pl-6">
             <p>
-              Currently working as an SDE Intern at Khel.AI, building
+              Currently working as an SDE at Khel.AI, building
               sports analytics platforms with computer vision and real-time
               video analysis.
             </p>

@@ -12,7 +12,7 @@ interface QuickFact {
 }
 
 const quickFacts: QuickFact[] = [
-  { label: "Current Role", value: "SDE Intern @ Khel.AI" },
+  { label: "Current Role", value: "SDE @ Khel.AI" },
   { label: "Location", value: "New Delhi, IN · IST" },
   { label: "Status", value: "● Available for work", highlight: true },
   { label: "Focus", value: "Next.js · TypeScript · APIs · UX" },

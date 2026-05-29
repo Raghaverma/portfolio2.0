@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1780073522250,
+  "projectRoot": "/Users/mac/Desktop/Raghav/portfolio2.0",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.2.6",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.0",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npx tsc --noEmit -p tsconfig.json 2>&1 | grep -iE \"interactive-terminal|api\\.ts|experience\" || echo \"No type errors in changed files\"",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "build": "next build",
+      "dev": "next dev",
+      "lint": "eslint .",
+      "start": "next start"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "lib",
+      "public"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 8,
+      "lastAccessed": 1780073522242,
+      "keyFiles": [
+        "globals.css",
+        "layout.tsx",
+        "not-found.tsx",
+        "opengraph-image.tsx",
+        "page.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 3,
+      "lastAccessed": 1780073522242,
+      "keyFiles": [
+        "experience-section.tsx",
+        "project-cards.tsx",
+        "projects-section.tsx"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 6,
+      "lastAccessed": 1780073522244,
+      "keyFiles": [
+        "admin-store.ts",
+        "api.ts",
+        "email.ts",
+        "lastfm.ts",
+        "spotify.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 6,
+      "lastAccessed": 1780073522245,
+      "keyFiles": [
+        "Dev.svg",
+        "GitHub_Invertocat_Black.svg",
+        "RaghavVerma_CV.pdf",
+        "Spotify-Icon.svg",
+        "install-repogremlin.sh"
+      ]
+    },
+    "app/api": {
+      "path": "app/api",
+      "purpose": "API routes",
+      "fileCount": 0,
+      "lastAccessed": 1780073522245,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "components/sections/interactive-terminal.tsx",
+      "accessCount": 10,
+      "lastAccessed": 1780073894063,
+      "type": "file"
+    },
+    {
+      "path": "lib/api.ts",
+      "accessCount": 4,
+      "lastAccessed": 1780073885060,
+      "type": "file"
+    },
+    {
+      "path": "components/sections/about-snippet.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780073598882,
+      "type": "file"
+    },
+    {
+      "path": "components/sections/hero-new.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780073614954,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

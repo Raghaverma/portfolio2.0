@@ -172,7 +172,7 @@ const ASK_RESPONSES: Array<{ keywords: string[]; response: string[] }> = [
   {
     keywords: ["experience", "background", "career", "worked", "company", "history"],
     response: [
-      "SDE Intern @ Khel.AI  (2026 – now)",
+      "SDE @ Khel.AI  (May 2026 – now)  — started as an intern (Feb–May), converted to full-time.",
       "sports analytics, computer vision, real-time video. cool stuff.",
       "",
       "Frontend Engineer @ Hypeliv Solutions  (2025 – 2026)",
@@ -364,12 +364,17 @@ export function InteractiveTerminal() {
     return () => timers.forEach(clearTimeout)
   }, [])
 
-  // Auto-scroll
+  // Auto-scroll: keep the latest output + the live input prompt pinned to view.
+  // Runs on a rAF so Framer Motion has committed the new line's height first,
+  // and also tracks `input` so a wrapping command stays visible while typing.
   useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight
-    }
-  }, [lines])
+    const el = outputRef.current
+    if (!el) return
+    const id = requestAnimationFrame(() => {
+      el.scrollTop = el.scrollHeight
+    })
+    return () => cancelAnimationFrame(id)
+  }, [lines, input, booting])
 
   const addOutput = (content: string[], type: Line["type"] = "output") =>
     content.map((c) => ({ id: nextId(), type, content: c } as Line))
@@ -537,7 +542,7 @@ export function InteractiveTerminal() {
           "   / __ \\| |  / /    ───────────────────────────",
           "  / /_/ /| | / /     OS:      macOS 15 Sequoia",
           " / _, _/ | |/ /      Shell:   zsh 5.9",
-          "/_/ |_|  |___/       Role:    SDE Intern @ Khel.AI",
+          "/_/ |_|  |___/       Role:    SDE @ Khel.AI",
           "                     Stack:   Next.js · TypeScript",
           "                     Status:  ● Open for work",
           "                     Music:   run 'spotify' to see",
@@ -580,7 +585,7 @@ export function InteractiveTerminal() {
         about:      { type: "output",  lines: ["Full-stack developer from New Delhi.", "Building fast, intentionally crafted web apps.", "Run 'cat about.txt' for more detail."] },
         skills:     { type: "output",  lines: ["Run 'cat skills.json' for the full breakdown.", "Or 'ls' to explore the filesystem."] },
         projects:   { type: "output",  lines: ["Run 'ls projects/' to browse all projects.", "Or 'cd projects && ls'."] },
-        experience: { type: "output",  lines: ["SDE Intern @ Khel.AI (2026–Present)  ·  Canvas · React · TypeScript", "Frontend Eng. @ Hypeliv Solutions (2025–2026)  ·  Next.js · TypeScript"] },
+        experience: { type: "output",  lines: ["SDE @ Khel.AI (May 2026–Present)  ·  Canvas · React · TypeScript", "SDE Intern @ Khel.AI (Feb–May 2026)  ·  converted to full-time", "Frontend Eng. @ Hypeliv Solutions (2025–2026)  ·  Next.js · TypeScript"] },
         contact:    { type: "output",  lines: ["raghav.verma.work@gmail.com", "Run 'cat contact.txt' for all links."] },
         social:     { type: "output",  lines: ["GitHub:   github.com/Raghaverma", "LinkedIn: linkedin.com/in/raghaverma"] },
         date:       { type: "info",    lines: [new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + "  (IST)"] },

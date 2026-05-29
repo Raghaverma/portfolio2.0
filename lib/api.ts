@@ -85,14 +85,23 @@ const PROJECTS: Project[] = [
 
 const EXPERIENCES: Experience[] = [
     {
+        title: "SDE",
+        company: "Khel.AI",
+        location: "Noida, India",
+        period: "May 2026 — Present",
+        highlights: [
+            "Developing Canvas-based rendering pipelines and browser-side motion analytics tooling",
+            "Architecting modular React component systems and 3D visualization layers"
+        ]
+    },
+    {
         title: "SDE Intern",
         company: "Khel.AI",
         location: "Noida, India",
-        period: "Feb 2026 — Present",
+        period: "Feb 2026 — May 2026",
         highlights: [
             "Built and refined sports analytics interfaces used in real-time operator workflows, focusing on performance, rendering precision, and product reliability",
-            "Developing Canvas-based rendering pipelines and browser-side motion analytics tooling",
-            "Architecting modular React component systems and 3D visualization layers"
+            "Converted to a full-time SDE role"
         ]
     },
     {
