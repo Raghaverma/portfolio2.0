@@ -37,7 +37,7 @@ function SpotifyCard() {
         <a href="https://open.spotify.com/user/31pgsy5xe3cbxvvf3r7hxtluvy74" target="_blank" rel="noopener noreferrer">
           <Image src="/Spotify-Icon.svg" alt="Spotify" width={60} height={60} style={{ width: 60, height: 60 }} />
         </a>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-[#944a32] group-hover:scale-105 transition-transform">
+        <span className={`text-[10px] font-bold uppercase tracking-widest group-hover:scale-105 transition-transform ${data?.isPlaying ? "text-[#1DB954]" : "text-[#944a32]"}`}>
           Now Playing
         </span>
       </div>
@@ -48,7 +48,7 @@ function SpotifyCard() {
             <img
               src={data.albumImageUrl}
               alt={data.album || "Album art"}
-              className="w-14 h-14 flex-shrink-0 object-cover"
+              className={`w-14 h-14 flex-shrink-0 object-cover transition-all duration-300 ${data.isPlaying ? "rounded-full vinyl-spin" : "rounded-sm"}`}
             />
           )}
           <div className="min-w-0">
@@ -81,7 +81,7 @@ function SpotifyCard() {
             {[1, 0.8, 0.6, 0.4, 0.9].map((delay, i) => (
               <div
                 key={i}
-                className="w-1.5 bg-[#944a32] rounded-full music-bar"
+                className="w-1.5 bg-[#1DB954] rounded-full music-bar"
                 style={{
                   height: "100%",
                   animationDelay: `${i * 0.15}s`,
@@ -117,7 +117,7 @@ const LEARNING_ITEMS: LearningItem[] = [
 
 function LearningItemTile({ item }: { item: LearningItem }) {
   return (
-    <div className="group/tile relative bg-[#e8e9e6] hover:bg-[#944a32]/10 px-3 py-3 transition-all duration-300 cursor-default overflow-hidden min-h-[64px]">
+    <div className={`group/tile relative bg-[#e8e9e6] px-3 py-3 transition-all duration-300 cursor-default overflow-hidden min-h-[64px] ${item.label === "Azure" ? "hover:bg-blue-500/10" : "hover:bg-[#944a32]/10"}`}>
       {/* Text — fades out on hover */}
       <div className="transition-all duration-300 group-hover/tile:opacity-0 group-hover/tile:-translate-y-1">
         <div className="text-[9px] uppercase tracking-widest text-[#944a32] font-bold mb-0.5">
@@ -129,7 +129,11 @@ function LearningItemTile({ item }: { item: LearningItem }) {
       {/* Logo / icon — fades in on hover */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-90 transition-all duration-300 group-hover/tile:opacity-100 group-hover/tile:scale-100">
         {item.logo ? (
-          <img src={item.logo} alt={item.label} className={`${item.logoClass ?? "w-14 h-14"} object-contain`} />
+          <img
+            src={item.logo}
+            alt={item.label}
+            className={`${item.logoClass ?? "w-14 h-14"} object-contain`}
+          />
         ) : item.icon === "terminal" ? (
           <Terminal size={40} className="text-[#944a32]" />
         ) : (

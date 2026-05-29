@@ -135,15 +135,15 @@
   },
   "hotPaths": [
     {
-      "path": "components/sections/interactive-terminal.tsx",
-      "accessCount": 14,
-      "lastAccessed": 1780076439353,
+      "path": "components/sections/status-dashboard.tsx",
+      "accessCount": 21,
+      "lastAccessed": 1780094000190,
       "type": "file"
     },
     {
-      "path": "components/sections/status-dashboard.tsx",
-      "accessCount": 10,
-      "lastAccessed": 1780093337415,
+      "path": "components/sections/interactive-terminal.tsx",
+      "accessCount": 14,
+      "lastAccessed": 1780076439353,
       "type": "file"
     },
     {
@@ -195,9 +195,21 @@
       "type": "file"
     },
     {
+      "path": "app/globals.css",
+      "accessCount": 2,
+      "lastAccessed": 1780093986320,
+      "type": "file"
+    },
+    {
       "path": "components/sections/stats-bar.tsx",
       "accessCount": 1,
       "lastAccessed": 1780092535218,
+      "type": "file"
+    },
+    {
+      "path": "app/api/music/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780093874963,
       "type": "file"
     }
   ],

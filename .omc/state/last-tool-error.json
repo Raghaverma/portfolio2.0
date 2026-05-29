@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"grep -n \\\"SPOTIFY\\\" /Users/mac/Desktop/Raghav/portfolio2.0/.env* 2>/dev/null | head -20; ls /Users/mac/Desktop/Raghav/portfolio2.0/.env* 2>/dev/null\",\"description\":\"Check Spotify env vars\"...",
+  "error": "Exit code 1\n(eval):1: no matches found: /Users/mac/Desktop/Raghav/portfolio2.0/.env*\n(eval):1: no matches found: /Users/mac/Desktop/Raghav/portfolio2.0/.env*",
+  "timestamp": "2026-05-29T22:31:15.711Z",
+  "retry_count": 1
+}
