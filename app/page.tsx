@@ -1,7 +1,17 @@
+import { Hero } from "@/components/home/Hero";
+import { WorkIndex } from "@/components/home/WorkIndex";
+import { About } from "@/components/home/About";
+import { Stack } from "@/components/home/Stack";
+import { Contact } from "@/components/home/Contact";
+
 export default function Home() {
   return (
     <main>
-      <div>Hello world!</div>
+      <Hero />
+      <WorkIndex />
+      <About />
+      <Stack />
+      <Contact />
     </main>
   );
 }
