@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { gsap } from "gsap";
 import Link from "next/link";
 import { projects, type Project } from "@/content/projects";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -9,12 +14,25 @@ const statusLabel: Record<Project["status"], string> = {
   private: "Private",
 };
 
-function ProjectRow({ project, n }: { project: Project; n: number }) {
+type ExpandFn = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+
+function ProjectRow({
+  project,
+  n,
+  onExpand,
+}: {
+  project: Project;
+  n: number;
+  onExpand: ExpandFn;
+}) {
+  const href = `/work/${project.slug}`;
   const index = String(n + 1).padStart(2, "0");
+
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={href}
       data-cursor
+      onClick={(e) => onExpand(e, href)}
       className="group relative block border-t border-line transition-colors duration-500 last:border-b hover:bg-surface/40"
     >
       {/* amber edge that grows on hover */}
@@ -67,6 +85,55 @@ function ProjectRow({ project, n }: { project: Project; n: number }) {
 }
 
 export function WorkIndex() {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const handleExpand: ExpandFn = (e, href) => {
+    e.preventDefault();
+
+    const overlay = overlayRef.current;
+    if (!overlay || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      router.push(href);
+      return;
+    }
+
+    const card = e.currentTarget as HTMLElement;
+    const { top, left, width, height } = card.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Scale the full-viewport overlay down to match the card, offset to card center
+    const sx = width / vw;
+    const sy = height / vh;
+    const tx = left + width / 2 - vw / 2;
+    const ty = top + height / 2 - vh / 2;
+
+    gsap.set(overlay, {
+      display: "block",
+      scaleX: sx,
+      scaleY: sy,
+      x: tx,
+      y: ty,
+      transformOrigin: "50% 50%",
+    });
+
+    gsap.to(overlay, {
+      scaleX: 1,
+      scaleY: 1,
+      x: 0,
+      y: 0,
+      duration: 0.6,
+      ease: "expo.inOut",
+      onComplete: () => {
+        router.push(href);
+        // Hide overlay after new page has painted
+        setTimeout(() => {
+          gsap.set(overlay, { display: "none" });
+        }, 900);
+      },
+    });
+  };
+
   return (
     <section id="work" className="container-px scroll-mt-24 py-24 sm:py-32">
       <SectionHeader
@@ -79,7 +146,7 @@ export function WorkIndex() {
       <Reveal>
         <div className="border-line">
           {projects.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} n={i} />
+            <ProjectRow key={p.slug} project={p} n={i} onExpand={handleExpand} />
           ))}
         </div>
       </Reveal>
@@ -87,6 +154,13 @@ export function WorkIndex() {
         Each entry breaks down the problem, architecture, and the hardest
         technical decision.
       </p>
+
+      {/* Full-viewport overlay that expands from the clicked card */}
+      <div
+        ref={overlayRef}
+        className="pointer-events-none fixed inset-0 z-[9990] bg-base"
+        style={{ display: "none", willChange: "transform" }}
+      />
     </section>
   );
 }
