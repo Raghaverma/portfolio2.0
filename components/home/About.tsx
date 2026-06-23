@@ -117,7 +117,7 @@ export function About() {
             <div className="absolute bottom-2 left-0 top-2 w-px bg-line" />
             <div className="space-y-14">
               {experience.map((role) => (
-                <ExperienceItem key={role.company} role={role} />
+                <ExperienceItem key={`${role.company}-${role.start}`} role={role} />
               ))}
             </div>
           </Reveal>
