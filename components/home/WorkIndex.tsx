@@ -35,16 +35,11 @@ function ProjectRow({
       onClick={(e) => onExpand(e, href)}
       className="group relative block border-t border-line transition-colors duration-500 last:border-b hover:bg-surface/40"
     >
-      {/* amber edge that grows on hover */}
       <span className="absolute left-0 top-0 h-full w-[2px] origin-top scale-y-0 bg-amber transition-transform duration-500 group-hover:scale-y-100" />
 
       <div className="grid grid-cols-12 items-center gap-4 px-4 py-7 sm:px-8 sm:py-9">
-        {/* index */}
-        <div className="col-span-2 font-mono text-xs text-amber sm:col-span-1">
-          {index}
-        </div>
+        <div className="col-span-2 font-mono text-xs text-amber sm:col-span-1">{index}</div>
 
-        {/* name + kind */}
         <div className="col-span-10 sm:col-span-5">
           <h3 className="text-3xl font-semibold tracking-tight text-fg transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl">
             {project.name}
@@ -54,12 +49,10 @@ function ProjectRow({
           </p>
         </div>
 
-        {/* summary */}
         <p className="col-span-12 text-pretty text-sm leading-relaxed text-muted sm:col-span-4 sm:text-[13px]">
           {project.summary}
         </p>
 
-        {/* meta + arrow */}
         <div className="col-span-12 flex items-center justify-between sm:col-span-2 sm:flex-col sm:items-end sm:gap-3">
           <div className="text-right">
             <div className="font-mono text-xs text-fg-soft">{project.year}</div>
@@ -85,51 +78,52 @@ function ProjectRow({
 }
 
 export function WorkIndex() {
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const amberRef = useRef<HTMLDivElement>(null);
+  const baseRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const handleExpand: ExpandFn = (e, href) => {
     e.preventDefault();
 
-    const overlay = overlayRef.current;
-    if (!overlay || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const amber = amberRef.current;
+    const base = baseRef.current;
+    if (!amber || !base || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       router.push(href);
       return;
     }
 
-    const card = e.currentTarget as HTMLElement;
-    const { top, left, width, height } = card.getBoundingClientRect();
+    const { top, left, width, height } = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // Scale the full-viewport overlay down to match the card, offset to card center
+    // Transform-based: overlay covers full viewport but starts scaled to card size
     const sx = width / vw;
     const sy = height / vh;
     const tx = left + width / 2 - vw / 2;
     const ty = top + height / 2 - vh / 2;
 
-    gsap.set(overlay, {
-      display: "block",
-      scaleX: sx,
-      scaleY: sy,
-      x: tx,
-      y: ty,
-      transformOrigin: "50% 50%",
+    const initial = { display: "block", scaleX: sx, scaleY: sy, x: tx, y: ty, transformOrigin: "50% 50%" };
+    gsap.set(amber, initial);
+    gsap.set(base, initial);
+
+    // Amber layer bursts open first
+    gsap.to(amber, {
+      scaleX: 1, scaleY: 1, x: 0, y: 0,
+      duration: 0.42,
+      ease: "expo.inOut",
     });
 
-    gsap.to(overlay, {
-      scaleX: 1,
-      scaleY: 1,
-      x: 0,
-      y: 0,
-      duration: 0.6,
+    // Paper layer follows 80 ms behind, completes at ~0.5 s
+    gsap.to(base, {
+      scaleX: 1, scaleY: 1, x: 0, y: 0,
+      duration: 0.46,
+      delay: 0.08,
       ease: "expo.inOut",
       onComplete: () => {
         router.push(href);
-        // Hide overlay after new page has painted
         setTimeout(() => {
-          gsap.set(overlay, { display: "none" });
-        }, 900);
+          gsap.set([amber, base], { display: "none" });
+        }, 800);
       },
     });
   };
@@ -155,9 +149,15 @@ export function WorkIndex() {
         technical decision.
       </p>
 
-      {/* Full-viewport overlay that expands from the clicked card */}
+      {/* Amber flash layer — leads the transition */}
       <div
-        ref={overlayRef}
+        ref={amberRef}
+        className="pointer-events-none fixed inset-0 z-[9991] bg-amber"
+        style={{ display: "none", willChange: "transform" }}
+      />
+      {/* Paper fill layer — follows 80 ms behind, is what the user "lands on" */}
+      <div
+        ref={baseRef}
         className="pointer-events-none fixed inset-0 z-[9990] bg-base"
         style={{ display: "none", willChange: "transform" }}
       />

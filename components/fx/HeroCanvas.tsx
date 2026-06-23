@@ -20,13 +20,13 @@ export function HeroCanvas() {
     if (!ctx) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
 
     let w = 0;
     let h = 0;
     let nodes: Node[] = [];
-    const GAP = 56; // grid spacing in px
-    const LINK = 78; // max link distance
+    const GAP = 72; // grid spacing in px
+    const LINK = 90; // max link distance
     const MOUSE_R = 170; // pointer influence radius
 
     const mouse = { x: -9999, y: -9999 };

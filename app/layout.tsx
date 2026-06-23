@@ -61,6 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} grain`}
     >
       <body className="min-h-screen antialiased">
