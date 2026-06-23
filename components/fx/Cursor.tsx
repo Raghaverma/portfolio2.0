@@ -12,7 +12,6 @@ const THICKNESS = 1.5;
 
 export function Cursor() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -27,7 +26,6 @@ export function Cursor() {
     document.documentElement.setAttribute("data-custom-cursor", "on");
 
     const container = containerRef.current!;
-    const dot = dotRef.current!;
     const top = topRef.current!;
     const right = rightRef.current!;
     const bottom = bottomRef.current!;
@@ -62,7 +60,6 @@ export function Cursor() {
       gsap.to([top, bottom], { scaleY: scale, duration: 0.2, ease: "power2.out" });
       gsap.to([left, right], { scaleX: scale, duration: 0.2, ease: "power2.out" });
       gsap.to([top, right, bottom, left], { opacity: 1, backgroundColor: AMBER_BRIGHT, duration: 0.2 });
-      gsap.to(dot, { scale: 1.6, backgroundColor: AMBER_BRIGHT, duration: 0.2 });
     };
 
     const out = (e: MouseEvent) => {
@@ -70,7 +67,6 @@ export function Cursor() {
       gsap.to([top, bottom], { scaleY: 1, duration: 0.25, ease: "power2.out" });
       gsap.to([left, right], { scaleX: 1, duration: 0.25, ease: "power2.out" });
       gsap.to([top, right, bottom, left], { opacity: 0.75, backgroundColor: AMBER, duration: 0.25 });
-      gsap.to(dot, { scale: 1, backgroundColor: AMBER, duration: 0.25 });
     };
 
     const leave = () => {
@@ -125,19 +121,6 @@ export function Cursor() {
         className="fixed left-0 top-0"
         style={{ width: 0, height: 0, willChange: "transform" }}
       >
-        {/* Center dot */}
-        <div
-          ref={dotRef}
-          style={{
-            position: "absolute",
-            width: 5,
-            height: 5,
-            borderRadius: "50%",
-            backgroundColor: AMBER,
-            top: -2.5,
-            left: -2.5,
-          }}
-        />
 
         {/* Top tick — extends upward, origin at bottom (nearest center) */}
         <div
