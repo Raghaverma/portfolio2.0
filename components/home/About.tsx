@@ -68,7 +68,7 @@ export function About() {
       className="relative scroll-mt-24 border-t border-line bg-surface/30 py-24 sm:py-32"
     >
       <div className="container-px">
-        <SectionHeader index="02" title="About" kicker="Profile · Experience" className="mb-14" />
+        <SectionHeader index="02" href="/#about" title="About" kicker="Profile · Experience" className="mb-14" />
 
         <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           {/* Left — narrative + education */}
@@ -109,6 +109,7 @@ export function About() {
                 {site.location} · {site.timezone}
               </div>
             </div>
+
           </Reveal>
 
           {/* Right — experience timeline */}

@@ -35,7 +35,7 @@ export function Contact() {
 
       <div className="container-px">
         <div className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
-          <span className="text-amber">04</span>
+          <a href="/#contact" className="text-amber transition-opacity hover:opacity-70">04</a>
           <span className="h-px w-12 bg-line-bright" />
           <span>Contact</span>
         </div>

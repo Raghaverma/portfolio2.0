@@ -9,6 +9,7 @@ export function Stack() {
       <div className="container-px">
         <SectionHeader
           index="03"
+          href="/#stack"
           title="Stack & capabilities"
           kicker="What I build with"
           className="mb-14"

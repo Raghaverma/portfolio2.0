@@ -71,6 +71,7 @@ export function WorkIndex() {
     <section id="work" className="container-px scroll-mt-24 py-24 sm:py-32">
       <SectionHeader
         index="01"
+        href="/#work"
         title="Selected work"
         kicker={`${projects.length} case studies`}
         className="mb-12"

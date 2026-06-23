@@ -46,7 +46,7 @@ export function ForgeDiagram() {
       {/* spine */}
       <Wire d="M 232 184 H 300" flow />
       <NodeBox x={300} y={150} w={140} h={68} title="Routine Engine" sub="26 routines · 60s tick" />
-      <Wire d="M 440 184 H 478" flow />
+      <Wire d="M 440 184 H 524" flow />
 
       {/* approval gate diamond */}
       <g data-node>

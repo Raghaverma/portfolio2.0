@@ -432,9 +432,9 @@ func Exploitability(f Finding, g *ReachGraph) Score {
     slug: "meridian",
     name: "Meridian",
     kind: "API resilience SDK",
-    tagline: "One typed interface for flaky third-party APIs.",
+    tagline: "One typed interface for every flaky third-party API.",
     summary:
-      "An open-source TypeScript SDK that wraps external APIs with retry, fallback, and circuit-breaker logic behind a unified, typed response — zero runtime dependencies, ESM + CommonJS.",
+      "Reliability middleware for third-party APIs — normalises errors, rate limits, and pagination across 46 providers, with automatic failover, circuit breaking, schema-drift detection, and polyglot gRPC clients for Go, Rust, and Python. Zero runtime dependencies.",
     year: "2025",
     role: "Open source",
     status: "open-source",
@@ -442,68 +442,85 @@ func Exploitability(f Finding, g *ReachGraph) Score {
     stack: [
       "TypeScript",
       "Node.js",
-      "Circuit Breaker",
+      "gRPC",
+      "Go",
+      "Rust",
+      "Python",
+      "Redis",
+      "OpenTelemetry",
+      "Docker",
       "ESM / CJS",
-      "Zero deps",
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Raghaverma" },
+      { label: "npm", href: "https://www.npmjs.com/package/meridianjs" },
     ],
     metrics: [
+      { value: "46", label: "Provider adapters" },
+      { value: "2,119", label: "Tests passing" },
       { value: "0", label: "Runtime dependencies" },
-      { value: "ESM+CJS", label: "Dual module output" },
-      { value: "Typed", label: "Unified responses" },
     ],
     problem: {
       context:
-        "Every service that talks to OpenAI, Stripe, or GitHub re-implements the same defensive plumbing — retries, backoff, fallbacks, breakers — slightly differently, slightly wrong. Flaky upstreams then cascade into your own outages, and each provider's error shape leaks into your business logic.",
+        "Every service that talks to OpenAI, Stripe, or GitHub re-implements the same defensive plumbing — retries, backoff, fallbacks, breakers — slightly differently, slightly wrong. Each provider's error shape, rate-limit header, and pagination cursor leaks into your business logic, and when a provider goes down your app goes down with it.",
       scope: [
         "Normalise wildly different provider responses into one typed result",
+        "Automatic failover for idempotent requests — writes are never silently replayed",
         "Add resilience without measurable runtime overhead",
         "Ship zero runtime dependencies — a resilience library can't be a liability",
-        "Work in both ESM and CommonJS consumers",
+        "Work in both ESM and CommonJS consumers, and from Go, Rust, and Python over gRPC",
       ],
     },
     architecture: {
       intro:
-        "Meridian wraps a provider call in a resilience pipeline. The caller sees one typed response; underneath, requests flow through retry, fallback, and a circuit breaker that sheds load before an upstream takes you down.",
+        "Meridian is a single layer between your app and every provider. Requests flow through retry, rate-limit coordination, and a circuit breaker; the caller always sees one typed response. A gRPC engine makes the full adapter set available to Go, Rust, and Python with no Node.js on the host.",
       flow: [
         {
-          step: "Unified call",
+          step: "Unified adapter layer",
           detail:
-            "Provider adapters (OpenAI, Anthropic, Stripe, GitHub) expose one typed request/response surface.",
+            "46 provider adapters (payments, AI/LLM, comms, KYC, infra) expose one typed request/response surface — same error shape, same rate-limit fields, same pagination cursor.",
         },
         {
           step: "Retry + backoff",
           detail:
-            "Transient failures retry with backoff before any fallback is considered.",
+            "Per-adapter classification of what's retryable; exponential backoff with full idempotency safety — writes are never silently replayed on a new provider.",
         },
         {
-          step: "Fallback",
+          step: "Rate-limit coordination",
           detail:
-            "If retries are exhausted, a configured fallback path keeps the caller served.",
+            "Token-bucket per provider with adaptive backoff; shared cooldown across all replicas via RedisStateStorage so a 429 on one process backs off the whole fleet.",
         },
         {
           step: "Circuit breaker",
           detail:
-            "Repeated failures trip the breaker, fast-failing requests so a struggling upstream can't cascade.",
+            "Per-provider closed/open/half-open state machine. Wraps the retry loop so 3 retries count as one logical failure, not three trips to the upstream.",
+        },
+        {
+          step: "Failover",
+          detail:
+            "Define a service with ordered fallback providers; Meridian routes around outages automatically for GET/PUT/DELETE. POST is surfaced immediately to prevent duplicate charges.",
+        },
+        {
+          step: "Observability + schema drift",
+          detail:
+            "One-line OpenTelemetry auto-instrumentation; schema snapshots gate CI on breaking provider contract changes before they reach prod.",
         },
       ],
       patterns: [
         {
           title: "Circuit breaker",
           detail:
-            "Closed → open → half-open. When an upstream is failing, the breaker stops sending traffic and probes for recovery instead of hammering it.",
+            "Closed → open → half-open. Recovery is checked lazily on the next incoming request — no background timers, no event-loop cost on the hot path.",
         },
         {
           title: "Unified response typing",
           detail:
-            "Provider quirks are normalised at the adapter boundary, so consumer code handles one error shape instead of four.",
+            "Provider quirks are normalised at the adapter boundary. Consumer code handles one MeridianError with .category, .retryable, and .retryAfter — never four bespoke shapes.",
         },
         {
-          title: "Zero runtime dependencies",
+          title: "Polyglot via gRPC",
           detail:
-            "Everything is built on platform primitives. A library you adopt for reliability shouldn't drag in a supply chain of its own.",
+            "docker compose up starts a gRPC engine; pre-built Go, Rust, and Python clients get all 46 providers with no Node.js on the host. Any language with proto support can generate its own client.",
         },
       ],
     },
@@ -537,11 +554,11 @@ func Exploitability(f Finding, g *ReachGraph) Score {
     },
     postmortem: {
       learned:
-        "Designing the typed boundary first was what made the rest fall out cleanly. Once every provider returned the same shape, retry/fallback/breaker were just composable middleware over that shape rather than four bespoke implementations.",
+        "Designing the typed boundary first was what made the rest fall out cleanly. Once every provider returned the same shape, retry/fallback/breaker/rate-limit were just composable middleware over that shape rather than 46 bespoke implementations.",
       roadmap: [
-        "Pluggable adapters so any HTTP API gets the same resilience surface",
-        "Per-provider telemetry for breaker trips and retry budgets",
-        "A visualization dashboard for live circuit state across providers",
+        "Inter-service transactions with compensating rollbacks across provider boundaries",
+        "Per-provider cost budgets enforced at the adapter layer",
+        "Reliability replay dashboard for reconstructing outage timelines post-mortem",
       ],
     },
   },
