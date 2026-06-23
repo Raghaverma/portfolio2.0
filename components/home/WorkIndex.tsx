@@ -1,8 +1,4 @@
-"use client";
-
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
-import { gsap } from "gsap";
+import { ViewTransition } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/content/projects";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -14,17 +10,7 @@ const statusLabel: Record<Project["status"], string> = {
   private: "Private",
 };
 
-type ExpandFn = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
-
-function ProjectRow({
-  project,
-  n,
-  onExpand,
-}: {
-  project: Project;
-  n: number;
-  onExpand: ExpandFn;
-}) {
+function ProjectRow({ project, n }: { project: Project; n: number }) {
   const href = `/work/${project.slug}`;
   const index = String(n + 1).padStart(2, "0");
 
@@ -32,7 +18,7 @@ function ProjectRow({
     <Link
       href={href}
       data-cursor
-      onClick={(e) => onExpand(e, href)}
+      transitionTypes={["nav-forward"]}
       className="group relative block border-t border-line transition-colors duration-500 last:border-b hover:bg-surface/40"
     >
       <span className="absolute left-0 top-0 h-full w-[2px] origin-top scale-y-0 bg-amber transition-transform duration-500 group-hover:scale-y-100" />
@@ -41,9 +27,11 @@ function ProjectRow({
         <div className="col-span-2 font-mono text-xs text-amber sm:col-span-1">{index}</div>
 
         <div className="col-span-10 sm:col-span-5">
-          <h3 className="text-3xl font-semibold tracking-tight text-fg transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl">
-            {project.name}
-          </h3>
+          <ViewTransition name={`project-name-${project.slug}`}>
+            <h3 className="text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
+              {project.name}
+            </h3>
+          </ViewTransition>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
             {project.kind}
           </p>
@@ -57,11 +45,7 @@ function ProjectRow({
           <div className="text-right">
             <div className="font-mono text-xs text-fg-soft">{project.year}</div>
             <div className="mt-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-faint">
-              <span
-                className={`inline-block h-1.5 w-1.5 ${
-                  project.status === "private" ? "bg-faint" : "bg-amber"
-                }`}
-              />
+              <span className={`inline-block h-1.5 w-1.5 ${project.status === "private" ? "bg-faint" : "bg-amber"}`} />
               {statusLabel[project.status]}
             </div>
           </div>
@@ -78,56 +62,6 @@ function ProjectRow({
 }
 
 export function WorkIndex() {
-  const amberRef = useRef<HTMLDivElement>(null);
-  const baseRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-
-  const handleExpand: ExpandFn = (e, href) => {
-    e.preventDefault();
-
-    const amber = amberRef.current;
-    const base = baseRef.current;
-    if (!amber || !base || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      router.push(href);
-      return;
-    }
-
-    const { top, left, width, height } = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    // Transform-based: overlay covers full viewport but starts scaled to card size
-    const sx = width / vw;
-    const sy = height / vh;
-    const tx = left + width / 2 - vw / 2;
-    const ty = top + height / 2 - vh / 2;
-
-    const initial = { display: "block", scaleX: sx, scaleY: sy, x: tx, y: ty, transformOrigin: "50% 50%" };
-    gsap.set(amber, initial);
-    gsap.set(base, initial);
-
-    // Amber layer bursts open first
-    gsap.to(amber, {
-      scaleX: 1, scaleY: 1, x: 0, y: 0,
-      duration: 0.42,
-      ease: "expo.inOut",
-    });
-
-    // Paper layer follows 80 ms behind, completes at ~0.5 s
-    gsap.to(base, {
-      scaleX: 1, scaleY: 1, x: 0, y: 0,
-      duration: 0.46,
-      delay: 0.08,
-      ease: "expo.inOut",
-      onComplete: () => {
-        router.push(href);
-        setTimeout(() => {
-          gsap.set([amber, base], { display: "none" });
-        }, 800);
-      },
-    });
-  };
-
   return (
     <section id="work" className="container-px scroll-mt-24 py-24 sm:py-32">
       <SectionHeader
@@ -140,7 +74,7 @@ export function WorkIndex() {
       <Reveal>
         <div className="border-line">
           {projects.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} n={i} onExpand={handleExpand} />
+            <ProjectRow key={p.slug} project={p} n={i} />
           ))}
         </div>
       </Reveal>
@@ -148,19 +82,6 @@ export function WorkIndex() {
         Each entry breaks down the problem, architecture, and the hardest
         technical decision.
       </p>
-
-      {/* Amber flash layer — leads the transition */}
-      <div
-        ref={amberRef}
-        className="pointer-events-none fixed inset-0 z-[9991] bg-amber"
-        style={{ display: "none", willChange: "transform" }}
-      />
-      {/* Paper fill layer — follows 80 ms behind, is what the user "lands on" */}
-      <div
-        ref={baseRef}
-        className="pointer-events-none fixed inset-0 z-[9990] bg-base"
-        style={{ display: "none", willChange: "transform" }}
-      />
     </section>
   );
 }

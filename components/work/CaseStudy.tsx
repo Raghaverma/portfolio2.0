@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import Link from "next/link";
 import type { Project } from "@/content/projects";
 import { projects } from "@/content/projects";
@@ -77,11 +78,11 @@ export function CaseStudy({ project }: { project: Project }) {
           </span>
         </Reveal>
 
-        <Reveal>
+        <ViewTransition name={`project-name-${project.slug}`}>
           <h1 className="mt-6 text-[clamp(3rem,11vw,9rem)] font-semibold leading-[0.9] tracking-[-0.03em] text-fg">
             {project.name}
           </h1>
-        </Reveal>
+        </ViewTransition>
 
         <Reveal>
           <p className="mt-6 max-w-3xl text-balance text-xl leading-relaxed text-muted sm:text-2xl">
