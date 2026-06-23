@@ -50,7 +50,7 @@ const projectsUnordered: Project[] = [
     summary:
       "A real-time CV pipeline that ingests live broadcast and automatically detects, validates, and clips every bowling delivery from noisy full-match footage.",
     year: "2026",
-    role: "SDE · Khel.AI",
+    role: "SWE · Khel.AI",
     status: "production",
     diagram: "autoclip",
     stack: [

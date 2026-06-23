@@ -7,7 +7,7 @@ import { NowPlaying } from "@/components/home/NowPlaying";
 import { site } from "@/content/site";
 
 const facts = [
-  { k: "Now", v: "SDE · Khel.AI" },
+  { k: "Now", v: "SWE · Khel.AI" },
   { k: "Focus", v: "Real-time · CV · Tooling" },
   { k: "Based", v: site.location },
 ];

@@ -12,12 +12,25 @@ export type Role = {
 export const experience: Role[] = [
   {
     company: "Khel.AI",
-    title: "SDE Intern",
-    start: "Feb 2026",
+    title: "Software Engineer",
+    start: "May 2026",
     end: "Present",
     current: true,
     summary:
-      "Building the real-time computer-vision pipeline behind AutoClip — from broadcast ingestion to lossless clip extraction.",
+      "Continuing to own and extend AutoClip post-internship — deepening the CV pipeline and taking on broader system responsibilities.",
+    highlights: [
+      "Retained full ownership of the AutoClip pipeline after internship completion; continuing active development.",
+      "Expanding scope beyond clip extraction into downstream analytics and model improvement workflows.",
+    ],
+    stack: ["Python", "YOLOv8", "OpenCV", "FFmpeg", "Express", "Socket.IO", "React"],
+  },
+  {
+    company: "Khel.AI",
+    title: "SDE Intern",
+    start: "Feb 2026",
+    end: "May 2026",
+    summary:
+      "Built the real-time computer-vision pipeline behind AutoClip — from broadcast ingestion to lossless clip extraction.",
     highlights: [
       "Architected a low-latency edge ingestion system with Express, OBS WebSocket, and Socket.IO for real-time broadcast processing.",
       "Built FFmpeg video workflows — transcoding, stream-copy clipping, atomic writes, automated cache cleanup.",
