@@ -1,47 +1,47 @@
-# Raghav Verma — Portfolio (v3)
+# Raghav Verma — portfolio
 
-A high-signal, architecture-first engineering portfolio. **Industrial Precision**
-aesthetic: deep matte-black surfaces, electric-amber accents, GSAP-driven
-motion, and bespoke animated SVG architecture diagrams for each case study.
+Source for [raghav-verma.com](https://raghav-verma.com): a one-page portfolio for a computer
+vision engineer.
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack) · **React 19** · **TypeScript** (strict)
-- **Tailwind CSS v4** (`@theme inline` design tokens)
-- **GSAP** + ScrollTrigger (reveals, draw-in diagrams) via `@gsap/react`
-- `next/font` (Space Grotesk · Inter · JetBrains Mono, self-hosted)
-- Fully static: every route prerenders to HTML (SSG) for near-instant loads.
+Next.js 16 (App Router), React 19, TypeScript and Tailwind CSS v4. Every route prerenders at
+build time. The only client-side JavaScript of its own is the light/dark toggle in the nav:
+light is the default, and a small inline script restores a saved dark choice before first
+paint (`lib/theme.ts`).
 
 ## Develop
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build (all routes static)
-npm run start    # serve the production build
 npm run lint
+npm test         # content and colour tests; smoke tests run when BASE_URL is set
+npm run build
 ```
 
-## Structure
+Smoke tests need a running server:
 
-```
-app/                     routes, metadata, sitemap/robots, generated icon + OG
-  page.tsx               home (hero → work → about → stack → contact)
-  work/[slug]/page.tsx   case studies (SSG via generateStaticParams)
-components/
-  fx/                    Cursor, Magnetic, Reveal, TextReveal, Marquee, Counter, HeroCanvas
-  layout/                Nav, Footer
-  home/                  Hero, WorkIndex, About, Stack, Contact
-  work/                  CaseStudy, CodeBlock, DiagramFrame, diagrams/*
-content/                 typed data layer — site, projects, experience, skills
-lib/gsap.ts              plugin registration
+```bash
+npm run build && npx next start -p 3123      # terminal 1
+BASE_URL=http://localhost:3123 npm test      # terminal 2
 ```
 
-## Content
+## Editing content
 
-All copy lives in typed modules under `content/`. The case-study narrative
-(`problem` / `architecture` / `challenge` / `postmortem`) lives in
-`content/projects.ts`. Edit there — the pages render from data.
+All copy lives in `content/`:
 
-> Note: the contact form uses a `mailto:` flow and copy-to-clipboard (no backend
-> secrets required). The résumé is served from `public/RaghavVerma_CV.pdf`.
+- `site.ts`: name, role, intro line, availability and links
+- `projects.ts`: featured projects (summary, three highlights, stack, links, details) and
+  other work
+- `experience.ts`: roles and education
+
+The pose skeleton in the intro is drawn from `lib/pose.ts`: COCO-17 keypoints for one bowling
+delivery, animated with SVG's built-in SMIL (no JavaScript). `tests/pose.test.ts` keeps the
+limbs from stretching between frames.
+
+Colours are CSS variables at the top of `app/globals.css`: light by default, dark under
+`:root[data-theme="dark"]`. `tests/theme.test.ts` keeps every text colour at WCAG AA in both
+themes.
+
+The résumé is served from `public/RaghavVerma_CV.pdf`.

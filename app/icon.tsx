@@ -13,18 +13,18 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#f4f1ea",
-          color: "#191713",
-          fontSize: 34,
+          background: "#f7f5f1",
+          color: "#1c1a16",
+          fontSize: 30,
           fontWeight: 700,
-          fontFamily: "monospace",
-          letterSpacing: "-2px",
-          border: "4px solid #9a5e00",
+          letterSpacing: "-1px",
+          borderRadius: 12,
+          border: "4px solid #945b00",
         }}
       >
         RV
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

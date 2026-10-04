@@ -1,42 +1,34 @@
 export const site = {
   name: "Raghav Verma",
-  role: "Software Engineer",
-  roleLong: "Full-stack & applied-CV engineer",
+  title: "Raghav Verma — Computer Vision Engineer",
+  role: "Computer vision engineer at Khel.AI",
+  intro:
+    "I build the pose-estimation and video pipelines behind Khel.AI's cricket analysis, and make them faster without letting accuracy slip.",
+  description:
+    "Computer vision engineer at Khel.AI. I build pose-estimation and video pipelines for cricket analysis, and make them faster without letting accuracy slip.",
+  availability: "Open to CV / ML roles",
   location: "New Delhi, India",
-  timezone: "IST · UTC+5:30",
   url: "https://raghav-verma.com",
   email: "raghav.verma.work@gmail.com",
-  description:
-    "Software engineer building real-time systems, computer-vision pipelines, and resilient developer tooling. I care about architecture, type safety, and interfaces that feel inevitable.",
-  keywords: [
-    "Raghav Verma",
-    "Software Engineer",
-    "Full-stack Developer",
-    "Computer Vision",
-    "TypeScript",
-    "Next.js",
-    "Python",
-    "Khel.AI",
-  ],
-  // One-line positioning used in the hero
-  pitch: [
-    "I build systems that",
-    "survive the real world",
-  ],
-  available: true,
-  availabilityNote: "Open to SDE roles · 2026",
-  socials: {
+  links: {
     github: "https://github.com/Raghaverma",
-    npm: "https://www.npmjs.com/~0xsantoryu",
     linkedin: "https://www.linkedin.com/in/raghaverma/",
-    email: "mailto:raghav.verma.work@gmail.com",
     resume: "/RaghavVerma_CV.pdf",
   },
+  keywords: [
+    "Raghav Verma",
+    "Computer Vision Engineer",
+    "Pose estimation",
+    "ViTPose",
+    "TensorRT",
+    "Inference optimization",
+    "Cricket analytics",
+    "Khel.AI",
+  ],
 } as const;
 
 export const nav = [
-  { label: "Work", href: "/#work", index: "01" },
-  { label: "About", href: "/#about", index: "02" },
-  { label: "Stack", href: "/#stack", index: "03" },
-  { label: "Contact", href: "/#contact", index: "04" },
+  { label: "Work", href: "/#work" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Contact", href: "/#contact" },
 ] as const;

@@ -1,16 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
-import { Cursor } from "@/components/fx/Cursor";
-import { Nav } from "@/components/layout/Nav";
-import { Footer } from "@/components/layout/Footer";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
+import { themeScript } from "@/lib/theme";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +21,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: site.title,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -38,20 +32,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: site.url,
-    title: `${site.name} — ${site.role}`,
+    title: site.title,
     description: site.description,
     siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role}`,
+    title: site.title,
     description: site.description,
   },
   robots: { index: true, follow: true },
 };
 
+// Light is the default for everyone. The theme-color meta belongs to lib/theme.ts,
+// which sets it per theme, so it is deliberately not declared here.
 export const viewport: Viewport = {
-  themeColor: "#f7f5f1",
   colorScheme: "light",
 };
 
@@ -59,15 +54,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
+    // suppressHydrationWarning: the <head> script may add data-theme before React hydrates.
     <html
       lang="en"
-      data-scroll-behavior="smooth"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} grain`}
+      className={`${inter.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">
-        <Cursor />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-screen">
         <Nav />
-        {children}
+        <main className="mx-auto max-w-page px-5">{children}</main>
         <Footer />
       </body>
     </html>
