@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__plugin_playwright_playwright__browser_run_code_unsafe",
+  "tool_input_preview": "{\"code\":\"async (page) => {\\n  const browser = page.context().browser();\\n  const ctx = await browser.newContext({ viewport: { width: 1024, height: 700 }, reducedMotion: 'no-preference' });\\n  const p ...",
+  "error": "### Error\nError: page.evaluate: TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.\n    at eval (eval at <anonymous> (eval at evaluate (:368:30)), <anonymous>:3:75)\n    at eval (eval at evaluate (:368:30), <anonymous>:10:51)\n    at UtilityScript.evaluate (<anonymous>:370:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+  "timestamp": "2026-10-04T20:38:11.978Z",
+  "retry_count": 1
+}

@@ -1,0 +1,439 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1791137816078,
+  "projectRoot": "c:\\Users\\ragha\\Desktop\\portfolio2.0",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.2.9",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.4",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.4",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "sleep 1; echo \"HEAD: $(git log --oneline -1)\"; echo \"status: $(git status --short | tr '\\n' ' ')\"; npm run lint > /tmp/v-lint.txt 2>&1; echo \"lint exit: $? ($(grep -c -E 'error|warning' /tmp/v-lint.txt) problem lines)\"; npx tsc --noEmit -p . > /tmp/v-tsc.txt 2>&1; echo \"tsc exit: $? ($(wc -l < /tmp/v-tsc.txt) output lines)\"; npm run build > /tmp/v-build.txt 2>&1; echo \"build exit: $?\"; sed -n '/Route (app)/,/Static)/p' /tmp/v-build.txt; echo \"internal names: $(git grep -i -c -E 'crik|takneek' -- . | wc -l) files\"; echo \"gsap lock entries: $(grep -c '\"node_modules/gsap\"\\|\"node_modules/@gsap/react\"' package-lock.json)\"; echo \"linux-x64 lock entries: $(grep -o '\"node_modules/[^\"]*linux-x64[^\"]*\"' package-lock.json | sort -u | wc -l)\"",
+    "testCommand": "curl -s -o /dev/null --retry 60 --retry-connrefused --retry-delay 1 http://localhost:3123/ && echo \"server up\"; BASE_URL=http://localhost:3123 npm test > /tmp/merged-tests.txt 2>&1; echo \"test exit: $?\"; grep -E \"ℹ (tests|pass|fail|skipped)|^✖\" /tmp/merged-tests.txt; npm run lint > /tmp/merged-lint.txt 2>&1; echo \"lint exit: $?\"",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "components",
+      "lib",
+      "public"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 8,
+      "lastAccessed": 1791137816038,
+      "keyFiles": [
+        "globals.css",
+        "icon.tsx",
+        "layout.tsx",
+        "not-found.tsx",
+        "opengraph-image.tsx"
+      ]
+    },
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1791137816039,
+      "keyFiles": []
+    },
+    "content": {
+      "path": "content",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1791137816048,
+      "keyFiles": [
+        "experience.ts",
+        "projects.ts",
+        "site.ts",
+        "skills.ts"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1791137816049,
+      "keyFiles": [
+        "gsap.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1791137816050,
+      "keyFiles": [
+        "RaghavVerma_CV.pdf"
+      ]
+    },
+    "app\\api": {
+      "path": "app\\api",
+      "purpose": "API routes",
+      "fileCount": 0,
+      "lastAccessed": 1791137816050,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "docs\\superpowers\\specs\\2026-10-05-portfolio-remodel-design.md",
+      "accessCount": 32,
+      "lastAccessed": 1791146883267,
+      "type": "file"
+    },
+    {
+      "path": "docs\\superpowers\\plans\\2026-10-05-portfolio-remodel.md",
+      "accessCount": 22,
+      "lastAccessed": 1791144484311,
+      "type": "file"
+    },
+    {
+      "path": "content\\projects.ts",
+      "accessCount": 14,
+      "lastAccessed": 1791146862220,
+      "type": "file"
+    },
+    {
+      "path": "tests\\theme.test.ts",
+      "accessCount": 12,
+      "lastAccessed": 1791145768020,
+      "type": "file"
+    },
+    {
+      "path": "app\\layout.tsx",
+      "accessCount": 8,
+      "lastAccessed": 1791145016278,
+      "type": "file"
+    },
+    {
+      "path": "tests\\smoke.test.ts",
+      "accessCount": 8,
+      "lastAccessed": 1791146766298,
+      "type": "file"
+    },
+    {
+      "path": "app\\globals.css",
+      "accessCount": 7,
+      "lastAccessed": 1791145017131,
+      "type": "file"
+    },
+    {
+      "path": "components\\ProjectEntry.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1791142523001,
+      "type": "file"
+    },
+    {
+      "path": "components\\Nav.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1791145026660,
+      "type": "file"
+    },
+    {
+      "path": "tests\\content.test.ts",
+      "accessCount": 6,
+      "lastAccessed": 1791146765034,
+      "type": "file"
+    },
+    {
+      "path": "components\\Intro.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1791146842465,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 5,
+      "lastAccessed": 1791144959764,
+      "type": "file"
+    },
+    {
+      "path": "app\\not-found.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1791145025772,
+      "type": "file"
+    },
+    {
+      "path": "app\\page.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1791142604387,
+      "type": "file"
+    },
+    {
+      "path": "tests\\theme-script.test.ts",
+      "accessCount": 4,
+      "lastAccessed": 1791144381059,
+      "type": "file"
+    },
+    {
+      "path": "lib\\theme.ts",
+      "accessCount": 4,
+      "lastAccessed": 1791145016781,
+      "type": "file"
+    },
+    {
+      "path": "components\\ThemeToggle.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1791145026176,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 3,
+      "lastAccessed": 1791140372730,
+      "type": "file"
+    },
+    {
+      "path": "components\\Experience.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1791142581628,
+      "type": "file"
+    },
+    {
+      "path": "content\\experience.ts",
+      "accessCount": 3,
+      "lastAccessed": 1791142603222,
+      "type": "file"
+    },
+    {
+      "path": "content\\site.ts",
+      "accessCount": 3,
+      "lastAccessed": 1791142603742,
+      "type": "file"
+    },
+    {
+      "path": "app\\icon.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1791142608802,
+      "type": "file"
+    },
+    {
+      "path": "app\\opengraph-image.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1791142609836,
+      "type": "file"
+    },
+    {
+      "path": "app\\sitemap.ts",
+      "accessCount": 3,
+      "lastAccessed": 1791142610046,
+      "type": "file"
+    },
+    {
+      "path": "tsconfig.json",
+      "accessCount": 2,
+      "lastAccessed": 1791140337734,
+      "type": "file"
+    },
+    {
+      "path": "next.config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1791140559955,
+      "type": "file"
+    },
+    {
+      "path": "components\\Footer.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791142579292,
+      "type": "file"
+    },
+    {
+      "path": "components\\Section.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791142579744,
+      "type": "file"
+    },
+    {
+      "path": "components\\TextLink.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791142580421,
+      "type": "file"
+    },
+    {
+      "path": "components\\OtherWork.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1791142580926,
+      "type": "file"
+    },
+    {
+      "path": "tests\\site.test.ts",
+      "accessCount": 2,
+      "lastAccessed": 1791142620402,
+      "type": "file"
+    },
+    {
+      "path": "public\\RaghavVerma_CV.pdf",
+      "accessCount": 1,
+      "lastAccessed": 1791137995011,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-1-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791140328194,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-2-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791140433585,
+      "type": "file"
+    },
+    {
+      "path": "app",
+      "accessCount": 1,
+      "lastAccessed": 1791140611796,
+      "type": "directory"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-3-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791140680197,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-4-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791140780280,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-5-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791140939707,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\og-image.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141057595,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\icon.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141069623,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\task-6-brief.md",
+      "accessCount": 1,
+      "lastAccessed": 1791141093860,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\phone-light.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141116591,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\phone-light-top.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141129683,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\phone-bench-open.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141146461,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\phone-cricketfm-open.png",
+      "accessCount": 1,
+      "lastAccessed": 1791141147115,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\desktop-light.png",
+      "accessCount": 1,
+      "lastAccessed": 1791142206999,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\phone-dark.png",
+      "accessCount": 1,
+      "lastAccessed": 1791142235397,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\desktop-dark.png",
+      "accessCount": 1,
+      "lastAccessed": 1791142235820,
+      "type": "file"
+    },
+    {
+      "path": ".playwright-mcp\\desktop-light-v2.png",
+      "accessCount": 1,
+      "lastAccessed": 1791142324565,
+      "type": "file"
+    },
+    {
+      "path": ".superpowers\\sdd\\2026-10-05-portfolio-remodel\\progress.md",
+      "accessCount": 1,
+      "lastAccessed": 1791142501184,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
